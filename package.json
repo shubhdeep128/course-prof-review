@@ -4,7 +4,9 @@
   "description": "Course-Prof-Review-portal",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "heroku-postbuild": "npm install && nodemon",
+    "start": "npm install && node index.js"
   },
   "author": "\"Shubh Deep\"",
   "license": "ISC",
