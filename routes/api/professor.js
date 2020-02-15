@@ -1,0 +1,1 @@
+var Professor = require('../../models/professor.js')
