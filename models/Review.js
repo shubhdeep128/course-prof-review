@@ -1,9 +1,11 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var User = require('./User.js');
 
-var Review = new Schema({
+var Review_schema = new Schema({
     Author:{
-        type: Object,
+        type: Schema.Types.ObjectId,
+        ref: 'User'
         required: true
     },
     Time_stamp:{
@@ -34,4 +36,4 @@ var Review = new Schema({
     }
 });
 
-module.exports = mongoose.model('Review', Review);
+module.exports = Review = mongoose.model('Review', Review_schema);

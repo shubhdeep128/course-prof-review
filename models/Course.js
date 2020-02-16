@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var Review = require('./Review.js')
+var Review = require('./Review.js');
+var Professor = require('./Professor.js');
 
 var Course_schema = new Schema({
     Name: {
@@ -13,7 +14,8 @@ var Course_schema = new Schema({
         required: true
     },
     Professor_history: {
-        type: [Object]
+        type: [Schema.Types.ObjectId],
+        ref: 'Professor'
     },
     Reviews: {
         type: [Schema.Types.ObjectId],
