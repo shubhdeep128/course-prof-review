@@ -5,7 +5,7 @@ var User = require('./User.js');
 var Review_schema = new Schema({
     Author:{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
         required: true
     },
     Time_stamp:{
