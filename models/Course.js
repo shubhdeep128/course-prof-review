@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var Review = require('./Review.js')
 
-var Course = new Schema({
+var Course_schema = new Schema({
     Name: {
         type: String,
         required: true,
@@ -9,13 +10,14 @@ var Course = new Schema({
     },
     Description: {
         type: String,
-        required:true
+        required: true
     },
     Professor_history: {
         type: [Object]
     },
     Reviews: {
-        type: [Object]
+        type: [Schema.Types.ObjectId],
+        ref: 'Review'
     },
     Relevent_tags: {
         type: [String]
@@ -25,5 +27,4 @@ var Course = new Schema({
     }
 });
 
-module.exports = mongoose.model('Course', Course);
-// test = mongoose.model('Course', Course);
+module.exports = Course = mongoose.model('Course', Course_schema);
