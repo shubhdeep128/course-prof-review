@@ -10,6 +10,7 @@ var Review_schema = new Schema({
     },
     Time_stamp:{
         type: Date,
+        default: Date.now,
         required: true
     },
     Description:{
@@ -24,7 +25,7 @@ var Review_schema = new Schema({
         type: Number,
         required: true
     },
-    votes: {
+    Votes: {
             up_vote: {
                 type: Number,
                 default: 0

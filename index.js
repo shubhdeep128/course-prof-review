@@ -41,18 +41,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passport.js");
 require("./routes/api/auth.js")(app);
+//require("./routes/api/course.js")(app);
+// require("./routes/api/professor.js")(app);
+// require("./routes/api/review.js")(app);
 
-//  ROUTES
-app.get('/home',(req,res) => {
-    res.send("HOME");
+// ROUTES
+app.get('/api',(req,res) => {
+    res.send("Home");
 })
-app.get("/api", (req,res)=>{
-    console.log(req.user)
-    res.send({"message": "Welcome to the course-prof microservice API."});
-});
+const courseRoutes = require("./routes/api/course");
+app.use('/api/course',courseRoutes);
+
+const profRoutes = require("./routes/api/professor");
+app.use('/api/prof',profRoutes);
+
+const reviewRoutes = require("./routes/api/review");
+app.use('/api/prof',reviewRoutes);
+
 
 
 PORT = process.env.PORT || 5050
 app.listen(PORT,function(){
-    console.log("Listening on port ",PORT)
+    console.log("Listening on port ",PORT);
 });
