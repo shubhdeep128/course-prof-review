@@ -12,7 +12,7 @@ require('dotenv/config');
 app.use(cors({origin: true, credentials: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname,'client','build')))
 
 
 //IMPORT SCHEMAS AND CONNECT TO DB
@@ -49,6 +49,9 @@ require("./routes/api/auth.js")(app);
 app.get('/api',(req,res) => {
     res.send("Home");
 })
+
+
+
 const courseRoutes = require("./routes/api/course");
 app.use('/api/course',courseRoutes);
 
@@ -59,6 +62,9 @@ const reviewRoutes = require("./routes/api/review");
 app.use('/api/prof',reviewRoutes);
 
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 PORT = process.env.PORT || 5050
 app.listen(PORT,function(){
