@@ -24,7 +24,7 @@ router.get("/",async (req,res)=>{
 router.post("/add",async (req,res)=>{
     try {
         
-        if(req.isAuthenticated()){
+         if(req.isAuthenticated()){
             const course_object = new Course({
                 Name: req.body.Name,
                 Description: req.body.Description, 
@@ -36,10 +36,10 @@ router.post("/add",async (req,res)=>{
             const savedCourse = await course_object.save();
             console.log("New Course added successfully");
             res.json({status:true, newCourse: course_object});
-        }
-        else{
-            res.status(401).send("Unauthorized")
-        }	
+         }
+         else{
+             res.status(401).send("Unauthorized")
+         }	
     } catch (error) {
         res.json({message: error});
     }
@@ -48,7 +48,7 @@ router.post("/add",async (req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     try {
-        if(req.isAuthenticated()){
+         if(req.isAuthenticated()){
             const course = await Course.findById(req.params.id);
             res.json(course); 
         }
