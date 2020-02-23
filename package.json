@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon index.js",
-    "heroku-postbuild": "npm install && nodemon",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "start": "npm install && node index.js"
   },
   "author": "\"Shubh Deep\"",

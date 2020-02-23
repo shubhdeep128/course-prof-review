@@ -16,7 +16,7 @@ class CourseList extends Component {
         }).catch(function (error) {
           console.log("ERROR LOADING DATA");
           console.log(error);
-          window.location = '/course'
+          window.location = '/'
         });
       }
   
@@ -25,7 +25,7 @@ class CourseList extends Component {
     if(this.state.loadStatus==true){
       courses = courses.map(function(course){
         return(
-          <EachCourse course_id={course._id} name={course.Name} grading={course.Average_grading}/>
+          <EachCourse tags={course.Relevant_tags} name={course.Name} desc={course.Description}/>
         )
       }.bind(this));
     }
