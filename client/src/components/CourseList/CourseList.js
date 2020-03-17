@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import EachCourse from './EachCourse.js';
 import API from '../../utils/API.js'
-
+import OuterContainer from '../OuterContainer/OuterContainer.js';
 class CourseList extends Component {
     state={
         loadStatus:false,
@@ -31,9 +31,12 @@ class CourseList extends Component {
     }
     
     return(
+      <div>
+      <OuterContainer />
       <div className="course-list">
           {courses}
       </div> 
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import styles from './form.css';
 import API from '../utils/API';
+import OuterContainer from './OuterContainer/OuterContainer.js';
 
 class CourseForm extends Component {
   state = {}
@@ -27,6 +28,8 @@ class CourseForm extends Component {
   render(){
     this.handleSubmit = this.handleSubmit.bind(this)
     return(
+      <div>
+      <OuterContainer />
       <div className="form">
         <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Name" ref="name"/> 
@@ -35,6 +38,7 @@ class CourseForm extends Component {
 
         <input type="submit" value="Submit" />
       </form>
+      </div>
       </div>
     );
   }
