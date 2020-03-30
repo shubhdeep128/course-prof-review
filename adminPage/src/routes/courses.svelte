@@ -37,7 +37,7 @@
 
   async function onDeleteClick(item) {
     category = item;
-    if (confirm(`Delete "${category.name}"?`)){
+    if (confirm(`Delete "${category.courseName}"?`)){
       await http.delete(`/categories/${category.id}`)
       categories = getCategories();
     }
@@ -53,8 +53,8 @@
 
   function onNewClick() {
     category = {
-      name: '',
-      description: ''
+      courseName: '',
+      courseID: ''
     }
     openModal()
   }
@@ -91,16 +91,16 @@
       <table class="table is-striped is-hoverable">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
+            <th>courseName</th>
+            <th>courseID</th>
             <th width="100px">Actions</th>
           </tr>
         </thead>
         <tbody>
           {#each list as item}
             <tr>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
+              <td>{item.courseName}</td>
+              <td>{item.courseID}</td>
               <td>
                 <a href="javascript:;" on:click={() => onItemClick(item)}>
                   <span class="icon is-small">
@@ -130,28 +130,28 @@
   <div class="modal-background" />
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">{category.name}</p>
+      <p class="modal-card-title">{category.courseName}</p>
       <button class="delete" aria-label="close" on:click={closeModal} />
     </header>
     <section class="modal-card-body">
       <div class="field">
-        <label class="label">Name</label>
+        <label class="label">courseName</label>
         <div class="control">
           <input
             class="input"
             type="text"
             placeholder=""
-            bind:value={category.name} />
+            bind:value={category.courseName} />
         </div>
       </div>
       <div class="field">
-        <label class="label">Description</label>
+        <label class="label">courseID</label>
         <div class="control">
           <input
             class="input"
             type="text"
             placeholder=""
-            bind:value={category.description} />
+            bind:value={category.courseID} />
         </div>
       </div>
     </section>
