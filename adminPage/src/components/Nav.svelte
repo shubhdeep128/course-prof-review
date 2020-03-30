@@ -91,18 +91,5 @@
       {/each}
 
     </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a
-            href="https://github.com/danielschmitz/svelte-sapper-bulma-crud"
-            target="_blank"
-            class="button is-light">
-            GitHub
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </nav>
