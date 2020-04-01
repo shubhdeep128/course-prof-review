@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const cors = require('cors');
+const Joi = require('joi');
 require('dotenv/config');
 
 //MIDDLEWARES
