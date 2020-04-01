@@ -31,6 +31,7 @@ class CourseForm extends Component {
         <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Name" ref="name"/> 
         <textarea type="text" placeholder="Description" ref="desc"/>
+        <textarea type="text" placeholder="Review" ref="review"/>
         <input type="text" placeholder="Relevent Tags" ref="tags"/>
         <input type="number" placeholder="Average Grade" ref="grade"/>
         <input type="submit" value="Submit" />
