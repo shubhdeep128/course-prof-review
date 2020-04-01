@@ -32,7 +32,7 @@ class CourseForm extends Component {
         <input type="text" placeholder="Name" ref="name"/> 
         <textarea type="text" placeholder="Description" ref="desc"/>
         <input type="text" placeholder="Relevent Tags" ref="tags"/>
-
+        <input type="number" placeholder="Average Grade" ref="grade"/>
         <input type="submit" value="Submit" />
       </form>
       </div>
