@@ -31,7 +31,7 @@ class ProfessorForm extends Component {
           <input type="text" placeholder="Name" ref="name"/> 
           <textarea type="text" placeholder="Description" ref="desc"/>
           <input type="text" placeholder="Relevent Tags" ref="tags"/>
-          <textarea type="text" placeholder="Review" ref="review"/>
+          <textarea type="text" placeholder="Reviews" ref="review"/>
           <input type="submit" value="Submit" />
         </form>
         </div>
