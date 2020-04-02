@@ -18,10 +18,13 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start npm run css-watch npm run copy",
+    "copy":"cp css/mystyles.css ./src",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
+    "css-watch": "npm run css-build -- --watch"
   },
   "eslintConfig": {
     "extends": "react-app"

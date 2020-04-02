@@ -23,11 +23,12 @@ class CourseList extends Component {
   
   render(){
     var courses = this.state.courses;
+    var string = '/course/'
     if(this.state.loadStatus===true){
       courses = courses.map(function(course){
         return(
           <div class = "tile">
-            <EachCourse tags={course.Relevant_tags} name={course.Name} desc={course.Description}/>
+            <EachCourse tags={course.Relevant_tags} name={course.Name} desc={course.Description} course_id={string + course._id}/>
           </div>
           
         )

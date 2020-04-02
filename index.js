@@ -59,7 +59,7 @@ const profRoutes = require("./routes/api/professor");
 app.use('/api/prof',profRoutes);
 
 const reviewRoutes = require("./routes/api/review");
-app.use('/api/prof',reviewRoutes);
+app.use('/api/review',reviewRoutes);
 
 
 app.get("*", (req, res) => {
