@@ -3,6 +3,10 @@ var Schema = mongoose.Schema;
 var User = require('./User.js');
 
 var Review_schema = new Schema({
+    Parent:{
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     Author:{
         type: Schema.Types.ObjectId,
         ref: 'User',

@@ -8,7 +8,7 @@ class OuterContainer extends Component {
             <nav class="navbar has-shadow is-light" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/">
-                    <img src="logoDummy.png" width="112" height="28"/>
+                    <img src="../logoDummy.png" width="112" height="28"/>
                     </a>
 
                     <div id="navbarBurger" class="navbar-burger" data-target="navbarWeb" >

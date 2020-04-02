@@ -16,7 +16,7 @@ class CourseForm extends Component {
         Professor_history: [],
         Reviews: [],
         Relevant_tags: [],
-        Average_grade: 0
+        Average_grade: 7
       }).then(function (response) {
         alert("Course added successfully!");
         window.location = '/course/add';
@@ -31,7 +31,7 @@ class CourseForm extends Component {
         <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Name" ref="name"/> 
         <textarea type="text" placeholder="Description" ref="desc"/>
-        <input type="text" placeholder="Relevent Tags" ref="tags"/>
+        <input type="text" placeholder="Relevant Tags" ref="tags"/>
 
         <input type="submit" value="Submit" />
       </form>
