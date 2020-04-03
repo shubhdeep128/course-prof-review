@@ -6,8 +6,6 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Home from './components/home.js';
 import CourseForm from './components/form.js';
 import CourseList from './components/CourseList/CourseList.js';
-import CourseDetails from './components/CourseDetails/CourseDetails.js'
-
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +13,6 @@ function App() {
       <Route exact path='/' component = {Home} />
       <Route exact path='/course/add' component = {CourseForm} /> 
       <Route exact path='/course' component= {CourseList} />
-      <Route exact path='/course/:courseid' component = {CourseDetails} />
     </div>
     </BrowserRouter>
   );

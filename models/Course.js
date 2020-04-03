@@ -13,20 +13,19 @@ var Course_schema = new Schema({
         type: String,
         required: true
     },
-    Current_Professor: {
-        type: Schema.Types.ObjectId,
+    Professor_history: {
+        type: [Schema.Types.ObjectId],
         ref: 'Professor'
     },
-    Relevant_tags: {
+    Reviews: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Review'
+    },
+    Relevent_tags: {
         type: [String]
     },
     Average_grade: {
-        type: Number,
-        default: 7
-    },
-    Rating: {
-        type: Number,
-        default: 3.5
+        type: Number
     }
 });
 
