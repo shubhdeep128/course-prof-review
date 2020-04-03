@@ -13,15 +13,7 @@ var Professor_schema = new Schema({
         type: String,
         required:true
     },
-    Course: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Course'
-    },
-    Reviews: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Review'
-    },
-    Relevent_tags: {
+    Relevant_tags: {
         type: [String]
     },
 });
