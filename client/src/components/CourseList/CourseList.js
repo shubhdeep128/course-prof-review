@@ -1,7 +1,6 @@
 import React , {Component} from 'react';
 import EachCourse from './EachCourse.js';
 import API from '../../utils/API.js'
-import OuterContainer from '../OuterContainer/OuterContainer.js'
 
 class CourseList extends Component {
     state={
@@ -23,39 +22,18 @@ class CourseList extends Component {
   
   render(){
     var courses = this.state.courses;
-    if(this.state.loadStatus===true){
+    if(this.state.loadStatus==true){
       courses = courses.map(function(course){
         return(
-          <div class = "tile">
-            <EachCourse tags={course.Relevant_tags} name={course.Name} desc={course.Description}/>
-          </div>
-          
+          <EachCourse tags={course.Relevant_tags} name={course.Name} desc={course.Description}/>
         )
       }.bind(this));
     }
     
     return(
-      <div>
-        <div>
-          <OuterContainer/>
-          <section class="hero is-info">
-            <div class="hero-body">
-              <div class="container">
-                <h1 class="title">
-                  Courses
-                </h1>
-                <h2 class="subtitle">
-                  Find your course
-                </h2>
-              </div>
-            </div>
-          </section>
-        </div>
-
-          <div className="course-list" class = "tile is-ancestor has-navbar-fixed-top">
-              {courses}
-          </div> 
-      </div>
+      <div className="course-list">
+          {courses}
+      </div> 
     );
   }
 }
