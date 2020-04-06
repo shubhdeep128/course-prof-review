@@ -27,7 +27,7 @@ app.set('view engine', 'hbs');
  
 //Establish the server connection
 //PORT ENVIRONMENT VARIABLE
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5050;
 app.listen(port, () => console.log(`Listening on port ${port}..`));
  
 //Set the Controller path which will be responding the user actions
