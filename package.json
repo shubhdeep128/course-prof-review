@@ -1,31 +1,45 @@
 {
-  "name": "course-prof-review",
-  "version": "1.0.0",
-  "description": "Course-Prof-Review-portal",
-  "main": "index.js",
-  "scripts": {
-    "test": "NODE_ENV=test mocha --exit tests/**/*.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "start": "npm install && node index.js"
-  },
-  "author": "\"Shubh Deep\"",
-  "license": "ISC",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "chai-http": "^4.3.0",
-    "cookie-session": "^1.4.0",
-    "cors": "^2.8.5",
-    "create-react-app": "^3.4.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.1",
-    "nodemon": "^2.0.2",
-    "passport": "^0.4.1",
-    "passport-google-oauth": "^2.0.0",
-    "path": "^0.12.7"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "bulma": "^0.8.0",
+    "node-sass": "^4.13.1",
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0"
   },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "supertest": "^4.0.2"
-  }
+  "scripts": {
+    "start": "react-scripts start npm run css-watch npm run copy",
+    "copy": "cp css/mystyles.css ./src",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
+    "css-watch": "npm run css-build -- --watch"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5050"
 }
