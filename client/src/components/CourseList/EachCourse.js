@@ -1,34 +1,34 @@
 import React , {Component} from 'react';
+import styles from './EachCourse.css'
 import {card} from 'bulma';
 
 class EachCourse extends Component {
   
   render(){
-    
+    console.log(this.props);
     return(
+
  
     <div>
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-          {this.props.name}
-          </p>
-          <a href="#" class="card-header-icon" aria-label="more options">
-            <span class="icon">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </a>
-        </header>
-        <div class="card-content">
-          <div class="content">
-          {this.props.desc}
+      <div class = "box course-box">
+        <div class = "course-title">{this.props.name}</div>
+        <nav class = "level">
+          <div class = "level-left">
+            <div class = "level-item">
+              <div class = "rating-circle">
+                <div class = "circle-text"> {this.props.rating}</div>
+              </div>
+            </div>
           </div>
-        </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">{this.props.Relevant_tags}</a>
-          <a href = {this.props.course_id}>See Details</a>
-        </footer>
+          <div class = "level-right">
+            <div class = "level-item has-text-weight-bold">
+              {this.props.average_grade}
+            </div>
+          </div>
+        </nav>
+        
       </div>
+      
     </div>
 
     );

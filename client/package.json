@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start npm run css-watch npm run copy",
-    "copy":"cp css/mystyles.css ./src",
+    "copy": "cp css/mystyles.css ./src",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

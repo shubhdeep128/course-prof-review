@@ -7,13 +7,13 @@ router = express.Router();
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
-        // if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
             const prof = await Professor.find()
             res.json(prof);
-        //     } 
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
+            } 
+        else{
+            res.status(401).send("Unauthorized")
+        }
     }
     catch (error) {
         res.json({message: error})
@@ -24,7 +24,7 @@ router.get("/",async (req,res)=>{
 router.post("/add",async (req,res)=>{
     try {
         
-        // if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
             const prof_object = new Professor({
                 _id: req.params._id,
                 Name: req.body.Name,
@@ -34,10 +34,10 @@ router.post("/add",async (req,res)=>{
             const savedProf = await prof_object.save();
             console.log("New Professor added successfully");
             res.json({status:true, newProf: prof_object});
-        // }	
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
+        }	
+        else{
+            res.status(401).send("Unauthorized")
+        }
     } catch (error) {
         res.json({message: error});
     }
@@ -46,13 +46,13 @@ router.post("/add",async (req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     try {
-        // if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
             const prof = await Professor.findById(req.params.id);
             res.json(prof); 
-        // }
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
+        }
+        else{
+            res.status(401).send("Unauthorized")
+        }
     } catch (error) {
         res.json({message: error});
     }
@@ -61,15 +61,15 @@ router.get('/:id',async (req,res)=>{
 router.patch("/:id",async (req,res)=>{
     /// update the attributes of a course in the database 
     try {
-        // if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
             const updatedProf = await Professor.updateOne({_id: req.params.id},  {$set: req.body});
             const prof = await Professor.findById(req.params.id);
             console.log("Professor updated successfully");
             res.json(prof);
-        // }
-        // else{
-        //     res.status(401).send("Unauthorized");
-        // }
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
     } catch (error) {
         res.json({message: error});
     }
@@ -78,13 +78,13 @@ router.patch("/:id",async (req,res)=>{
 
 router.delete('/:id',async (req,res) => {
     try {
-        // if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             const removedProf = await Professor.deleteOne({_id: req.params.id});
             console.log("Professor deleted successfully")
             res.json(removedProf)
-        // } else {
-        //     res.status(401).send("Unauthorized");
-        // }
+        } else {
+            res.status(401).send("Unauthorized");
+        }
     } catch (error) {
         res.json({message: error})
     }

@@ -1,12 +1,15 @@
 import React , {Component} from 'react';
 import EachCourse from './EachCourse.js';
 import API from '../../utils/API.js'
+import Pagination from './Pagination.js'
 import OuterContainer from '../OuterContainer/OuterContainer.js'
-
+import styles from "./CourseList.css"
 class CourseList extends Component {
     state={
         loadStatus:false,
         courses: [],
+        currentPage: 1,
+        coursesPerPage: 3,
         error:false
       }
       componentDidMount(){
@@ -22,40 +25,46 @@ class CourseList extends Component {
       }
   
   render(){
+    const lastindex = this.state.currentPage*this.state.coursesPerPage;
+    const firstIndex = lastindex - this.state.coursesPerPage;
+    const currentCourses = this.state.courses.slice(firstIndex,lastindex);
     var courses = this.state.courses;
     var string = '/course/'
     if(this.state.loadStatus===true){
-      courses = courses.map(function(course){
+      courses = currentCourses.map(function(course){
         return(
-          <div class = "tile">
-            <EachCourse tags={course.Relevant_tags} name={course.Name} desc={course.Description} course_id={string + course._id}/>
-          </div>
-          
+          <div class = "column is-one-third">
+            <EachCourse name={course.Name} rating={course.Rating} average_grade = {course.Average_grade} course_id={string + course._id}/>
+          </div> 
         )
       }.bind(this));
+    }
+    const paginate = (pageNumber) => {
+      this.setState({currentPage: pageNumber})
     }
     
     return(
       <div>
         <div>
           <OuterContainer/>
-          <section class="hero is-info">
-            <div class="hero-body">
-              <div class="container">
-                <h1 class="title">
-                  Courses
-                </h1>
-                <h2 class="subtitle">
-                  Find your course
-                </h2>
-              </div>
+          <div class = "columns is-centered is-mobile">
+            <div class = "column is-11">
+            <div class = "head-box box">
+              <div class = "head-title">Courses</div>
             </div>
-          </section>
-        </div>
-
-          <div className="course-list" class = "tile is-ancestor has-navbar-fixed-top">
+            </div>
+          </div>
+          
+          <div class = "container">
+            <div class = "columns is-centered is-mobile">
               {courses}
-          </div> 
+            </div>
+          </div>
+          <footer class = "footer">
+            <Pagination coursesPerPage = {this.state.coursesPerPage} totalCourses = {this.state.courses.length} currentPage = {this.state.currentPage} paginate = {paginate}/>
+          </footer>
+          
+        </div>
       </div>
     );
   }

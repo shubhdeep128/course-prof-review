@@ -5,7 +5,7 @@ class OuterContainer extends Component {
     render(){
         return(
             <div>
-            <nav class="navbar has-shadow is-light" role="navigation" aria-label="main navigation">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/">
                     <img src="../logoDummy.png" width="112" height="28"/>
@@ -51,7 +51,7 @@ class OuterContainer extends Component {
                     <div class="navbar-item">
                         <div class="buttons">
                         <a class="button is-primary" href = "/auth/google">
-                           <span> <strong>Log in</strong></span>
+                            <span> <strong>Log in</strong></span>
                         </a>
                         </div>
                     </div>
