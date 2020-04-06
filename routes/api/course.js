@@ -8,13 +8,13 @@ router = express.Router();
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
-        // if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
             const course = await Course.find()
             res.json(course);
-        //     } 
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
+            } 
+        else{
+            res.status(401).send("Unauthorized")
+        }
     }
     catch (error) {
         res.json({message: error})
@@ -25,7 +25,9 @@ router.get("/",async (req,res)=>{
 router.post("/add",async (req,res)=>{
     try {
         
-        //  if(req.isAuthenticated()){
+
+        if(req.isAuthenticated()){
+
             const course_object = new Course({
                 Name: req.body.Name,
                 Description: req.body.Description, 
@@ -37,10 +39,12 @@ router.post("/add",async (req,res)=>{
             const savedCourse = await course_object.save();
             console.log("New Course added successfully");
             res.json({status:true, newCourse: course_object});
-        //  }
-        //  else{
-        //      res.status(401).send("Unauthorized")
-        //  }	
+
+        }
+        else{
+            res.status(401).send("Unauthorized")
+        }	
+
     } catch (error) {
         res.json({message: error});
     }
@@ -49,16 +53,19 @@ router.post("/add",async (req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     try {
-        //  if(req.isAuthenticated()){
+
+        if(req.isAuthenticated()){
+
             const course = await Course.findById(req.params.id);
             const reviews = await Review.find({Parent: course._id});
             res.json({course: course, reviews: reviews}); 
             console.log({course: course,reviews:reviews});
 
-        // }
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
+        }
+        else{
+            res.status(401).send("Unauthorized")
+        }
+
     } catch (error) {
         res.json({message: error});
     }
@@ -67,15 +74,15 @@ router.get('/:id',async (req,res)=>{
 router.patch("/:id",async (req,res)=>{
     /// update the attributes of a course in the database 
     try {
-        // if(req.isAuthenticated()){
+        if(req.isAuthenticated()){
             const updatedCourse = await Course.updateOne({_id: req.params.id},  {$set: req.body});
             const course = await Course.findById(req.params.id);
             console.log("Course updated successfully");
             res.json(course);
-        // }
-        // else{
-        //     res.status(401).send("Unauthorized");
-        // }
+        }
+        else{
+            res.status(401).send("Unauthorized");
+        }
     } catch (error) {
         res.json({message: error});
     }
@@ -84,13 +91,13 @@ router.patch("/:id",async (req,res)=>{
 
 router.delete('/:id',async (req,res) => {
     try {
-        // if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             const removedCourse = await Course.deleteOne({_id: req.params.id});
             console.log("Course deleted successfully")
             res.json(removedCourse)
-        // } else {
-        //     res.status(401).send("Unauthorized");
-        // }
+        } else {
+            res.status(401).send("Unauthorized");
+        }
     } catch (error) {
         res.json({message: error})
     }

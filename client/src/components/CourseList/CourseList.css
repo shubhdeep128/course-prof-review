@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+.head-box{
+    background-color: #ffffff;
+    background: linear-gradient(90deg, #F8ED98 0%, #B1ECD1 100%);
+    border-radius: 60px;
+    font-family: Quicksand;
+    margin-top: 2vw;
+    color: #000000;
+
+}
+
+.head-title{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 9vw;
+    line-height: 187px;
+
+    color: #000000;
+
+
+}

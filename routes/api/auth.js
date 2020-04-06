@@ -34,7 +34,7 @@ module.exports = app => {
       res.send(req.user);
     }
     else{
-      res.status(401).send("Unauthorized")
+      res.status(401).send({status:"Unauthorized"})
     }
   });
 };

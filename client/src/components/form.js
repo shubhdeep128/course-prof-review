@@ -8,8 +8,6 @@ class CourseForm extends Component {
     e.preventDefault();
     var Name = this.refs.name.value;
     var Description = this.refs.desc.value;
-    
-    
     API.post('/api/course/add', {
         Name : Name,
         Description: Description,

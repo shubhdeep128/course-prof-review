@@ -41,13 +41,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passport.js");
 require("./routes/api/auth.js")(app);
-//require("./routes/api/course.js")(app);
+// require("./routes/api/course.js")(app);
 // require("./routes/api/professor.js")(app);
 // require("./routes/api/review.js")(app);
 
 // ROUTES
 app.get('/api',(req,res) => {
-    res.send("Home");
+    res.send({"message":"Welcome to the course-prof API"});
 })
 
 
@@ -70,3 +70,4 @@ PORT = process.env.PORT || 5050
 app.listen(PORT,function(){
     console.log("Listening on port ",PORT);
 });
+module.exports = app
