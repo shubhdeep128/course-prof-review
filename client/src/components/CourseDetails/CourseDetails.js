@@ -4,8 +4,6 @@ import OuterContainer from  '../OuterContainer/OuterContainer.js'
 import styles from "../../mystyles.css"
 import axios from 'axios';
 import Reviews from './Reviews.js';
-
-
 class CourseDetails extends Component {
     state = {
         loadstatus : false,
@@ -60,18 +58,14 @@ class CourseDetails extends Component {
 
     render(){
         this.handleSubmit = this.handleSubmit.bind(this);
-        error : false
-
         var course = this.state.resData.course 
         var review= this.state.resData.reviews
         console.log(course)
         if(this.state.loadStatus===true){
             review = review.map(function(review){
               return(
-
                 <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
                 )
-
             }.bind(this));
           }
 
@@ -134,7 +128,7 @@ class CourseDetails extends Component {
                 </div>
                 <div class = "Review"> {review} </div>
                 
-          
+        
             </div>
         );
     }
