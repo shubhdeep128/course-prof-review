@@ -4,7 +4,9 @@ var chaiHttp = require('chai-http');
 var server = require('../index.js');
 var should = chai.should();
 chai.use(chaiHttp);
+require('dotenv/config');
 
+process.env['NODE_ENV'] = "Production"
 
 /// Testing if arithmetic is true. Spoiler alert: it is
 describe('Basic Math', function() {
@@ -69,6 +71,5 @@ describe('Test API', function(){
 		      done();
 		    });
 		});
-		// you can test that other endpoints also ask for authorization similarly here
 	});
 });

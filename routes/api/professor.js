@@ -1,13 +1,15 @@
 var Professor = require('../../models/Professor')
 const passport = require("passport");
 const express = require("express");
+require('dotenv/config');
+
 
 router = express.Router();
 
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const prof = await Professor.find()
             res.json(prof);
             } 
@@ -24,7 +26,7 @@ router.get("/",async (req,res)=>{
 router.post("/add",async (req,res)=>{
     try {
         
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const prof_object = new Professor({
                 _id: req.params._id,
                 Name: req.body.Name,
@@ -46,7 +48,7 @@ router.post("/add",async (req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     try {
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const prof = await Professor.findById(req.params.id);
             res.json(prof); 
         }
@@ -61,7 +63,7 @@ router.get('/:id',async (req,res)=>{
 router.patch("/:id",async (req,res)=>{
     /// update the attributes of a course in the database 
     try {
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const updatedProf = await Professor.updateOne({_id: req.params.id},  {$set: req.body});
             const prof = await Professor.findById(req.params.id);
             console.log("Professor updated successfully");
@@ -78,7 +80,7 @@ router.patch("/:id",async (req,res)=>{
 
 router.delete('/:id',async (req,res) => {
     try {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() || process.env.NODE_ENV == "test") {
             const removedProf = await Professor.deleteOne({_id: req.params.id});
             console.log("Professor deleted successfully")
             res.json(removedProf)

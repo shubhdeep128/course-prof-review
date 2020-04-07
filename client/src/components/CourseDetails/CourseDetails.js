@@ -31,7 +31,7 @@ class CourseDetails extends Component {
             }
           }).then(function (response) {
               console.log(response);
-            alert("Review added Successfully");
+            window.location.reload(false)
           }).catch(function (error) {
             console.log(error);
           });
@@ -121,9 +121,9 @@ class CourseDetails extends Component {
             </div>
                 <div class = "Form">
                     <form onSubmit = {this.handleSubmit}>
-                        <input type = "text" placeholder = "Give your Review" ref = "desc"></input>
-                        <input type = "number" placeholder = "Rating" ref = "rating"></input>
-                        <input type = "Submit" value = "submit"></input>
+                        <input type = "text" placeholder = "Give your Review" ref = "desc" id = "desc"></input>
+                        <input type = "number" placeholder = "Rating" ref = "rating" id = "rating"></input>
+                        <input type = "Submit" value = "submit" data-cy-review-button />
                     </form>
                 </div>
                 <div class = "Review"> {review} </div>

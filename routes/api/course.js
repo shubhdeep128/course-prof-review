@@ -2,13 +2,14 @@ var Course = require('../../models/Course')
 var Review = require('../../models/Review')
 const passport = require("passport");
 const express = require("express");
+require('dotenv/config');
 
 router = express.Router();
 
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const course = await Course.find()
             res.json(course);
             } 
@@ -26,7 +27,7 @@ router.post("/add",async (req,res)=>{
     try {
         
 
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
 
             const course_object = new Course({
                 Name: req.body.Name,
@@ -54,7 +55,7 @@ router.post("/add",async (req,res)=>{
 router.get('/:id',async (req,res)=>{
     try {
 
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
 
             const course = await Course.findById(req.params.id);
             const reviews = await Review.find({Parent: course._id});
@@ -74,7 +75,7 @@ router.get('/:id',async (req,res)=>{
 router.patch("/:id",async (req,res)=>{
     /// update the attributes of a course in the database 
     try {
-        if(req.isAuthenticated()){
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const updatedCourse = await Course.updateOne({_id: req.params.id},  {$set: req.body});
             const course = await Course.findById(req.params.id);
             console.log("Course updated successfully");
@@ -91,7 +92,7 @@ router.patch("/:id",async (req,res)=>{
 
 router.delete('/:id',async (req,res) => {
     try {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() || process.env.NODE_ENV == "test") {
             const removedCourse = await Course.deleteOne({_id: req.params.id});
             console.log("Course deleted successfully")
             res.json(removedCourse)

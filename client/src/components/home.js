@@ -9,7 +9,7 @@ class Home extends Component {
               <div class="hero-body">
                 <div class="container">
                   <p class="title is-light">
-                    Fullheight hero with navbar
+                    Welcome to Course-Prof-Review
                   </p>
                 </div>
               </div>

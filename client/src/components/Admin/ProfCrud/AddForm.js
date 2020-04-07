@@ -1,23 +1,18 @@
 import React , {Component} from 'react';
-import styles from './form.css';
-import API from '../utils/API';
+import API from '../../../utils/API';
 
-class CourseForm extends Component {
+class AddProf extends Component {
   state = {}
   handleSubmit(e){
     e.preventDefault();
     var Name = this.refs.name.value;
     var Description = this.refs.desc.value;
-    API.post('/api/course/add', {
+    API.post('/api/prof/add', {
         Name : Name,
         Description: Description,
-        Professor_history: [],
-        Reviews: [],
         Relevant_tags: [],
-        Average_grade: 7
       }).then(function (response) {
-        alert("Course added successfully!");
-        window.location = '/course/add';
+        alert("Professor added successfully!");
       }).catch(function (error) {
         console.log(error);
       });
@@ -27,11 +22,15 @@ class CourseForm extends Component {
     return(
       <div className="form">
         <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Name" ref="name"/> 
+        <div>
+        <input type="text" placeholder="Name" ref="name"/>
+        </div>
+        <div> 
         <textarea type="text" placeholder="Description" ref="desc"/>
-        <input type="text" placeholder="Relevant Tags" ref="tags"/>
-
+        </div>
+        <div>
         <input type="submit" value="Submit" />
+        </div>
       </form>
       </div>
     );
@@ -40,4 +39,4 @@ class CourseForm extends Component {
 
 
 
-export default CourseForm;
+export default AddProf;

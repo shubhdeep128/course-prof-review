@@ -4,6 +4,7 @@
   "description": "Course-Prof-Review-portal",
   "main": "index.js",
   "scripts": {
+    "cypress": "cypress open",
     "test": "NODE_ENV=test mocha --exit tests/**/*.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "start": "npm install && node index.js"
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "cypress": "^4.3.0",
     "mocha": "^7.1.1",
     "supertest": "^4.0.2"
   }

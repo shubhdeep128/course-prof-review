@@ -30,7 +30,7 @@ module.exports = app => {
   });
 
   app.get("/api/current_user", (req, res) => {
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
       res.send(req.user);
     }
     else{
