@@ -4,7 +4,30 @@ import API from '../utils/API';
 import OuterContainer from './OuterContainer/OuterContainer.js';
 
 class CourseForm extends Component {
-  state = {}
+  state = {
+    Relevant_tags : []
+  }
+  addTag(e){
+    e.preventDefault();
+    var tag = this.refs.tags.value;
+    if (tag=="")
+    {
+      alert("Tags should not be empty!")
+    }
+    else{
+    var tags = this.state.Relevant_tags;
+    tags.push  (tag)
+    this.setState({Relevant_tags : tags})
+    console.log(this.state.Relevant_tags);
+    this.refs.tags.value = '';
+  }
+}
+  deleteTag = (key) => {
+    var tags = this.state.Relevant_tags;
+    tags.splice(key,1);
+    this.setState({Relevant_tags : tags})
+  }
+
   handleSubmit(e){
     e.preventDefault();
     var Name = this.refs.name.value;
@@ -14,19 +37,35 @@ class CourseForm extends Component {
     API.post('/api/course/add', {
         Name : Name,
         Description: Description,
-        Professor_history: [],
+        Current_Professer: "",
         Reviews: [],
         Relevant_tags: [],
         Average_grade: 0
       }).then(function (response) {
         alert("Course added successfully!");
-        window.location = '/course/add';
+        
       }).catch(function (error) {
         console.log(error);
       });
   }
+}
+  
   render(){
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.addTag = this.addTag.bind(this);
+    this.deleteTag = this.deleteTag.bind(this);
+    var tags = this.state.Relevant_tags;
+    let that = this;
+    tags = tags.map(function(tag,key){
+      return(
+      <div>{tag}
+      <button onClick = {() =>that.deleteTag(key)}>
+               Delete
+               </button>
+      </div>
+      )
+    }
+    )
     return(
       <div>
       <OuterContainer />
@@ -41,8 +80,8 @@ class CourseForm extends Component {
       </div>
       </div>
     );
-  }
-}
+    }
+
 
 
 
