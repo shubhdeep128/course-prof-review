@@ -12,6 +12,7 @@ import CourseCrud from './components/Admin/CourseCrud/CourseCrud.js';
 import UpdateForm from './components/Admin/CourseCrud/UpdateForm.js';
 import ProfCrud from './components/Admin/ProfCrud/ProfCrud.js';
 import AddProf from './components/Admin/ProfCrud/AddForm.js';
+import UpdateProf from './components/Admin/ProfCrud/UpdateForm.js';
 
 function App() {
   return (
@@ -25,9 +26,10 @@ function App() {
       <Route exact path='/course' component= {CourseList} />
       <Route exact path='/course/:courseid' component = {CourseDetails} />
       <Route exact path='/admin/courses' component= {CourseCrud} />
-      <Route exact path='/admin/courses/:courseid' component = {UpdateForm} />
+      <Route exact path='/admin/courses/update/:courseid' component = {UpdateForm} />
       <Route exact path = '/admin/profs' component = {ProfCrud} />
       <Route exact path = '/admin/profs/add' component = {AddProf} />
+      <Route exact path = '/admin/profs/update/:profid' component = {UpdateProf} /> 
     </div>
     </BrowserRouter>
   );

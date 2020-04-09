@@ -10,9 +10,7 @@ class EachProf extends Component {
                 <div> {this.props.desc} </div>
                 <div> {this.props.tags} </div>
                 <div>
-                    <a href={this.props.id}>
-                        Update
-                    </a>
+                    <a href={this.props.profid}>Update</a>
                     <button onClick = {this.props.onClick}>
                         Delete
                     </button>

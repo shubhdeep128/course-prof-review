@@ -40,7 +40,7 @@ class OuterContainer extends Component {
                             Contact
                         </a>
                         <hr class="navbar-divider"/>
-                        <a class="navbar-item">
+                        <a class="navbar-item" href = "/admin">
                             Admin
                         </a>
                         </div>

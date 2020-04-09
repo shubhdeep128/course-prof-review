@@ -38,7 +38,7 @@ class CourseCrud extends Component {
         return <Redirect to = "/admin/login"></Redirect>
     }
     var courses = this.state.courses;
-    var string = '/admin/courses/'
+    var string = '/admin/courses/update/'
     var courses = this.state.courses;
     if(this.state.loadStatus===true){
       courses = courses.map(function(course){

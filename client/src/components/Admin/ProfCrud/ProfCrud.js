@@ -27,7 +27,7 @@ class ProfCrud extends Component {
       }
     render(){
     var profs = this.state.profs;
-    var string = '/admin/profs/'
+    var string = '/admin/profs/update/'
     var profs = this.state.profs;
     if(this.state.loadStatus===true){
       profs = profs.map(function(prof){
