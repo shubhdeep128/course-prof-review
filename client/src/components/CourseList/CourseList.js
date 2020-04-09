@@ -49,10 +49,10 @@ class CourseList extends Component {
           <OuterContainer/>
           <div class = "columns is-centered is-mobile">
             <div class = "column is-11">
-            <div class = "head-box box">
-              <div class = "head-title">Courses</div>
-            </div>
-            </div>
+              <div class = "head-box box">
+                <div class = "head-title">Courses</div>
+              </div>
+              </div>
           </div>
           
           <div class = "container">

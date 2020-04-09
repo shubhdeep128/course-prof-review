@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+.web-title{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10.4vw;
+    line-height: 12.986vw;
+    text-align: center;
+    color: #000000;
+    margin-top: 3.5vw;    
+}    

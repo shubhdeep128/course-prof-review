@@ -8,14 +8,14 @@ router = express.Router();
 router.get("/",async (req,res)=>{
     /// get a list of all reviews in the database
     try {
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
 
             const review = await Review.find()
             res.json(review);
-        }
-        else{
-            res.status(401).send("Unauthorized")
-        }	
+        // }
+        // else{
+        //     res.status(401).send("Unauthorized")
+        // }	
     }
     catch (error) {
         res.json({message: error})
@@ -51,13 +51,13 @@ router.post("/add",async (req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     try {
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const review = await Review.findById(req.params.id);
             res.json(review); 
-        }
-        else{
-            res.status(401).send("Unauthorized")
-        }
+        // }
+        // else{
+        //     res.status(401).send("Unauthorized")
+        // }
     } catch (error) {
         res.json({message: error});
     }

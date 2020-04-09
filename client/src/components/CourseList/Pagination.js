@@ -18,7 +18,7 @@ class Pagination extends Component{
 
         console.log(classStr(this.props.currentPage));
         return(
-            <div class = "pageNums">
+            <div class = "pageNums has-text-weight-semibold has-text-black">
                 <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
                 <a onClick = {() => {if(this.props.currentPage>1){this.props.paginate(this.props.currentPage-1)}}} class="pagination-previous">Previous</a>
                 <a onClick = {() => {if(this.props.currentPage<pageNumbers[pageNumbers.length -1]){this.props.paginate(this.props.currentPage+1)}}} class="pagination-next">Next page</a>

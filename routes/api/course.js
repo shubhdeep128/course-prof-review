@@ -1,5 +1,6 @@
 var Course = require('../../models/Course')
 var Review = require('../../models/Review')
+var Professor = require('../../models/Professor')
 const passport = require("passport");
 const express = require("express");
 require('dotenv/config');
@@ -9,13 +10,13 @@ router = express.Router();
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const course = await Course.find()
             res.json(course);
-            } 
-        else{
-            res.status(401).send("Unauthorized")
-        }
+            // } 
+        // else{
+        //     res.status(401).send("Unauthorized")
+        // }
     }
     catch (error) {
         res.json({message: error})
@@ -55,17 +56,18 @@ router.post("/add",async (req,res)=>{
 router.get('/:id',async (req,res)=>{
     try {
 
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
 
             const course = await Course.findById(req.params.id);
             const reviews = await Review.find({Parent: course._id});
-            res.json({course: course, reviews: reviews}); 
-            console.log({course: course,reviews:reviews});
+            const prof = await Professor.findById(course.Current_Professor)
+            res.json({course: course, reviews: reviews, prof: prof}); 
+            console.log({course: course,reviews:reviews, prof: prof});
 
-        }
-        else{
-            res.status(401).send("Unauthorized")
-        }
+        // }
+        // else{
+        //     res.status(401).send("Unauthorized")
+        // }
 
     } catch (error) {
         res.json({message: error});

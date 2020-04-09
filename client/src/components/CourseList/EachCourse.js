@@ -14,7 +14,7 @@ class EachCourse extends Component {
  
     <div>
       <div class = "box course-box">
-        <div class = "course-title" id = "course-title"><a href = {this.props.course_id}>
+        <div class = "course-title" id = "course-title"><a class = "has-text-black"href = {this.props.course_id}>
           {this.props.name}
           </a>
           </div>

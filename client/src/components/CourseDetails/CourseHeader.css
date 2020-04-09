@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+.courseDetail-box{
+    background-color: #ffffff;
+    background: linear-gradient(90deg, #FBED96 0%, #ABECD6 100%);
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 2vw;
+    color: #000000;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 5vw;
+    padding-bottom: 3vw;
+    margin-left: 1vw;
+    margin-right:1vw;
+}
+.courseDetail-title{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 5vw;
+    line-height: 1vw;
+    color: #000000;
+}
+.prof-name{
+    font-family: Quicksand;
+    font-style: normal;
+    font-size: 3vw;
+    line-height: 187px;
+    color: #000000;
+}
+.header-rating-circle{
+    margin-left: 1.7vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+}
+.circle-text{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.6vw;
+    text-align: center;
+    margin: auto;
+    color: #000000;
+}
+.course-description{
+    font-family: Quicksand;
+    font-style: normal;
+    font-size: 2.1vw;
+    text-align: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top:3vw;
+    color: #000000;
+    margin-left: 3.5vw;
+    margin-right:3.5vw;
+    margin-bottom: 5vw;
+}
+.footer{
+    margin-top:5vw
+}

@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
 .head-box{
-    background-color: #ffffff;
-    background: linear-gradient(90deg, #F8ED98 0%, #B1ECD1 100%);
-    border-radius: 60px;
-    font-family: Quicksand;
+    background: linear-gradient(90deg, #F8ED98 0%, rgba(255, 108, 63, 0.94) 100%);
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
     margin-top: 2vw;
     color: #000000;
 
@@ -19,4 +18,21 @@
     color: #000000;
 
 
+}
+.rating-circle{
+    margin-left: 25px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #FDF39B;
+    display: flex;
+}
+.circle-text{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.6vw;
+    text-align: center;
+    margin: auto;
+    color: #000000;
 }

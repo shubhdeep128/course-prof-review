@@ -2,14 +2,15 @@ import React,{Component} from 'react';
 import EachCourse from './EachCourse.js';
 import API from '../../../utils/API.js'
 import { Link, Redirect } from 'react-router-dom'
+import axios from 'axios';
 
 class CourseCrud extends Component {
 
   state={
       loadStatus:false,
       courses: [],
-      loggedIn: true,
-      error:false
+      error:false,
+      current_user: {}
     }
     onDelete = (id) => {
       this.setState(this.props.location.state)
@@ -19,24 +20,23 @@ class CourseCrud extends Component {
       })
     }
     componentDidMount(){
-      this.setState(this.props.location.state)
-      API.get('/api/course').then((response) => {
-        this.setState({error:false, courses:response.data, loadStatus:true});
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log("ERROR LOADING DATA");
-        console.log(error);
-      });
+      const { match: { params } } = this.props;
+        this.setState(this.props.location.state)
+        axios.all([
+            axios.get("/api/course/"),
+            axios.get("/api/current_user")
+        ])
+        .then(responseArr => {
+            this.setState({error:false, courses:responseArr[0].data,  loadStatus:true, current_user: responseArr[1].data});
+            console.log(responseArr);
+        }).catch(function (error) {
+            console.log("ERROR LOADING DATA");
+            console.log(error);
+          });
       
     }
   render(){
-    const token = localStorage.getItem("token")
-    if(token == null){
-      this.state.loggedIn = false
-    }
-    if(this.state.loggedIn === false){
-        return <Redirect to = "/admin/login"></Redirect>
-    }
+
     var courses = this.state.courses;
     var string = '/admin/courses/'
     var courses = this.state.courses;
@@ -50,8 +50,16 @@ class CourseCrud extends Component {
         )
       }.bind(this));
     }
+    if(this.state.current_user.Roles != 'Admin'){
+      console.log(this.state.current_user.Roles)
+      return(
+          <div>
+              Unathorized
+          </div>
+      )
+  }
     return(
-        <div>
+        <div class = "container">
           <a href="/admin/courses/add">Add a Course</a>
           {courses}   
         </div>

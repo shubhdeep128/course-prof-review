@@ -26,7 +26,7 @@ module.exports = app => {
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.redirect("/api");
+    res.redirect("/");
   });
 
   app.get("/api/current_user", (req, res) => {
@@ -34,7 +34,7 @@ module.exports = app => {
       res.send(req.user);
     }
     else{
-      res.status(401).send({status:"Unauthorized"})
+      res.status(401).send({data:"Unauthorized"})
     }
   });
 };

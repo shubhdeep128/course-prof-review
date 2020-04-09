@@ -9,13 +9,13 @@ router = express.Router();
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const prof = await Professor.find()
             res.json(prof);
-            } 
-        else{
-            res.status(401).send("Unauthorized")
-        }
+        //     } 
+        // else{
+        //     res.status(401).send("Unauthorized")
+        // }
     }
     catch (error) {
         res.json({message: error})
@@ -48,13 +48,13 @@ router.post("/add",async (req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     try {
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const prof = await Professor.findById(req.params.id);
             res.json(prof); 
-        }
-        else{
-            res.status(401).send("Unauthorized")
-        }
+        // }
+        // else{
+        //     res.status(401).send("Unauthorized")
+        // }
     } catch (error) {
         res.json({message: error});
     }

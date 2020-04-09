@@ -4,12 +4,14 @@ import OuterContainer from  '../OuterContainer/OuterContainer.js'
 import styles from "../../mystyles.css"
 import axios from 'axios';
 import Reviews from './Reviews.js';
+import CourseHeader from './CourseHeader'
 class CourseDetails extends Component {
     state = {
         loadstatus : false,
         course: [],
         resData : [],
         reviews: [],
+        prof:[],
         error : false,
         current_user : ''
     }
@@ -46,7 +48,7 @@ class CourseDetails extends Component {
             axios.get("/api/current_user")
         ])
         .then(responseArr => {
-            this.setState({error:false, resData:responseArr[0].data, course:responseArr[0].data.course, reviews: responseArr[0].data.reviews, loadStatus:true, current_user: responseArr[1].data._id});
+            this.setState({error:false, resData:responseArr[0].data, course:responseArr[0].data.course, reviews: responseArr[0].data.reviews,prof: responseArr[0].data.prof, loadStatus:true, current_user: responseArr[1].data._id});
             console.log(responseArr[1]);
         }).catch(function (error) {
             console.log("ERROR LOADING DATA");
@@ -64,7 +66,7 @@ class CourseDetails extends Component {
         if(this.state.loadStatus===true){
             review = review.map(function(review){
               return(
-                <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
+                <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
                 )
             }.bind(this));
           }
@@ -84,51 +86,41 @@ class CourseDetails extends Component {
               )
             }.bind(this));
           }
-        return(
-            <div class=  "has-background-grey-darker">
-        
-            <OuterContainer/>
-    
-                <div class = "column is-full has-text-primary has-text-centered is-size-1 has-text-weight-semibold"> 
-
-                <div class="card ">
-                    <div class="card-content has-background-success">
-                        <p class="title">
-                            {this.state.course.Name}
-                        </p>
-                        <p class="subtitle">
-                        {this.state.course.Description}
-                        </p>
-                    </div>
-                    <footer class="card-footer">
-                        <p class="card-footer-item">
-                            <p class = "title"><span class = "is-size-6">Rating</span><br/> <span class = "has-text-weight-bold">{this.state.course.Rating}</span></p>
-                        </p>
-                        <p class="card-footer-item">
-                        <span>
-                        <p class = "title"><span class = "is-size-6">Average Grade</span><br/> <span class = "has-text-weight-bold">{this.state.course.Average_grade}</span></p>
-                            
-                        </span>
-                        </p>
-                    </footer>
-                    </div>
-                </div>
-            
-            <div class = "columns is-3">
-                <div class = "column has-text-centred"> 
-        <nav class = "level">{course_tags}</nav>
-                </div>
-            </div>
-                <div class = "Form">
+          const ReviewForm = ()=>{
+              if(this.state.current_user != null){
+                return(
+                    <div class = "Form">
                     <form onSubmit = {this.handleSubmit}>
                         <input type = "text" placeholder = "Give your Review" ref = "desc" id = "desc"></input>
                         <input type = "number" placeholder = "Rating" ref = "rating" id = "rating"></input>
                         <input type = "Submit" value = "submit" data-cy-review-button />
                     </form>
                 </div>
+                )
+              }
+          }
+          if(this.state.prof === null){
+              this.state.prof = {"name":""}
+          }
+        return(
+            <div class>
+        
+                <OuterContainer/>
+                <CourseHeader course = {this.state.course} prof = {this.state.prof}/>
+            
+                {/* <div class = "box">{ReviewForm()}</div> */}
+                <div class = "review-heading"><span class = "has-text-weight-semibold">Reviews</span></div>
                 <div class = "Review"> {review} </div>
                 
-        
+                <footer class="footer">
+                  <div class="content has-text-centered">
+                    <p>
+                      <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+                      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+                      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+                    </p>
+                  </div>
+                </footer>
             </div>
         );
     }
