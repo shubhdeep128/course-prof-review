@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+.container{
+    margin-top:3vw;
+}
+.card{
+    font-family: Quicksand, sans-serif;
+    color: #000000;
+}
+.tag{
+    margin-left: 1vw;
+}

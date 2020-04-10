@@ -14,10 +14,9 @@ class EachCourse extends Component {
  
     <div>
       <div class = "box course-box">
-        <div class = "course-title" id = "course-title"><a class = "has-text-black"href = {this.props.course_id}>
+        <div class = "course-title" id = "course-title">
           {this.props.name}
-          </a>
-          </div>
+        </div>
         <nav class = "level">
           <div class = "level-left">
             <div class = "level-item">
@@ -28,7 +27,11 @@ class EachCourse extends Component {
           </div>
           <div class = "level-right">
             <div class = "level-item has-text-weight-bold">
-              {this.props.average_grade}
+              <span class = "icon is-large">
+                <a class = "has-text-black"href = {this.props.course_id}>
+                  <img src = "arrow_forward.svg"></img>
+                </a>
+              </span>
             </div>
           </div>
         </nav>

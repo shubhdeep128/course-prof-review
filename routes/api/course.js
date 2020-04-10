@@ -33,13 +33,13 @@ router.post("/add",async (req,res)=>{
             const course_object = new Course({
                 Name: req.body.Name,
                 Description: req.body.Description, 
-                Professor_history: req.body.Professor_history, 
-                Reviews: req.body.Reviews, 
+                Current_Professor: req.body.Current_Professor, 
                 Relevant_tags: req.body.Relevant_tags, 
-                Average_grade: req.body.Average_grade
+                Average_grade: req.body.Average_grade,
+                Rating: req.body.Rating
             });
             const savedCourse = await course_object.save();
-            console.log("New Course added successfully");
+            console.log("New Course added successfully",savedCourse);
             res.json({status:true, newCourse: course_object});
 
         }
@@ -48,6 +48,7 @@ router.post("/add",async (req,res)=>{
         }	
 
     } catch (error) {
+        console.log(error)
         res.json({message: error});
     }
     

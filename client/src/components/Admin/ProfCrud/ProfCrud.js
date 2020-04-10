@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import EachProf from './EachProf.js';
 import API from '../../../utils/API.js'
 import axios from 'axios';
+import OuterContainer from '../../OuterContainer/OuterContainer'
 
 
 class ProfCrud extends Component {
@@ -36,7 +37,7 @@ class ProfCrud extends Component {
       }
     render(){
     var profs = this.state.profs;
-    var string = '/admin/profs/'
+    var string = '/admin/profs/update/'
     var profs = this.state.profs;
     if(this.state.loadStatus===true){
       profs = profs.map(function(prof){
@@ -57,10 +58,13 @@ class ProfCrud extends Component {
       )
   }
         return(
+          <div>
+            <OuterContainer/>
             <div class = "container">
-               <a href = "/admin/profs/add">Add a Professor</a>
+               <a class = "button is-large is-black is-rounded" href = "/admin/profs/add">Add a Professor</a>
               {profs}   
             </div>
+          </div>
         )
     }
 }

@@ -23,63 +23,58 @@ class OuterContainer extends Component {
 
             // Get all "navbar-burger" elements
             const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-          
             // Check if there are any navbar burgers
             if ($navbarBurgers.length > 0) {
-          
               // Add a click event on each of them
-              $navbarBurgers.forEach( el => {
-                el.addEventListener('click', () => {
-          
-                  // Get the target from the "data-target" attribute
-                  const target = el.dataset.target;
-                  const $target = document.getElementById(target);
-          
-                  // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                  el.classList.toggle('is-active');
-                  $target.classList.toggle('is-active');
-          
+                $navbarBurgers.forEach( el => {
+                    el.addEventListener('click', () => {
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                    });
                 });
-              });
             }
-          
-          });
-          if(this.state.current_user === null){
-              this.state.current_user = {"Roles": "Unauthorized"}
-          }
+        });
+        if(this.state.current_user === null){
+            this.state.current_user = {"Roles": "Unauthorized"}
+        }
 
-          const AdminButton = ()=>{
-            if(this.state.current_user.Roles === 'Admin'){
+        const AdminButton = ()=>{
+        if(this.state.current_user.Roles === 'Admin'){
+            return(
+                <div>
+                    <hr class="navbar-divider"/>
+                    <a class="navbar-item" href = "/admin">
+                        <span>Admin</span>
+                    </a>
+                </div>
+            )
+        }
+        else{
+            return
+        }
+        }
+        const LoginButton = ()=>{
+            if(this.state.current_user.Roles === "Unauthorized"){
+                console.log("here")
                 return(
-                    <div>
-                        <hr class="navbar-divider"/>
-                        <a class="navbar-item" href = "/admin">
-                            <span>Admin</span>
-                        </a>
-                    </div>
+                <a class="button is-black is-rounded" href = "/auth/google">
+                    <span> <strong>Log in</strong></span>
+                </a>
                 )
             }
             else{
-                return
+            return(
+                <a class="button is-black is-rounded" href = "/api/logout">
+                    <span> <strong>Log Out</strong></span>
+                </a>
+            )
             }
-          }
-          const LoginButton = ()=>{
-              if(this.state.current_user.Roles === "Unauthorized"){
-                  return(
-                    <a class="button is-black is-rounded" href = "/auth/google">
-                        <span> <strong>Log in</strong></span>
-                    </a>
-                  )
-              }
-              else{
-                return(
-                    <a class="button is-black is-rounded" href = "/api/logout">
-                        <span> <strong>Log Out</strong></span>
-                    </a>
-                )
-              }
-          }
-          console.log(this.state.current_user)
+        }
+        console.log(this.state.current_user)
         return(
             <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">

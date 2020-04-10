@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+.admin-box{
+    background: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 2vw;
+    color: #000000;
+    padding-left: 3vw;
+}
+
+.admin-title{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 9vw;
+    line-height: 15vw;
+    color: #000000;
+}
+.admin-btn{
+    margin: 5vw;
+}
+.btn-container{
+    text-align: center;
+}

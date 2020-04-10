@@ -5,6 +5,7 @@ import styles from "../../mystyles.css"
 import axios from 'axios';
 import Reviews from './Reviews.js';
 import CourseHeader from './CourseHeader'
+import AddReview from "./AddReview";
 class CourseDetails extends Component {
     state = {
         loadstatus : false,
@@ -71,8 +72,6 @@ class CourseDetails extends Component {
             }.bind(this));
           }
 
-
-        console.log(review)
         var course_tags = this.state.course.Relevant_tags
         if(this.state.loadStatus===true){
             course_tags = course_tags.map(function(tag){
@@ -86,32 +85,35 @@ class CourseDetails extends Component {
               )
             }.bind(this));
           }
-          const ReviewForm = ()=>{
-              if(this.state.current_user != null){
-                return(
-                    <div class = "Form">
-                    <form onSubmit = {this.handleSubmit}>
-                        <input type = "text" placeholder = "Give your Review" ref = "desc" id = "desc"></input>
-                        <input type = "number" placeholder = "Rating" ref = "rating" id = "rating"></input>
-                        <input type = "Submit" value = "submit" data-cy-review-button />
-                    </form>
-                </div>
-                )
-              }
+          const isLoggedin = true
+          if(this.state.current_user === null){
+            isLoggedin = false
           }
+
           if(this.state.prof === null){
               this.state.prof = {"name":""}
           }
         return(
-            <div class>
+            <div>
         
                 <OuterContainer/>
                 <CourseHeader course = {this.state.course} prof = {this.state.prof}/>
-            
-                {/* <div class = "box">{ReviewForm()}</div> */}
-                <div class = "review-heading"><span class = "has-text-weight-semibold">Reviews</span></div>
-                <div class = "Review"> {review} </div>
+
                 
+                
+                <nav class = "level">
+                  <div class = "level-left">
+                    <div class = "level-item">
+                      <div class = "review-heading"><span class = "has-text-weight-semibold">Reviews</span></div>
+                    </div>
+                  </div>
+                  <div calss = "level-right">
+                    <div class = "level-item">
+                      <div class = "add-review"><AddReview current_user = {this.state.current_user} course_id = {this.state.course._id}/></div>
+                    </div>
+                  </div>
+                </nav>
+                <div class = "Review"> {review} </div>
                 <footer class="footer">
                   <div class="content has-text-centered">
                     <p>
