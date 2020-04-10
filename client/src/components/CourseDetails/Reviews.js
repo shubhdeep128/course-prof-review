@@ -3,22 +3,23 @@ import styles from './Reviews.css';
 
 class Reviews extends Component {
     render() {
+        console.log(this.props)
         return (
             <div class = 'review-container'>
-    <div class = 'author'>{this.props.author}</div>
-        <div class = 'time'>Given on {this.props.time}</div>
-        <div class = 'description'>{this.props.desc}</div>
-    <div class = 'difficulty'>{this.props.difficulty}</div>
-    <div class = 'rating'> {this.props.rating} </div>
-        <div class = 'votes'>
-            <div class = 'upvotes'>
-                Upvotes : {this.props.upvotes}
-            </div>
-            <div class = 'downvotes'>
-                Downvotes : {this.props.downvotes}
-            </div>
-        </div>
-        <hr></hr>
+                <div class = "columns is-vcentered is-mobile">
+                    <div class = "column is-2">
+                        <div class = "review-circle">
+                            <div class = "review-circle-text"> {this.props.rating}</div>
+                        </div>
+                    </div>
+                    <div class = "column">
+                        <div class = "review-desc is-italic">
+                            <span class = " has-text-weight-semibold">"</span>
+                            {this.props.desc}
+                            <span class = "">"</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

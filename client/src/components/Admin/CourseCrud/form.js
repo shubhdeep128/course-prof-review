@@ -4,8 +4,26 @@ import API from '../../../utils/API';
 
 class CourseForm extends Component {
   state = {
-    Relevant_tags : []
+    Relevant_tags : [],
+    Professers : [],
+    currentprof : ""
   }
+  componentDidMount(){
+    this.setState(this.props.location.state)
+    API.get('/api/prof/').then((response) => {
+      this.setState({Professers : response.data})
+      console.log(this.state.Professers._id)
+
+    }).catch(function(error){
+      console.log(error)
+    })
+  }
+  handleChange(event){
+    this.setState({currentprof : event.target.value});
+  }
+  
+  
+
   addTag(e){
     e.preventDefault();
     var tag = this.refs.tags.value;
@@ -38,16 +56,17 @@ class CourseForm extends Component {
     }
     else
     {
+    console.log(this.state.currentprof)
     API.post('/api/course/add', {
         Name : Name,
         Description: Description,
-        Current_Professer: "",
+        Current_Professer: this.state.currentprof,
         Reviews: [],
         Relevant_tags: this.state.Relevant_tags,
         Average_grade: 7
       }).then(function (response) {
         alert("Course added successfully!");
-        
+        console.log(response);
       }).catch(function (error) {
         console.log(error);
       });
@@ -55,11 +74,23 @@ class CourseForm extends Component {
 }
   
   render(){
+  const  compare = ( a, b ) => {
+      if ( a.Name < b.Name ){
+        return -1;
+      }
+      if ( a.Name > b.Name ){
+        return 1;
+      }
+      return 0;
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addTag = this.addTag.bind(this);
     this.deleteTag = this.deleteTag.bind(this);
+    this.handleChange = this.handleChange.bind(this)
     var tags = this.state.Relevant_tags;
     let that = this;
+    var Professers = this.state.Professers;
+    Professers.sort(compare);
     tags = tags.map(function(tag,key){
       return(
       <div>{tag}
@@ -70,6 +101,11 @@ class CourseForm extends Component {
       )
     }
     )
+    Professers = Professers.map(function(professor){
+      return(
+      <option value = {professor._id}>{professor.Name}</option>
+      )
+    })
     return(
       <div className="form">
         <form onSubmit={this.handleSubmit}>
@@ -78,6 +114,10 @@ class CourseForm extends Component {
         <input type="text" placeholder="Relevant Tags" ref="tags" />
         <button onClick = {this.addTag}>Add Tag</button>
     <div>{tags}</div>
+        <label>Current_Professer</label>
+        <select value = {this.state.currentprof} onChange = {this.handleChange}>
+          {Professers}
+        </select>  
         <input type="submit" value="Submit" />
       </form>
       </div>

@@ -1,12 +1,15 @@
 import React,{Component} from 'react';
 import EachProf from './EachProf.js';
 import API from '../../../utils/API.js'
+import axios from 'axios';
+
 
 class ProfCrud extends Component {
     state={
         loadStatus:false,
         profs: [],
-        error:false
+        error:false,
+        current_user: {}
       }
       onDelete = (id) => {
         this.setState(this.props.location.state)
@@ -16,14 +19,20 @@ class ProfCrud extends Component {
         })
       }
       componentDidMount(){
-        this.setState(this.props.location.state)
-        API.get('/api/prof').then((response) => {
-          this.setState({error:false, profs:response.data, loadStatus:true});
-          console.log(response.data);
-        }).catch(function (error) {
-          console.log("ERROR LOADING DATA");
-          console.log(error);
-        });
+        const { match: { params } } = this.props;
+          this.setState(this.props.location.state)
+          axios.all([
+              axios.get("/api/prof/"),
+              axios.get("/api/current_user")
+          ])
+          .then(responseArr => {
+              this.setState({error:false, profs:responseArr[0].data,  loadStatus:true, current_user: responseArr[1].data});
+              console.log(responseArr);
+          }).catch(function (error) {
+              console.log("ERROR LOADING DATA");
+              console.log(error);
+            });
+        
       }
     render(){
     var profs = this.state.profs;
@@ -39,6 +48,14 @@ class ProfCrud extends Component {
         )
       }.bind(this));
     }
+    if(this.state.current_user.Roles != 'Admin'){
+      console.log(this.state.current_user.Roles)
+      return(
+          <div>
+              Unathorized
+          </div>
+      )
+  }
         return(
             <div class = "container">
                <a href = "/admin/profs/add">Add a Professor</a>

@@ -5,8 +5,6 @@ import Home from './components/home.js';
 import CourseForm from './components/Admin/CourseCrud/form.js';
 import CourseList from './components/CourseList/CourseList.js';
 import CourseDetails from './components/CourseDetails/CourseDetails.js'
-import Login from './components/Admin/Login.js'
-import Logout from './components/Admin/Logout.js'
 import Admin from './components/Admin/Admin.js'
 import CourseCrud from './components/Admin/CourseCrud/CourseCrud.js';
 import UpdateForm from './components/Admin/CourseCrud/UpdateForm.js';
@@ -20,8 +18,6 @@ function App() {
     <div>
       <Route exact path='/' component = {Home} />
       <Route exact path='/admin' component = {Admin} />
-      <Route exact path='/admin/login' component = {Login} />
-      <Route exact path='/admin/logout' component = {Logout} />
       <Route exact path='/admin/courses/add' component = {CourseForm} /> 
       <Route exact path='/course' component= {CourseList} />
       <Route exact path='/course/:courseid' component = {CourseDetails} />
