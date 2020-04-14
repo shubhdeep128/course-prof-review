@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+.add-review{
+    margin-right: 5vw;
+    font-family: 'Quicksand', sans-serif;
+}
+.button{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    background-color: black;
+    color: #ffffff;
+}

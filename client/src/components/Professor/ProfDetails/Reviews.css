@@ -1,0 +1,41 @@
+.review-container {
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, .3);
+    border-radius: 1.7vw;
+    padding: 1vw;
+    margin-top:3vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+.review-circle{
+    margin-left: 1.7vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    background: #fdf39b;
+    display: flex;
+}
+.review-circle-text{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.6vw;
+    text-align: center;
+    margin: auto;
+    color: #000000;
+}
+.review-desc{
+    font-family: Quicksand;
+    font-style: normal;
+    font-size: 2vw;
+    text-align: left;
+    color: #000000;
+
+}
+.review-heading{
+    font-family: Quicksand;
+    font-style: normal;
+    font-size: 4vw;
+    color: #000000;
+    margin-left:5vw
+}

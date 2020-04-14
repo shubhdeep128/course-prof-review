@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import API from '../../../utils/API.js';
-import styles from "../../mystyles.css"
 import axios from 'axios';
-import Reviews from './Reviews.js.js';
-import CourseHeader from './CourseHeader'
+import Reviews from './Reviews.js';
+import ProfHeader from './ProfHeader.js'
 import AddReview from "./AddReview";
 class ProfDetails extends Component {
     state = {
         loadstatus : false,
-        course: [],
+        prof: [],
         resData : [],
         reviews: [],
-        prof:[],
         error : false,
         current_user : ''
     }
@@ -21,7 +19,7 @@ class ProfDetails extends Component {
         var rating = this.refs.rating.value;
         const { match: { params } } = this.props;
         API.post('/api/review/add', {
-            Parent : params.courseid,
+            Parent : params.profid,
             Author: this.state.current_user,
             Time_stamp : Date.now,
             Description : desc,
@@ -44,12 +42,12 @@ class ProfDetails extends Component {
         const { match: { params } } = this.props;
         this.setState(this.props.location.state)
         axios.all([
-            axios.get(`/api/course/${params.courseid}`),
+            axios.get(`/api/prof/${params.profid}`),
             axios.get("/api/current_user")
         ])
         .then(responseArr => {
-            this.setState({error:false, resData:responseArr[0].data, course:responseArr[0].data.course, reviews: responseArr[0].data.reviews,prof: responseArr[0].data.prof, loadStatus:true, current_user: responseArr[1].data._id});
-            console.log(responseArr[1]);
+            this.setState({error:false, resData:responseArr[0].data, prof:responseArr[0].data.prof, reviews: responseArr[0].data.reviews, loadStatus:true, current_user: responseArr[1].data._id});
+            console.log(this.state.resData);
         }).catch(function (error) {
             console.log("ERROR LOADING DATA");
             console.log(error);
@@ -60,9 +58,9 @@ class ProfDetails extends Component {
 
     render(){
         this.handleSubmit = this.handleSubmit.bind(this);
-        var course = this.state.resData.course 
+        var prof = this.state.prof 
         var review= this.state.resData.reviews
-        console.log(course)
+        console.log(prof)
         if(this.state.loadStatus===true){
             review = review.map(function(review){
               return(
@@ -71,9 +69,9 @@ class ProfDetails extends Component {
             }.bind(this));
           }
 
-        var course_tags = this.state.course.Relevant_tags
+        var prof_tags = this.state.prof.Relevant_tags
         if(this.state.loadStatus===true){
-            course_tags = course_tags.map(function(tag){
+            prof_tags = prof_tags.map(function(tag){
               return(
                 <div class="level-item has-text-centered">
                     <div>
@@ -84,18 +82,11 @@ class ProfDetails extends Component {
               )
             }.bind(this));
           }
-          const isLoggedin = true
-          if(this.state.current_user === null){
-            isLoggedin = false
-          }
-
-          if(this.state.prof === null){
-              this.state.prof = {"name":""}
-          }
+          
         return(
             <div>
         
-                <CourseHeader course = {this.state.course} prof = {this.state.prof}/>
+                <ProfHeader prof = {this.state.prof} />
                 
                 <nav class = "level">
                   <div class = "level-left">
@@ -105,7 +96,7 @@ class ProfDetails extends Component {
                   </div>
                   <div calss = "level-right">
                     <div class = "level-item">
-                      <div class = "add-review"><AddReview current_user = {this.state.current_user} course_id = {this.state.course._id}/></div>
+                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} prof_id = {this.state.prof._id} prof_rating = {this.state.prof.Rating} course_revCount = {this.state.prof.revCount} /></div>
                     </div>
                   </div>
                 </nav>
