@@ -8,6 +8,8 @@ class CourseHeader extends Component {
         console.log(this.props.course.Current_Professor)
         const course = this.props.course
         console.log(course)
+        var courseRating = Number(course.Rating).toFixed(1)
+
         return (
             <div>
                 <div class = "columns is-centered is-mobile">
@@ -22,7 +24,7 @@ class CourseHeader extends Component {
                                             <span class = 'has-text-weight-semibold is-size-4'>Avg. Rating</span>
                                             <br/>
                                             <div class = "header-rating-circle">
-                                                <div class = "circle-text"> {course.Rating}</div>
+                                                <div class = "circle-text"> {Number(courseRating).toFixed(1)}</div>
                                             </div>      
                                         </div>   
                                     </div>

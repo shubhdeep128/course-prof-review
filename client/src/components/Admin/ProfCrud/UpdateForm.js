@@ -37,7 +37,7 @@ class UpdateForm extends Component {
         const { match: { params } } = this.props;
         this.setState(this.props.location.state)
         API.get(`/api/prof/${params.profid}`).then((response) => {
-          this.setState({error:false, profs:response.data, loadStatus:true,Relevant_tags:response.data.Relevant_tags});
+          this.setState({error:false, profs:response.data.prof, loadStatus:true,Relevant_tags:response.data.prof.Relevant_tags});
           console.log(this.state.profs);
         }).catch(function (error) {
           console.log("ERROR LOADING DATA");

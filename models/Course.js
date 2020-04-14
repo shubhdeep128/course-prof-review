@@ -26,7 +26,13 @@ var Course_schema = new Schema({
     },
     Rating: {
         type: Number,
-        default: 3.5
+        default: 3.5,
+        min: 0,
+        max: 5
+    },
+    revCount:{
+        type: Number,
+        default: 1
     }
 });
 

@@ -4,8 +4,11 @@ import API from '../../../utils/API.js';
 
 export default class AddReview extends Component {
 
+  calcRating(overall_rating,total_rating,new_rating){
+    return ((overall_rating*total_rating)+new_rating)/(total_rating+1);
+  }
+
   handleSubmit(e){
-    console.log("submit")
     e.preventDefault();
     var desc = this.refs.desc.value;
     var rating = this.refs.rating.value;
@@ -22,13 +25,29 @@ export default class AddReview extends Component {
         }
       }).then(function (response) {
           console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });  
+
+      const overall_rating =+Number(this.props.course_rating);
+      const total_rating =+Number(this.props.course_revCount);
+      const new_rating =+rating
+      const newRevCount = this.props.course_revCount + 1;
+      var newOverallRating = (overall_rating*total_rating+new_rating)/(newRevCount)
+      API.patch(`/api/course/${this.props.course_id}`,{
+        Rating: newOverallRating,
+        revCount: newRevCount
+      }).then(function(response){
+        console.log(response)
         window.location.reload(false)
       }).catch(function (error) {
         console.log(error);
       });  
+
   }
     render() {
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.calcRating = this.calcRating.bind(this)
         document.addEventListener('DOMContentLoaded', function () {
 
             // Modals

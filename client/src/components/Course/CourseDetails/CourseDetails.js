@@ -96,7 +96,7 @@ class CourseDetails extends Component {
                   </div>
                   <div calss = "level-right">
                     <div class = "level-item">
-                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id}/></div>
+                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id} course_rating = {this.state.course.Rating} course_revCount = {this.state.course.revCount} /></div>
                     </div>
                   </div>
                 </nav>
