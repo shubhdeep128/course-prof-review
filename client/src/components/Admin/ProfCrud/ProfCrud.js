@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import EachProf from './EachProf.js';
 import API from '../../../utils/API.js'
 import axios from 'axios';
-import OuterContainer from '../../OuterContainer/OuterContainer'
 
 
 class ProfCrud extends Component {
@@ -10,7 +9,6 @@ class ProfCrud extends Component {
         loadStatus:false,
         profs: [],
         error:false,
-        current_user: {}
       }
       onDelete = (id) => {
         this.setState(this.props.location.state)
@@ -22,12 +20,9 @@ class ProfCrud extends Component {
       componentDidMount(){
         const { match: { params } } = this.props;
           this.setState(this.props.location.state)
-          axios.all([
-              axios.get("/api/prof/"),
-              axios.get("/api/current_user")
-          ])
+            API.get("/api/prof/")
           .then(responseArr => {
-              this.setState({error:false, profs:responseArr[0].data,  loadStatus:true, current_user: responseArr[1].data});
+              this.setState({error:false, profs:responseArr.data,  loadStatus:true});
               console.log(responseArr);
           }).catch(function (error) {
               console.log("ERROR LOADING DATA");
@@ -43,23 +38,23 @@ class ProfCrud extends Component {
       profs = profs.map(function(prof){
         return(
           <div class = "tile">
-            <EachProf name = {prof.Name} desc = {prof.Description} tags = {prof.Relevant_tags} profid = {string+prof._id} onClick={this.onDelete.bind(this,prof._id)}/>
+            <EachProf name = {prof.Name} rating = {prof.Rating} desc = {prof.Description} tags = {prof.Relevant_tags} profid = {string+prof._id} onClick={this.onDelete.bind(this,prof._id)}/>
           </div>
           
         )
       }.bind(this));
     }
-    if(this.state.current_user.Roles != 'Admin'){
-      console.log(this.state.current_user.Roles)
+    if(this.props.current_user.Roles != 'Admin'){
+      console.log(this.props.current_user.Roles)
       return(
-          <div>
-              Unathorized
+          <div class = "container has-text-centered">
+              <p class = "title">Unauthorized</p>
+              <p class = "subtitle">Log in as an Admin to Continue</p>
           </div>
       )
   }
         return(
           <div>
-            <OuterContainer/>
             <div class = "container">
                <a class = "button is-large is-black is-rounded" href = "/admin/profs/add">Add a Professor</a>
               {profs}   

@@ -3,7 +3,6 @@ import EachCourse from './EachCourse.js';
 import API from '../../../utils/API.js'
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
-import OuterContainer from '../../OuterContainer/OuterContainer'
 import styles from './CourseCrud.css'
 class CourseCrud extends Component {
 
@@ -30,7 +29,7 @@ class CourseCrud extends Component {
             axios.get("/api/prof")
         ])
         .then(responseArr => {
-            this.setState({error:false, courses:responseArr[0].data,  loadStatus:true, current_user: responseArr[1].data, professors: responseArr[2].data});
+            this.setState({error:false, courses:responseArr[0].data,  loadStatus:true, current_user: responseArr[1].data.user, professors: responseArr[2].data});
             console.log(responseArr[2]);
         }).catch(function (error) {
             console.log("ERROR LOADING DATA");
@@ -63,7 +62,6 @@ class CourseCrud extends Component {
   }
     return(
         <div class>
-          <OuterContainer/>
           <div class = "container">
           <a class = "button is-large is-black is-rounded" href="/admin/courses/add">Add a Course</a>
           {courses}   

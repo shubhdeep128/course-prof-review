@@ -42,10 +42,10 @@ module.exports = app => {
 
   app.get("/api/current_user", (req, res) => {
     if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
-      res.send(req.user);
+      res.send({user:req.user,loggedIn:true});
     }
     else{
-      res.status(401).send({data:"Unauthorized"})
+      res.send({user:{Roles: "Unauthorized"},loggedIn:false})
     }
   });
 };

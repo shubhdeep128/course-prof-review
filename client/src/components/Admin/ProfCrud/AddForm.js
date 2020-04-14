@@ -1,7 +1,6 @@
 import React , {Component} from 'react';
 import API from '../../../utils/API';
 import {Redirect} from 'react-router-dom';
-import OuterContainer from '../../OuterContainer/OuterContainer';
 
 class AddProf extends Component {
   state = {
@@ -53,6 +52,15 @@ class AddProf extends Component {
     }
   }
   render(){
+    if(this.props.current_user.Roles != 'Admin'){
+      console.log(this.props.current_user.Roles)
+      return(
+          <div class = "container has-text-centered">
+              <p class = "title">Unauthorized</p>
+              <p class = "subtitle">Log in as an Admin to Continue</p>
+          </div>
+      )
+  }
     this.addTag = this.addTag.bind(this);
     this.deleteTag = this.deleteTag.bind(this);
     var tags = this.state.Relevant_tags;
@@ -69,23 +77,6 @@ class AddProf extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     return(
       <div>
-        <OuterContainer/>
-        {/* <form class = "form" onSubmit={this.handleSubmit}>
-        <div>
-        <input type="text" placeholder="Name" ref="name" required/>
-        </div>
-        <div> 
-        <textarea type="text" placeholder="Description" ref="desc" required/>
-        </div>
-        <div>
-          <input type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
-          <button onClick = {this.addTag} type = "button">Add Tag</button>
-          <div> {tags} </div>
-        </div>
-        <div>
-        <input type="submit" value="Submit" />
-        </div>
-      </form> */}
       <div class = "form box">
                 <form class = "form">
                   <span class = "is-size-1 has-text-weight-bold has-text-black">Add Professor</span><br/><br/>
@@ -114,6 +105,13 @@ class AddProf extends Component {
                     <button class = "button is-link is-rounded" onClick = {this.addTag}>Add Tags</button>
                     <br/><br/>
                     <label class = "label"> Existing Tags:{tags} </label>
+
+                    <div class = "field">
+                    <label class = "label">Rating</label>
+                      <div class = "control">
+                        <input type = "number" class = "input" placeholder = "Rating" ref = "rating" required/>
+                      </div>
+                    </div>
                 </form>
                 <div class = "form-btn"><input onClick = {this.handleSubmit} class = "button is-large is-success is-rounded" type = "submit" value = "Add" /></div>
             </div>

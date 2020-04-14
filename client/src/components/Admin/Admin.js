@@ -1,36 +1,21 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import API from '../../utils/API'
-import OuterContiner from '../OuterContainer/OuterContainer'
 import styles from './Admin.css'
 export default class Admin extends Component {
-    state = {
-        current_user: {},
-        error: false,
-        loadStatus: false
-    }
-    componentDidMount(){
-        API.get("/api/current_user")
-        .then(response => {
-            this.setState({error:false,loadStatus:true, current_user: response.data});
-            // console.log(response.data);
-        }).catch(function (error) {
-            console.log("ERROR LOADING DATA");
-            console.log(error);
-          });
-    }
+    
     render() {
-        if(this.state.current_user.Roles != 'Admin'){
-            console.log(this.state.current_user.Roles)
+        if(this.props.current_user.Roles != 'Admin'){
+            console.log(this.props.current_user.Roles)
             return(
-                <div>
-                    Unathorized
+                <div class = "container has-text-centered">
+                    <p class = "title">Unauthorized</p>
+                    <p class = "subtitle">Log in as an Admin to Continue</p>
                 </div>
             )
         }
         return (
             <div >
-                <OuterContiner/>
                 <div class = "columns is-centered is-mobile">
                     <div class = "column is-11">
                     <div class = "admin-box box">
