@@ -32,7 +32,7 @@ class OuterContainer extends Component {
                             <a class="navbar-item" href = "/admin/courses">
                                 Courses
                             </a>
-                            <a class="navbar-item" href = '/admin/prof/'>
+                            <a class="navbar-item" href = '/admin/profs/'>
                                 Professors
                             </a>
                         </div>

@@ -50,7 +50,8 @@ router.get('/:id',async (req,res)=>{
     try {
         // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const prof = await Professor.findById(req.params.id);
-            res.json(prof); 
+            const reviews = await Review.find({Parent: prof._id});
+            res.json({prof:prof,reviews:reviews}); 
         // }
         // else{
         //     res.status(401).send("Unauthorized")
