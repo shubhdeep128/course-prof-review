@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import API from '../../../utils/API.js';
-import OuterContainer from '../../OuterContainer/OuterContainer'
 
 class UpdateForm extends Component {
     state  = {
@@ -14,6 +13,7 @@ class UpdateForm extends Component {
         const { match: { params } } = this.props;
         var Name = this.refs.name.value;
         var Description = this.refs.desc.value;
+        var Rating = this.refs.rating.value
         if(this.state.Relevant_tags.length < 3)
         {
             alert("Minimum 3 tags required!")
@@ -23,6 +23,7 @@ class UpdateForm extends Component {
         API.patch(`/api/prof/${params.profid}`, {
             Name : Name,
             Description: Description,
+            Rating: Rating,
             Relevant_tags: this.state.Relevant_tags,
           }).then(function (response) {
             alert("Professor Updated successfully!");
@@ -69,6 +70,15 @@ class UpdateForm extends Component {
       
 
     render(){
+      if(this.props.current_user.Roles != 'Admin'){
+        console.log(this.props.current_user.Roles)
+        return(
+            <div class = "container has-text-centered">
+                <p class = "title">Unauthorized</p>
+                <p class = "subtitle">Log in as an Admin to Continue</p>
+            </div>
+        )
+    }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addTag = this.addTag.bind(this);
         this.deleteTag = this.deleteTag.bind(this);
@@ -86,25 +96,6 @@ class UpdateForm extends Component {
         )
         return(
             <div>
-                <OuterContainer/>
-                {/* <div className="form">
-        <form onSubmit={this.handleSubmit}>
-        <div>
-        <input type="text" placeholder="Name" ref="name" defaultValue = {this.state.profs.Name} required/>
-        </div>
-        <div> 
-        <textarea type="text" placeholder="Description" ref="desc" defaultValue = {this.state.profs.Description} required/>
-        </div>
-        <div>
-        <input type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
-                    <div> Existing Tags:{tags} </div>
-                    <button onClick = {this.addTag}>Add Tags</button>
-        </div>
-        <div>
-        <input type="submit" value="Update" />
-        </div>
-      </form>
-      </div> */}
       <div class = "form box">
                 <form class = "form">
                   <span class = "is-size-1 has-text-weight-bold has-text-black">Update Professor</span><br/><br/>
@@ -136,6 +127,13 @@ class UpdateForm extends Component {
                     
                     <br/><br/>
                     <label class = "label"> Existing Tags:{tags} </label>
+                    </div>
+
+                    <div class = "field">
+                    <label class = "label">Rating</label>
+                      <div class = "control">
+                        <input class = "input" defaultValue = {this.state.profs.Rating} placeholder = "Rating" ref = "rating" required/>
+                      </div>
                     </div>
 
                 </form>

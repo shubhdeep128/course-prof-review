@@ -1,8 +1,7 @@
 import React , {Component} from 'react';
 import EachCourse from './EachCourse.js';
-import API from '../../utils/API.js'
+import API from '../../../utils/API.js'
 import Pagination from './Pagination.js'
-import OuterContainer from '../OuterContainer/OuterContainer.js'
 import styles from "./CourseList.css"
 class CourseList extends Component {
     state={
@@ -46,7 +45,6 @@ class CourseList extends Component {
     return(
       <div>
         <div>
-          <OuterContainer/>
           <div class = "columns is-centered is-mobile">
             <div class = "column is-11">
               <div class = "head-box box">

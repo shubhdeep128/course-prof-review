@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import API from '../../utils/API.js';
-import OuterContainer from  '../OuterContainer/OuterContainer.js'
-import styles from "../../mystyles.css"
+import API from '../../../utils/API.js';
 import axios from 'axios';
 import Reviews from './Reviews.js';
 import CourseHeader from './CourseHeader'
@@ -14,7 +12,6 @@ class CourseDetails extends Component {
         reviews: [],
         prof:[],
         error : false,
-        current_user : ''
     }
     handleSubmit(e){
         e.preventDefault();
@@ -23,7 +20,7 @@ class CourseDetails extends Component {
         const { match: { params } } = this.props;
         API.post('/api/review/add', {
             Parent : params.courseid,
-            Author: this.state.current_user,
+            Author: this.props.current_user._id,
             Time_stamp : Date.now,
             Description : desc,
             Difficulty : 10,
@@ -44,12 +41,9 @@ class CourseDetails extends Component {
     componentDidMount(){
         const { match: { params } } = this.props;
         this.setState(this.props.location.state)
-        axios.all([
-            axios.get(`/api/course/${params.courseid}`),
-            axios.get("/api/current_user")
-        ])
+        API.get(`/api/course/${params.courseid}`)
         .then(responseArr => {
-            this.setState({error:false, resData:responseArr[0].data, course:responseArr[0].data.course, reviews: responseArr[0].data.reviews,prof: responseArr[0].data.prof, loadStatus:true, current_user: responseArr[1].data._id});
+            this.setState({error:false, resData:responseArr.data, course:responseArr.data.course, reviews: responseArr.data.reviews,prof: responseArr.data.prof, loadStatus:true});
             console.log(responseArr[1]);
         }).catch(function (error) {
             console.log("ERROR LOADING DATA");
@@ -63,7 +57,7 @@ class CourseDetails extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         var course = this.state.resData.course 
         var review= this.state.resData.reviews
-        console.log(course)
+        console.log(this.props)
         if(this.state.loadStatus===true){
             review = review.map(function(review){
               return(
@@ -85,10 +79,6 @@ class CourseDetails extends Component {
               )
             }.bind(this));
           }
-          const isLoggedin = true
-          if(this.state.current_user === null){
-            isLoggedin = false
-          }
 
           if(this.state.prof === null){
               this.state.prof = {"name":""}
@@ -96,10 +86,7 @@ class CourseDetails extends Component {
         return(
             <div>
         
-                <OuterContainer/>
                 <CourseHeader course = {this.state.course} prof = {this.state.prof}/>
-
-                
                 
                 <nav class = "level">
                   <div class = "level-left">
@@ -109,7 +96,7 @@ class CourseDetails extends Component {
                   </div>
                   <div calss = "level-right">
                     <div class = "level-item">
-                      <div class = "add-review"><AddReview current_user = {this.state.current_user} course_id = {this.state.course._id}/></div>
+                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id}/></div>
                     </div>
                   </div>
                 </nav>

@@ -13,6 +13,10 @@ var Professor_schema = new Schema({
         type: String,
         required:true
     },
+    Rating:{
+        type: Number,
+        default: 3.5
+    },
     Relevant_tags: {
         type: [String]
     },

@@ -41,6 +41,8 @@ class EachProf extends Component {
                         <br/>
                         <span class = " is-size-5 has-text-weight-bold">Tags - </span>{tags}
                         <br/>
+                        <span class = " is-size-5 has-text-weight-bold">Rating - </span>{this.props.rating}                       
+                        <br/>
                         </div>
                     </div>
                     <footer class="card-footer">

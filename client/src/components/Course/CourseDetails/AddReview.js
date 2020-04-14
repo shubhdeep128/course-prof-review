@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styles from './AddReview.css'
-import API from '../../utils/API.js';
+import API from '../../../utils/API.js';
 
 export default class AddReview extends Component {
+
   handleSubmit(e){
     console.log("submit")
     e.preventDefault();
@@ -28,7 +29,6 @@ export default class AddReview extends Component {
   }
     render() {
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log(this.props)
         document.addEventListener('DOMContentLoaded', function () {
 
             // Modals
@@ -78,8 +78,9 @@ export default class AddReview extends Component {
             }
           
           });
+          console.log(this.props)
           const ReviewForm = ()=>{
-            if(this.props.current_user != null){
+            if(this.props.loginStatus){
               return(
                   <div class = "Form">
                   <form>

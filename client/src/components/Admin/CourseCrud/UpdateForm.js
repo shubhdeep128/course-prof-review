@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import API from '../../../utils/API.js';
 import axios from 'axios'
-import OuterContainer from '../../OuterContainer/OuterContainer'
 class UpdateCourse extends Component {
   state  = {
     loadStatus : false,
@@ -84,6 +83,15 @@ class UpdateCourse extends Component {
       }
 
     render(){
+      if(this.props.current_user.Roles != 'Admin'){
+        console.log(this.props.current_user.Roles)
+        return(
+            <div class = "container has-text-centered">
+                <p class = "title">Unauthorized</p>
+                <p class = "subtitle">Log in as an Admin to Continue</p>
+            </div>
+        )
+    }
         const  compare = ( a, b ) => {
           if ( a.Name < b.Name ){
             return -1;
@@ -126,7 +134,6 @@ class UpdateCourse extends Component {
 
         return(
             <div>
-                <OuterContainer/>
                 <div class = "form box">
                 <form class = "form">
                   <span class = "is-size-1 has-text-weight-bold has-text-black">Update Course</span><br/><br/>
