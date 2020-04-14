@@ -20,6 +20,10 @@ var Professor_schema = new Schema({
     Relevant_tags: {
         type: [String]
     },
+    revCount:{
+        type: Number,
+        default: 1
+    }
 });
 
 module.exports = Professor = mongoose.model('Professor', Professor_schema);

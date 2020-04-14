@@ -1,6 +1,6 @@
 const axios = require('axios')
 var reviews = [];
-axios.get(`http://localhost:5050/api/course/5e8a240cc9ce53153564022f`)
+axios.get(`http://localhost:5050/api/prof/5e86e46976d2883f34851964`)
 .then(response => {
     reviews = response.data.reviews
     reviews.map(function(review){

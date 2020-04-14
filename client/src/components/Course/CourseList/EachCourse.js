@@ -21,7 +21,7 @@ class EachCourse extends Component {
           <div class = "level-left">
             <div class = "level-item">
               <div class = "rating-circle">
-                <div class = "circle-text"> {this.props.rating}</div>
+                <div class = "circle-text"> {Number(this.props.rating).toFixed(1)}</div>
               </div>
             </div>
           </div>

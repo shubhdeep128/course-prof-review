@@ -13,6 +13,7 @@ import ProfCrud from './components/Admin/ProfCrud/ProfCrud.js';
 import AddProf from './components/Admin/ProfCrud/AddForm.js';
 import UpdateProf from './components/Admin/ProfCrud/UpdateForm.js';
 import ProfList from './components/Professor/ProfList/ProfList.js'
+import ProfDetails from './components/Professor/ProfDetails/ProfDetails.js';
 import NotFound from './components/NotFound.js'
 import API from './utils/API'
 
@@ -46,6 +47,7 @@ class App extends Component {
       <Route exact path='/course' render = {(props) => <CourseList {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
       <Route exact path='/course/:courseid'render = {(props) => <CourseDetails {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
       <Route exact path='/prof' render = {(props) => <ProfList {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
+      <Route exact path = '/prof/:profid' render = {(props) => <ProfDetails {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  /> 
       <Route exact path='/admin/courses' render = {(props) => <CourseCrud {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>} />
       <Route exact path='/admin/courses/update/:courseid' render = {(props) => <UpdateCourse {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
       <Route exact path = '/admin/profs' render = {(props) => <ProfCrud {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />

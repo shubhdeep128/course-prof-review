@@ -9,7 +9,11 @@ class CourseList extends Component {
         courses: [],
         currentPage: 1,
         coursesPerPage: 3,
-        error:false
+        error:false,
+        search: ''
+      }
+      handleChange(event){
+        this.setState({search : event.target.value});
       }
       componentDidMount(){
         this.setState(this.props.location.state)
@@ -24,11 +28,18 @@ class CourseList extends Component {
       }
   
   render(){
+    this.handleChange = this.handleChange.bind(this);
     const lastindex = this.state.currentPage*this.state.coursesPerPage;
     const firstIndex = lastindex - this.state.coursesPerPage;
-    const currentCourses = this.state.courses.slice(firstIndex,lastindex);
     var courses = this.state.courses;
     var string = '/course/'
+    let filteredCourses = courses.filter(
+      (course) => {
+        return course.Name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+      }
+    )
+    const currentCourses = filteredCourses.slice(firstIndex,lastindex);
+    
     if(this.state.loadStatus===true){
       courses = currentCourses.map(function(course){
         return(
@@ -52,7 +63,17 @@ class CourseList extends Component {
               </div>
               </div>
           </div>
-          
+          <div class = "container has-text-centered">
+            <div class="control has-icons-left has-icons-right">
+              <input class = "input is-large is-rounded" type = "text" placeholder = "Search By Name" onChange = {this.handleChange}/>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <img src="search-36dp.svg"/>
+              </span>
+            </div>
+          </div>
           <div class = "container">
             <div class = "columns is-centered is-mobile">
               {courses}
