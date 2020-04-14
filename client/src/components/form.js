@@ -80,8 +80,7 @@ class CourseForm extends Component {
       </div>
       </div>
     );
-    }
-
+  }
 
 
 
