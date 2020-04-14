@@ -9,7 +9,11 @@ class CourseList extends Component {
         courses: [],
         currentPage: 1,
         coursesPerPage: 3,
-        error:false
+        error:false,
+        search: ''
+      }
+      handleChange(event){
+        this.setState({search : event.target.value});
       }
       componentDidMount(){
         this.setState(this.props.location.state)
@@ -24,10 +28,18 @@ class CourseList extends Component {
       }
   
   render(){
+    this.handleChange = this.handleChange.bind(this);
     const lastindex = this.state.currentPage*this.state.coursesPerPage;
     const firstIndex = lastindex - this.state.coursesPerPage;
-    const currentCourses = this.state.courses.slice(firstIndex,lastindex);
     var courses = this.state.courses;
+    let filteredCourses = courses.filter(
+      (course) => {
+        return course.Name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+      }
+    )
+    const currentCourses = filteredCourses.slice(firstIndex,lastindex);
+    
+    
     var string = '/course/'
     if(this.state.loadStatus===true){
       courses = currentCourses.map(function(course){
@@ -44,6 +56,7 @@ class CourseList extends Component {
     
     return(
       <div>
+        <input placeholder = "Search By Name" onChange = {this.handleChange}/>
         <div>
           <div class = "columns is-centered is-mobile">
             <div class = "column is-11">
