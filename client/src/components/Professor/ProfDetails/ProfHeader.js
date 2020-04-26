@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import styles from './ProfHeader.css'
-import API from '../../../utils/API'
+import './ProfHeader.css'
 
 class ProfHeader extends Component {
 
@@ -9,18 +8,18 @@ class ProfHeader extends Component {
         console.log(prof)
         return (
             <div>
-                <div class = "columns is-centered is-mobile">
-                    <div class = "column is-11">
-                        <div class = "courseDetail-box box">
-                            <div class = "courseDetail-title">{prof.Name}</div>
-                            <nav class = "level">
-                                <div class = "level-left">
-                                    <div class = "level-item">
-                                    <div class = "container">
-                                            <span class = 'has-text-weight-semibold is-size-4'>Avg. Rating</span>
+                <div className = "columns is-centered is-mobile">
+                    <div className = "column is-11">
+                        <div className = "courseDetail-box box">
+                            <div className = "courseDetail-title">{prof.Name}</div>
+                            <nav className = "level">
+                                <div className = "level-left">
+                                    <div className = "level-item">
+                                    <div className = "container">
+                                            <span className = 'has-text-weight-semibold is-size-4'>Avg. Rating</span>
                                             <br/>
-                                            <div class = "header-rating-circle">
-                                                <div class = "circle-text"> {Number(prof.Rating).toFixed(1)}</div>
+                                            <div className = "header-rating-circle">
+                                                <div className = "circle-text"> {Number(prof.Rating).toFixed(1)}</div>
                                             </div>      
                                         </div>   
                                     </div>
@@ -29,8 +28,23 @@ class ProfHeader extends Component {
                         </div>
                     </div>
                 </div>
-                <div class = "course-description has-text-justified">
-                    <span class = "has-text-weight-semibold">Details:</span>
+                <div class= "course-description">
+                <nav className = "level">
+                    <div className = "level-left">
+                        <div className = "level-item has-text-weight-semibold">
+                            Tags:
+                        </div>
+                    </div>
+                    <div className = "level-right">
+                        <div className = "level-item has-text-weight-bold">
+                            {this.props.prof_tags} 
+                        </div>
+                    </div>
+                </nav>
+                </div>
+
+                <div className = "course-description has-text-justified">
+                    <span className = "has-text-weight-semibold">Details:</span>
                     {prof.Description}
                 </div>
             </div>

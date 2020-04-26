@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import styles from './Reviews.css';
+import './Reviews.css';
 import API from '../../../utils/API'
 
 class Reviews extends Component {
@@ -30,27 +30,27 @@ class Reviews extends Component {
         }
         console.log(this.props)
         return (
-            <div class = 'review-container'>
-                <div class = "columns is-vcentered is-mobile">
-                    <div class = "column is-2">
-                        <div class = "review-circle">
-                            <div class = "review-circle-text"> {this.props.rating}</div>
+            <div className = 'review-container'>
+                <div className = "columns is-vcentered is-mobile">
+                    <div className = "column is-2">
+                        <div className = "review-circle">
+                            <div className = "review-circle-text"> {this.props.rating}</div>
                         </div>
                     </div>
-                    <div class = "column is-9">
-                        <div class = "review-desc is-italic">
-                            <span class = "has-text-weight-bold">{this.state.user.name} -</span><br/>
-                            <span class = " has-text-weight-semibold">"</span>
+                    <div className = "column is-9">
+                        <div className = "review-desc is-italic">
+                            <span className = "has-text-weight-bold">{this.state.user.name} -</span><br/>
+                            <span className = " has-text-weight-semibold">"</span>
                             {this.props.desc}
-                            <span class = "">"</span>
+                            <span className = "">"</span>
                         </div>
                     </div>
-                    <div class = "column">
-                        <span class = "has-text-weight-bold">{this.state.upvotes}</span><br/>
-                        <a onClick = {upvote}><img src = "../thumb_up.svg"></img><br/></a>
+                    <div className = "column has-text-centered">
+                        <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>
+                        <button className = "button is-white" onClick = {upvote}><i className="far fa-thumbs-up icon is-large"></i></button><br/>
                         <br/>
-                        <a onClick = {downvote}><img src = "../thumb_down.svg"></img><br/></a>
-                        <span class = "has-text-weight-bold">{this.state.downvotes}</span>
+                        <button className = "button is-white" onClick = {downvote}><i className="far fa-thumbs-down icon is-large"></i></button><br/>
+                        <span className = "has-text-weight-bold">{this.state.downvotes}</span>
                     </div>
                 </div>
             </div>

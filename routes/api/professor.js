@@ -23,6 +23,33 @@ router.get("/",async (req,res)=>{
     };
 });
 
+router.get("/count",async (req,res)=>{
+    try {
+        
+
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+
+            Professor.countDocuments({},(err,count)=>{
+                if(err){
+                    res.status(500).send({status:false,error:err})
+                }
+                else{
+                    res.status(200).send({"Professors":count})
+                }
+            })
+
+        }
+        else{
+            res.status(401).send("Unauthorized")
+        }	
+
+    } catch (error) {
+        console.log(error)
+        res.json({message: error});
+    }
+    
+});
+
 router.post("/add",async (req,res)=>{
     try {
         

@@ -1,33 +1,31 @@
 import React , {Component} from 'react';
-import { Redirect } from 'react-router-dom';
-import styles from './EachProf.css'
+import './EachProf.css'
 class EachProf extends Component {
   
   render(){
     console.log(this.props);
-    var string = "prof/"+this.props.prof_id;
 
     return(
 
  
     <div>
-      <div class = "box prof-box">
-        <div class = "prof-title" id = "prof-title">
+      <div className = "box prof-box">
+        <div className = "prof-title" id = "prof-title">
           {this.props.name}
         </div>
-        <nav class = "level">
-          <div class = "level-left">
-            <div class = "level-item">
-              <div class = "prof-rating-circle">
-                <div class = "prof-circle-text"> {this.props.rating}</div>
+        <nav className = "level">
+          <div className = "level-left">
+            <div className = "level-item">
+              <div className = "prof-rating-circle">
+                <div className = "prof-circle-text"> {Number(this.props.rating).toFixed(1)}</div>
               </div>
             </div>
           </div>
-          <div class = "level-right">
-            <div class = "level-item has-text-weight-bold">
-              <span class = "icon is-large">
-                <a class = "has-text-black"href = {this.props.prof_id}>
-                  <img src = "arrow_forward.svg"></img>
+          <div className = "level-right">
+            <div className = "level-item has-text-weight-bold">
+              <span className = "icon is-large">
+              <a className = "has-text-black"href = {this.props.prof_id}>
+                  <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </span>
             </div>

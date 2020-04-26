@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Home from './components/home.js';
+import Home from './components/Home.js';
 import OuterContainer from './components/OuterContainer/OuterContainer.js'
 import CourseForm from './components/Admin/CourseCrud/AddForm.js';
 import CourseList from './components/Course/CourseList/CourseList.js';
@@ -38,6 +38,7 @@ class App extends Component {
   render(){
   return (
     <div>
+      <div>
       <OuterContainer current_user={this.state.current_user} loginStatus={this.state.loginStatus}/>
     <BrowserRouter>
     <Switch>
@@ -56,6 +57,7 @@ class App extends Component {
       <Route exact path = '*' component = {NotFound} status={404} />
     </Switch>
     </BrowserRouter>
+      </div>
     </div>
   );
 }

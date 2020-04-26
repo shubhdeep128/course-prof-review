@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import './OuterContainer.css';
-import API from '../../utils/API.js'
 
 class OuterContainer extends Component {
 
@@ -24,15 +23,15 @@ class OuterContainer extends Component {
         const AdminButton = ()=>{
         if(this.props.current_user.Roles === 'Admin'){
             return(
-                <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href = '/admin'>
+                <div className="navbar-item has-dropdown is-hoverable">
+                        <a className="navbar-link" href = '/admin'>
                             Admin
                         </a>
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item" href = "/admin/courses">
+                        <div className="navbar-dropdown">
+                            <a className="navbar-item" href = "/admin/courses">
                                 Courses
                             </a>
-                            <a class="navbar-item" href = '/admin/profs/'>
+                            <a className="navbar-item" href = '/admin/profs/'>
                                 Professors
                             </a>
                         </div>
@@ -46,14 +45,14 @@ class OuterContainer extends Component {
         const LoginButton = ()=>{
             if(!this.props.loginStatus){
                 return(
-                <a class="button is-black is-rounded" href = "/auth/google">
+                <a className="button is-black is-rounded" href = "/auth/google">
                     <span> <strong>Log in</strong></span>
                 </a>
                 )
             }
             else{
             return(
-                <a class="button is-black is-rounded" href = "/api/logout">
+                <a className="button is-black is-rounded" href = "/api/logout">
                     <span> <strong>Log Out</strong></span>
                 </a>
             )
@@ -61,24 +60,24 @@ class OuterContainer extends Component {
         }
         return(
             <div>
-                <nav class="navbar" role="navigation" aria-label="main navigation">
-                    <div class="navbar-brand">
-                        <a class="navbar-item" href="/">
-                            <span class = "is-size-4 has-text-weight-bold has-text-black">CourseReview</span>
+                <nav className="navbar" role="navigation" aria-label="main navigation">
+                    <div className="navbar-brand">
+                        <a className="navbar-item" href="/">
+                            <span className = "is-size-4 has-text-weight-bold has-text-black">CourseReview</span>
                         </a>
-                        <a role="button" class="navbar-burger" data-target="navbarWeb" aria-label="menu" aria-expanded="false">
+                        <div role="button" className="navbar-burger" data-target="navbarWeb" aria-label="menu" aria-expanded="false">
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
-                        </a>
+                        </div>
                     </div>
 
-                    <div id="navbarWeb" class="navbar-menu">
-                        <div class="navbar-start">
-                            <a class="navbar-item" href = "/course">
+                    <div id="navbarWeb" className="navbar-menu">
+                        <div className="navbar-start">
+                            <a className="navbar-item" href = "/course">
                                 <span>Courses</span>
                             </a>
-                            <a class="navbar-item" href = "/prof">
+                            <a className="navbar-item" href = "/prof">
                                 <span>Professors</span>
                             </a>
 
@@ -86,12 +85,12 @@ class OuterContainer extends Component {
                             {AdminButton()}
                         </div>
 
-                        <div class="navbar-end">
-                            <a class="navbar-item" href = "/about">
+                        <div className="navbar-end">
+                            <a className="navbar-item" href = "/about">
                                 <span>About Us</span>
                             </a>
-                            <div class="navbar-item">
-                                <div class="buttons">
+                            <div className="navbar-item">
+                                <div className="buttons">
                                     {LoginButton()}
                                 </div>
                             </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from '../../../utils/API.js';
-import axios from 'axios';
 import Reviews from './Reviews.js';
 import ProfHeader from './ProfHeader.js'
 import AddReview from "./AddReview";
@@ -62,42 +61,42 @@ class ProfDetails extends Component {
               return(
                 <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
                 )
-            }.bind(this));
+            });
           }
 
         var prof_tags = this.state.prof.Relevant_tags
         if(this.state.loadStatus===true){
             prof_tags = prof_tags.map(function(tag){
               return(
-                <div class="level-item has-text-centered">
+                <div className="level-item has-text-centered">
                     <div>
-                    <span class = "tag is-primary">{tag}</span>
+                    <span className = "tag is-large is-link">{tag}</span>
                     </div>
                 </div>
                 
               )
-            }.bind(this));
+            });
           }
           
         return(
             <div>
         
-                <ProfHeader prof = {this.state.prof} />
-                <nav class = "level">
-                  <div class = "level-left">
-                    <div class = "level-item">
-                      <div class = "review-heading"><span class = "has-text-weight-semibold">Reviews</span></div>
+                <ProfHeader prof_tags = {prof_tags} prof = {this.state.prof} />
+                <nav className = "level">
+                  <div className = "level-left">
+                    <div className = "level-item">
+                      <div className = "review-heading"><span className = "has-text-weight-semibold">Reviews</span></div>
                     </div>
                   </div>
-                  <div calss = "level-right">
-                    <div class = "level-item">
-                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user._id} prof_id = {this.state.prof._id} prof_rating = {this.state.prof.Rating} prof_revCount = {this.state.prof.revCount} /></div>
+                  <div className = "level-right">
+                    <div className = "level-item">
+                      <div className = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user._id} prof_id = {this.state.prof._id} prof_rating = {this.state.prof.Rating} prof_revCount = {this.state.prof.revCount} /></div>
                     </div>
                   </div>
                 </nav>
-                <div class = "Review"> {review} </div>
-                <footer class="footer">
-                  <div class="content has-text-centered">
+                <div className = "Review"> {review} </div>
+                <footer className="footer">
+                  <div className="content has-text-centered">
                     <p>
                       <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
                       <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content

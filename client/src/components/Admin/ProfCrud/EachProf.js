@@ -4,50 +4,48 @@ import React,{ Component } from "react";
 class EachProf extends Component {
     
     render(){
-        const tags = this.props.tags.map(function(tag){
+        const tags = this.props.tags.map(function(tag,i){
             return(
-                <span class = "tag is-rounded is-light is-medium is-success">{tag}</span>
+                <span key = {i} className = "tag is-rounded is-light is-medium is-success">{tag}</span>
             )
         })
         return(
-            // <div class = "box">
+            // <div className = "box">
             //     <div> {this.props.name} </div>
             //     <div> {this.props.desc} </div>
             //     <div> {this.props.tags} </div>
             //     <div>
-            //         <a class = "button is-black is-rounded" href={this.props.profid}>
+            //         <a className = "button is-black is-rounded" href={this.props.profid}>
             //             Update
             //         </a>
-            //         <button class = "button is-danger is-black is-rounded" onClick = {this.props.onClick}>
+            //         <button className = "button is-danger is-black is-rounded" onClick = {this.props.onClick}>
             //             Delete
             //         </button>
             //     </div>
             // </div>
-            <div class = "container">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title has-text-weight-bold is-size-3 has-text-black">
+            <div className = "container">
+                <div className="card">
+                    <header className="card-header">
+                        <p className="card-header-title has-text-weight-bold is-size-3 has-text-black">
                         {this.props.name}
                         </p>
-                        <a href="#" class="card-header-icon" aria-label="more options">
-                        <span class="icon">
-                            <img src = "../expand_more.svg"></img>
+                        <span className="icon">
+                            <img src = "../expand_more.svg" alt = ""></img>
                         </span>
-                        </a>
                     </header>
-                    <div class="card-content">
-                        <div class="content">
-                        <span class = " is-size-5 has-text-weight-bold">Description - </span>{this.props.desc}                       
+                    <div className="card-content">
+                        <div className="content">
+                        <span className = " is-size-5 has-text-weight-bold">Description - </span>{this.props.desc}                       
                         <br/>
-                        <span class = " is-size-5 has-text-weight-bold">Tags - </span>{tags}
+                        <span className = " is-size-5 has-text-weight-bold">Tags - </span>{tags}
                         <br/>
-                        <span class = " is-size-5 has-text-weight-bold">Rating - </span>{this.props.rating}                       
+                        <span className = " is-size-5 has-text-weight-bold">Rating - </span>{this.props.rating}                       
                         <br/>
                         </div>
                     </div>
-                    <footer class="card-footer">
-                        <a href={this.props.profid} class="card-footer-item has-text-weight-semibold">Update</a>
-                        <a onClick = {this.props.onClick} class="card-footer-item has-text-danger has-text-weight-semibold">Delete</a>
+                    <footer className="card-footer">
+                        <a href={this.props.profid} className="button is-large is-white has-text-link card-footer-item has-text-weight-semibold">Update</a>
+                        <button onClick = {this.props.onClick} className="button is-large is-white card-footer-item has-text-danger has-text-weight-semibold">Delete</button>
                     </footer>
                     </div>
                 </div>

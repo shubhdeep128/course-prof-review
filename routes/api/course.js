@@ -23,6 +23,32 @@ router.get("/",async (req,res)=>{
         console.log(error);
     };
 });
+router.get("/count",async (req,res)=>{
+    try {
+        
+
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+
+            Course.countDocuments({},(err,count)=>{
+                if(err){
+                    res.status(500).send({status:false,error:err})
+                }
+                else{
+                    res.status(200).send({"courses":count})
+                }
+            })
+
+        }
+        else{
+            res.status(401).send("Unauthorized")
+        }	
+
+    } catch (error) {
+        console.log(error)
+        res.json({message: error});
+    }
+    
+});
 
 router.post("/add",async (req,res)=>{
     try {
@@ -106,6 +132,7 @@ router.delete('/:id',async (req,res) => {
         res.json({message: error})
     }
 });
+
 
 
 module.exports = router;

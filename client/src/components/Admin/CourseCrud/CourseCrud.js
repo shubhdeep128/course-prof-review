@@ -1,9 +1,8 @@
 import React,{Component} from 'react';
 import EachCourse from './EachCourse.js';
 import API from '../../../utils/API.js'
-import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
-import styles from './CourseCrud.css'
+import './CourseCrud.css'
 class CourseCrud extends Component {
 
   state={
@@ -21,7 +20,6 @@ class CourseCrud extends Component {
       })
     }
     componentDidMount(){
-      const { match: { params } } = this.props;
         this.setState(this.props.location.state)
         axios.all([
             axios.get("/api/course/"),
@@ -41,18 +39,17 @@ class CourseCrud extends Component {
 
     var courses = this.state.courses;
     var string = '/admin/courses/update/'
-    var courses = this.state.courses;
-    if(this.state.loadStatus===true){
-      courses = courses.map(function(course){
+    if(this.state.loadStatus === true){
+      courses = courses.map(function(course, i){
         return(
-          <div class = "tile">
+          <div className = "tile" key = {i}>
             <EachCourse professors = {this.state.professors} tags={course.Relevant_tags} name={course.Name} desc={course.Description} prof = {course.Current_Professor} grade = {course.Average_grade} rating = {course.Rating} course_id={string+course._id} onClick={this.onDelete.bind(this,course._id)}/>
           </div>
           
         )
       }.bind(this));
     }
-    if(this.state.current_user.Roles != 'Admin'){
+    if(this.state.current_user.Roles !== 'Admin'){
       console.log(this.state.current_user.Roles)
       return(
           <div>
@@ -61,9 +58,9 @@ class CourseCrud extends Component {
       )
   }
     return(
-        <div class>
-          <div class = "container">
-          <a class = "button is-large is-black is-rounded" href="/admin/courses/add">Add a Course</a>
+        <div >
+          <div className = "container">
+          <a className = "button is-large is-black is-rounded" href="/admin/courses/add">Add a Course</a>
           {courses}   
           </div>
         </div>

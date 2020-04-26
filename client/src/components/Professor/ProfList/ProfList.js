@@ -2,8 +2,13 @@ import React , {Component} from 'react';
 import EachProf from './EachProf.js';
 import API from '../../../utils/API.js'
 import Pagination from './Pagination.js'
-import styles from "./ProfList.css"
+import WOW from 'wowjs'
+import "./ProfList.css"
 class ProfList extends Component {
+  constructor(props){
+    super(props)
+    new WOW.WOW().init()
+  }
     state={
         loadStatus:false,
         profs: [],
@@ -42,11 +47,11 @@ class ProfList extends Component {
     if(this.state.loadStatus===true){
       profs = currentProfs.map(function(prof){
         return(
-          <div class = "column is-one-third">
+          <div className = "column is-one-third">
             <EachProf name={prof.Name} rating={prof.Rating} average_grade = {prof.Average_grade} prof_id={string + prof._id}/>
           </div> 
         )
-      }.bind(this));
+      });
     }
     const paginate = (pageNumber) => {
       this.setState({currentPage: pageNumber})
@@ -55,30 +60,27 @@ class ProfList extends Component {
     return(
       <div>
         <div>
-          <div class = "columns is-centered is-mobile">
-            <div class = "column is-11">
-              <div class = "prof-head-box box">
-                <div class = "prof-head-title">Professors</div>
+          <div className = "columns is-centered is-mobile">
+            <div className = "column is-11 wow fadeIn">
+              <div className = "prof-head-box box">
+                <div className = "prof-head-title">Professors</div>
               </div>
               </div>
           </div>
-          <div class = "container has-text-centered">
-            <div class="control has-icons-left has-icons-right">
-              <input class = "input is-large is-rounded" type = "text" placeholder = "Search By Name" onChange = {this.handleChange}/>
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <img src="search-36dp.svg"/>
+          <div className = "container has-text-centered">
+            <div className="control has-icons-left has-icons-right">
+              <input className = "input is-large is-rounded" type = "text" placeholder = "Search By Name" onChange = {this.handleChange}/>
+              <span className="icon is-small is-right">
+                <i class="fas fa-search"></i>
               </span>
             </div>
           </div>
-          <div class = "container">
-            <div class = "columns is-centered is-mobile">
+          <div className = "container wow fadeInUp">
+            <div className = "columns is-centered is-mobile">
               {profs}
             </div>
           </div>
-          <footer class = "footer">
+          <footer className = "footer">
             <Pagination profsPerPage = {this.state.profsPerPage} totalProfs = {this.state.profs.length} currentPage = {this.state.currentPage} paginate = {paginate}/>
           </footer>
           
