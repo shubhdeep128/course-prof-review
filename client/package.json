@@ -17,7 +17,7 @@
     "wowjs": "^1.1.3"
   },
   "scripts": {
-    "start": "react-scripts start npm run css-watch npm run copy",
+    "start": "react-scripts start",
     "copy": "cp css/mystyles.css ./src",
     "build": "react-scripts build",
     "test": "react-scripts test",

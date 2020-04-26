@@ -2,14 +2,14 @@
 .prof-head-box{
     background: linear-gradient(90deg, #A0BAFE 0%, #B2ECD1 100%);
     border-radius: 25px;
-    font-family: 'Quicksand', sans-serif;
+    font-family: Quicksand, sans-serif;
     margin-top: 2vw;
     color: #000000;
 
 }
 
 .prof-head-title{
-    font-family: Quicksand;
+    font-family: Quicksand,  sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 9vw;
@@ -28,7 +28,7 @@
     display: flex;
 }
 .prof-circle-text{
-    font-family: Quicksand;
+    font-family: Quicksand,  sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 2.6vw;

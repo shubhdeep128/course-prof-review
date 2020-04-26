@@ -4,6 +4,6 @@
   border-bottom: 1px solid #000000;
 }
 .navbar-item{
-  font-family: Quicksand;
+  font-family: Quicksand, sans-serif;
   font-weight: bolder;
 }
