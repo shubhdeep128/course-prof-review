@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../../utils/API.js';
+import axios from 'axios';
 import Reviews from './Reviews.js';
 import CourseHeader from './CourseHeader'
 import AddReview from "./AddReview";
@@ -43,7 +44,7 @@ class CourseDetails extends Component {
         API.get(`/api/course/${params.courseid}`)
         .then(responseArr => {
             this.setState({error:false, resData:responseArr.data, course:responseArr.data.course, reviews: responseArr.data.reviews,prof: responseArr.data.prof, loadStatus:true});
-            console.log(responseArr);
+            console.log(this.state.reviews._id);
         }).catch(function (error) {
             console.log("ERROR LOADING DATA");
             console.log(error);
@@ -54,44 +55,54 @@ class CourseDetails extends Component {
 
     render(){
         this.handleSubmit = this.handleSubmit.bind(this);
+        var course = this.state.resData.course 
         var review= this.state.resData.reviews
         console.log(this.props)
         if(this.state.loadStatus===true){
-            review = review.map(function(review , i){
+            review = review.map(function(review){
               return(
-                <Reviews key = {i} author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
+                <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} current_user = {this.props.current_user} course = {this.state.course} loginStatus = {this.props.loginStatus} review_id = {review._id} />
                 )
-            });
+            }.bind(this));
           }
-        
+
         var course_tags = this.state.course.Relevant_tags
         if(this.state.loadStatus===true){
-            course_tags = course_tags.map(function(tag,i){
+            course_tags = course_tags.map(function(tag){
               return(
-                    <span className = "tag is-large is-link">{tag}</span>
+                <div class="level-item has-text-centered">
+                    <div>
+                    <span class = "tag is-primary">{tag}</span>
+                    </div>
+                </div>
+                
               )
-            });
+            }.bind(this));
           }
-        
+
+          if(this.state.prof === null){
+              this.state.prof = {"name":""}
+          }
         return(
             <div>
         
-                <CourseHeader course_tags = {course_tags} course = {this.state.course} prof = {this.state.prof}/>
-                <nav className = "level">
-                  <div className = "level-left">
-                    <div className = "level-item">
-                      <div className = "review-heading"><span className = "has-text-weight-semibold">Reviews</span></div>
+                <CourseHeader course = {this.state.course} prof = {this.state.prof}/>
+                
+                <nav class = "level">
+                  <div class = "level-left">
+                    <div class = "level-item">
+                      <div class = "review-heading"><span class = "has-text-weight-semibold">Reviews</span></div>
                     </div>
                   </div>
-                  <div className = "level-right">
-                    <div className = "level-item">
-                      <div className = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id} course_rating = {this.state.course.Rating} course_revCount = {this.state.course.revCount} /></div>
+                  <div calss = "level-right">
+                    <div class = "level-item">
+                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id} course_rating = {this.state.course.Rating} course_revCount = {this.state.course.revCount} /></div>
                     </div>
                   </div>
                 </nav>
-                <div className = "Review"> {review} </div>
-                <footer className="footer">
-                  <div className="content has-text-centered">
+                <div class = "Review"> {review} </div>
+                <footer class="footer">
+                  <div class="content has-text-centered">
                     <p>
                       <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
                       <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content

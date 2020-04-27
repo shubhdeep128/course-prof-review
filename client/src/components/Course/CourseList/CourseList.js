@@ -68,11 +68,8 @@ class CourseList extends Component {
     }
     
     return(
-<<<<<<< HEAD
       <div>
         <input placeholder = "Search By Name" onChange = {this.handleChange}/>
-=======
->>>>>>> a13c63f1fa4f9c4eeb449b5ddc231b335db63553
         <div>
           <div className = "columns is-centered is-mobile">
             <div className = "column is-11 wow fadeIn">
