@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand,  sans-serif&display=swap');
 .web-title{
-    font-family: Quicksand;
+    font-family: Quicksand,  sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 10.4vw;

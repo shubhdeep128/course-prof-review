@@ -49,7 +49,7 @@ class UpdateForm extends Component {
         e.preventDefault();
         var tag = this.refs.tags.value;
         var tags = this.state.Relevant_tags;
-        if (tag=="")
+        if (tag === "")
         {
            alert("Tags should not be empty!")
         }
@@ -69,12 +69,12 @@ class UpdateForm extends Component {
       
 
     render(){
-      if(this.props.current_user.Roles != 'Admin'){
+      if(this.props.current_user.Roles !== 'Admin'){
         console.log(this.props.current_user.Roles)
         return(
-            <div class = "container has-text-centered">
-                <p class = "title">Unauthorized</p>
-                <p class = "subtitle">Log in as an Admin to Continue</p>
+            <div className = "container has-text-centered">
+                <p className = "title">Unauthorized</p>
+                <p className = "subtitle">Log in as an Admin to Continue</p>
             </div>
         )
     }
@@ -86,57 +86,57 @@ class UpdateForm extends Component {
         tags = tags.map(function(tag,key){
           console.log(tag,key)
           return(
-            <span class="tag is-medium is-success">
+            <span className="tag is-medium is-success">
             {tag}
-            <button type = "button" onClick = {() =>that.deleteTag(key)} class="delete is-small"></button>
+            <button type = "button" onClick = {() =>that.deleteTag(key)} className="delete is-small"></button>
           </span>
           )
         }
         )
         return(
             <div>
-      <div class = "form box">
-                <form class = "form">
-                  <span class = "is-size-1 has-text-weight-bold has-text-black">Update Professor</span><br/><br/>
-                    <div class = "field">
-                      <label class = "label">Name</label>
-                      <div class="control">
-                      <input class = "input" defaultValue = {this.state.profs.Name} placeholder = "Name" ref = "name" required/>
+      <div className = "form box">
+                <form className = "form">
+                  <span className = "is-size-1 has-text-weight-bold has-text-black">Update Professor</span><br/><br/>
+                    <div className = "field">
+                      <label className = "label">Name</label>
+                      <div className="control">
+                      <input className = "input" defaultValue = {this.state.profs.Name} placeholder = "Name" ref = "name" required/>
                       </div>
                     </div>
 
 
-                    <div class = "field">
-                      <label class = "label">Description</label>
-                      <div class = "control">
-                        <textarea class = "textarea" defaultValue = {this.state.profs.Description} placeholder = "Description" ref= "desc" required/>
+                    <div className = "field">
+                      <label className = "label">Description</label>
+                      <div className = "control">
+                        <textarea className = "textarea" defaultValue = {this.state.profs.Description} placeholder = "Description" ref= "desc" required/>
                       </div>
                     </div>
 
-                    <div class = "field">
-                      <label class = "label">Relevant Tags</label>
-                      <div class = "control">
-                        <input class = "input" type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
+                    <div className = "field">
+                      <label className = "label">Relevant Tags</label>
+                      <div className = "control">
+                        <input className = "input" type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
                         <br/><br/>
-                        <button class = "button is-link is-rounded" onClick = {this.addTag}>Add Tags</button>
+                        <button className = "button is-link is-rounded" onClick = {this.addTag}>Add Tags</button>
                       </div>
                     </div>
 
-                    <div class = "field">
+                    <div className = "field">
                     
                     <br/><br/>
-                    <label class = "label"> Existing Tags:{tags} </label>
+                    <label className = "label"> Existing Tags:{tags} </label>
                     </div>
 
-                    <div class = "field">
-                    <label class = "label">Rating</label>
-                      <div class = "control">
-                        <input class = "input" defaultValue = {this.state.profs.Rating} placeholder = "Rating" ref = "rating" required/>
+                    <div className = "field">
+                    <label className = "label">Rating</label>
+                      <div className = "control">
+                        <input className = "input" defaultValue = {this.state.profs.Rating} placeholder = "Rating" ref = "rating" required/>
                       </div>
                     </div>
 
                 </form>
-                <div class = "form-btn"><input onClick = {this.handleSubmit} class = "button is-large is-success is-rounded" type = "submit" value = "Update" /></div>
+                <div className = "form-btn"><input onClick = {this.handleSubmit} className = "button is-large is-success is-rounded" type = "submit" value = "Update" /></div>
             </div>
             </div>
         )

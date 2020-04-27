@@ -16,7 +16,7 @@
     display: flex;
 }
 .review-circle-text{
-    font-family: Quicksand;
+    font-family: Quicksand, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 2.6vw;
@@ -25,7 +25,7 @@
     color: #000000;
 }
 .review-desc{
-    font-family: Quicksand;
+    font-family: Quicksand, sans-serif;
     font-style: normal;
     font-size: 2vw;
     text-align: left;
@@ -33,7 +33,7 @@
 
 }
 .review-heading{
-    font-family: Quicksand;
+    font-family: Quicksand, sans-serif;
     font-style: normal;
     font-size: 4vw;
     color: #000000;

@@ -1,35 +1,32 @@
 import React , {Component} from 'react';
-import styles from './EachCourse.css'
-import {card} from 'bulma';
-import { Redirect } from 'react-router-dom';
+import './EachCourse.css'
 
 class EachCourse extends Component {
   
   render(){
     console.log(this.props);
-    var string = "course/"+this.props.course_id;
 
     return(
 
  
     <div>
-      <div class = "box course-box">
-        <div class = "course-title" id = "course-title">
+      <div className = "box course-box">
+        <div className = "course-title" id = "course-title">
           {this.props.name}
         </div>
-        <nav class = "level">
-          <div class = "level-left">
-            <div class = "level-item">
-              <div class = "rating-circle">
-                <div class = "circle-text"> {this.props.rating}</div>
+        <nav className = "level">
+          <div className = "level-left">
+            <div className = "level-item">
+              <div className = "rating-circle">
+                <div className = "circle-text"> {Number(this.props.rating).toFixed(1)}</div>
               </div>
             </div>
           </div>
-          <div class = "level-right">
-            <div class = "level-item has-text-weight-bold">
-              <span class = "icon is-large">
-                <a class = "has-text-black"href = {this.props.course_id}>
-                  <img src = "arrow_forward.svg"></img>
+          <div className = "level-right">
+            <div className = "level-item has-text-weight-bold">
+              <span className = "icon is-large">
+                <a className = "has-text-black"href = {this.props.course_id}>
+                  <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </span>
             </div>

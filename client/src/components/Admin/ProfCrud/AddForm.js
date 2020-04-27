@@ -1,6 +1,5 @@
 import React , {Component} from 'react';
 import API from '../../../utils/API';
-import {Redirect} from 'react-router-dom';
 
 class AddProf extends Component {
   state = {
@@ -10,7 +9,7 @@ class AddProf extends Component {
     e.preventDefault();
     var tag = this.refs.tags.value;
     var tags = this.state.Relevant_tags;
-    if (tag=="")
+    if (tag === "")
     {
       alert("Tags should not be empty!")
     }
@@ -31,7 +30,6 @@ class AddProf extends Component {
     e.preventDefault();
     var Name = this.refs.name.value;
     var Description = this.refs.desc.value;
-    var self = this;
     if(this.state.Relevant_tags.length < 3)
     {
       alert("Minimum 3 tags required!")
@@ -52,12 +50,12 @@ class AddProf extends Component {
     }
   }
   render(){
-    if(this.props.current_user.Roles != 'Admin'){
+    if(this.props.current_user.Roles !== 'Admin'){
       console.log(this.props.current_user.Roles)
       return(
-          <div class = "container has-text-centered">
-              <p class = "title">Unauthorized</p>
-              <p class = "subtitle">Log in as an Admin to Continue</p>
+          <div className = "container has-text-centered">
+              <p className = "title">Unauthorized</p>
+              <p className = "subtitle">Log in as an Admin to Continue</p>
           </div>
       )
   }
@@ -67,9 +65,9 @@ class AddProf extends Component {
     let that = this;
     tags = this.state.Relevant_tags.map(function(tag,key){
       return(
-        <span class="tag is-medium is-success">
+        <span className="tag is-medium is-success">
         {tag}
-        <button type = "button" onClick = {() =>that.deleteTag(key)} class="delete is-small"></button>
+        <button type = "button" onClick = {() =>that.deleteTag(key)} className="delete is-small"></button>
       </span>
       )
     }
@@ -77,43 +75,43 @@ class AddProf extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     return(
       <div>
-      <div class = "form box">
-                <form class = "form">
-                  <span class = "is-size-1 has-text-weight-bold has-text-black">Add Professor</span><br/><br/>
-                    <div class = "field">
-                      <label class = "label">Name</label>
-                      <div class="control">
-                      <input class = "input" placeholder = "Name" ref = "name" required/>
+      <div className = "form box">
+                <form className = "form">
+                  <span className = "is-size-1 has-text-weight-bold has-text-black">Add Professor</span><br/><br/>
+                    <div className = "field">
+                      <label className = "label">Name</label>
+                      <div className="control">
+                      <input className = "input" placeholder = "Name" ref = "name" required/>
                       </div>
                     </div>
 
 
-                    <div class = "field">
-                      <label class = "label">Description</label>
-                      <div class = "control">
-                        <textarea class = "textarea" placeholder = "Description" ref= "desc" required/>
+                    <div className = "field">
+                      <label className = "label">Description</label>
+                      <div className = "control">
+                        <textarea className = "textarea" placeholder = "Description" ref= "desc" required/>
                       </div>
                     </div>
 
-                    <div class = "field">
-                      <label class = "label">Relevant Tags</label>
-                      <div class = "control">
-                        <input class = "input" type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
+                    <div className = "field">
+                      <label className = "label">Relevant Tags</label>
+                      <div className = "control">
+                        <input className = "input" type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
                       </div>
                     </div>
 
-                    <button class = "button is-link is-rounded" onClick = {this.addTag}>Add Tags</button>
+                    <button className = "button is-link is-rounded" onClick = {this.addTag}>Add Tags</button>
                     <br/><br/>
-                    <label class = "label"> Existing Tags:{tags} </label>
+                    <label className = "label"> Existing Tags:{tags} </label>
 
-                    <div class = "field">
-                    <label class = "label">Rating</label>
-                      <div class = "control">
-                        <input type = "number" class = "input" placeholder = "Rating" ref = "rating" required/>
+                    <div className = "field">
+                    <label className = "label">Rating</label>
+                      <div className = "control">
+                        <input type = "number" className = "input" placeholder = "Rating" ref = "rating" required/>
                       </div>
                     </div>
                 </form>
-                <div class = "form-btn"><input onClick = {this.handleSubmit} class = "button is-large is-success is-rounded" type = "submit" value = "Add" /></div>
+                <div className = "form-btn"><input onClick = {this.handleSubmit} className = "button is-large is-success is-rounded" type = "submit" value = "Add" /></div>
             </div>
       </div>
     );

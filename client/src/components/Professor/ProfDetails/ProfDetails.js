@@ -11,7 +11,6 @@ class ProfDetails extends Component {
         resData : [],
         reviews: [],
         error : false,
-        current_user : ''
     }
     handleSubmit(e){
         e.preventDefault();
@@ -66,16 +65,16 @@ class ProfDetails extends Component {
               return(
                 <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
                 )
-            }.bind(this));
+            });
           }
 
         var prof_tags = this.state.prof.Relevant_tags
         if(this.state.loadStatus===true){
             prof_tags = prof_tags.map(function(tag){
               return(
-                <div class="level-item has-text-centered">
+                <div className="level-item has-text-centered">
                     <div>
-                    <span class = "tag is-primary">{tag}</span>
+                    <span className = "tag is-large is-link">{tag}</span>
                     </div>
                 </div>
                 
@@ -100,9 +99,9 @@ class ProfDetails extends Component {
                     </div>
                   </div>
                 </nav>
-                <div class = "Review"> {review} </div>
-                <footer class="footer">
-                  <div class="content has-text-centered">
+                <div className = "Review"> {review} </div>
+                <footer className="footer">
+                  <div className="content has-text-centered">
                     <p>
                       <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
                       <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content

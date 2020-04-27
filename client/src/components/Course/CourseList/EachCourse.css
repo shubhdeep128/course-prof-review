@@ -1,7 +1,7 @@
 .course-box{
     border-radius: 25px;
     border: 0.5px #1f1f1f solid;
-    font-family: Quicksand;
+    font-family: Quicksand, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 2.5vw;
@@ -16,7 +16,7 @@
     display: flex;
 }
 .circle-text{
-    font-family: Quicksand;
+    font-family: Quicksand, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 2.6vw;
@@ -25,7 +25,7 @@
     color: #000000;
 }
 .course-title{
-    font-family: Quicksand;
+    font-family: Quicksand, sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 2.5vw;

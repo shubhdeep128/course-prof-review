@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Home from './components/home.js';
+import Home from './components/Home.js';
 import OuterContainer from './components/OuterContainer/OuterContainer.js'
 import CourseForm from './components/Admin/CourseCrud/AddForm.js';
 import CourseList from './components/Course/CourseList/CourseList.js';
@@ -38,6 +38,7 @@ class App extends Component {
   render(){
   return (
     <div>
+      <div>
       <OuterContainer current_user={this.state.current_user} loginStatus={this.state.loginStatus}/>
     <BrowserRouter>
     <Switch>
@@ -47,6 +48,7 @@ class App extends Component {
       <Route exact path='/course' render = {(props) => <CourseList {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
       <Route exact path='/course/:courseid'render = {(props) => <CourseDetails {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
       <Route exact path='/prof' render = {(props) => <ProfList {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
+      <Route exact path = '/prof/:profid' render = {(props) => <ProfDetails {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  /> 
       <Route exact path='/admin/courses' render = {(props) => <CourseCrud {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>} />
       <Route exact path='/admin/courses/update/:courseid' render = {(props) => <UpdateCourse {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
       <Route exact path = '/admin/profs' render = {(props) => <ProfCrud {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
@@ -56,6 +58,7 @@ class App extends Component {
       <Route exact path = '*' component = {NotFound} status={404} />
     </Switch>
     </BrowserRouter>
+      </div>
     </div>
   );
 }

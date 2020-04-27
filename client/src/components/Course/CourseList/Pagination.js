@@ -18,13 +18,13 @@ class Pagination extends Component{
 
         console.log(classStr(this.props.currentPage));
         return(
-            <div class = "pageNums has-text-weight-semibold has-text-black">
-                <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
-                <a onClick = {() => {if(this.props.currentPage>1){this.props.paginate(this.props.currentPage-1)}}} class="pagination-previous">Previous</a>
-                <a onClick = {() => {if(this.props.currentPage<pageNumbers[pageNumbers.length -1]){this.props.paginate(this.props.currentPage+1)}}} class="pagination-next">Next page</a>
-                <ul class="pagination-list">
-                    {pageNumbers.map(number => (
-                        <li><a onClick = {() => this.props.paginate(number)} class={classStr(number)} aria-label="Goto page 1">{number}</a></li>
+            <div className = "pageNums has-text-weight-semibold has-text-black">
+                <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
+                <button onClick = {() => {if(this.props.currentPage>1){this.props.paginate(this.props.currentPage-1)}}} className="pagination-previous">Previous</button>
+                <button onClick = {() => {if(this.props.currentPage<pageNumbers[pageNumbers.length -1]){this.props.paginate(this.props.currentPage+1)}}} className="pagination-next">Next page</button>
+                <ul className="pagination-list">
+                    {pageNumbers.map((number,i) => (
+                        <li key = {i}><button onClick = {() => this.props.paginate(number)} className={classStr(number)} aria-label="Goto page 1">{number}</button></li>
                     ))}
                 </ul>
             </nav>
