@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './AddReview.css'
+import './AddReview.css'
 import API from '../../../utils/API.js';
 
 export default class AddReview extends Component {
@@ -22,12 +22,26 @@ export default class AddReview extends Component {
         }
       }).then(function (response) {
           console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });  
+      const overall_rating =+Number(this.props.prof_rating);
+      const total_rating =+Number(this.props.prof_revCount);
+      const new_rating =+rating
+      const newRevCount = this.props.prof_revCount + 1;
+      var newOverallRating = (overall_rating*total_rating+new_rating)/(newRevCount)
+      API.patch(`/api/prof/${this.props.prof_id}`,{
+        Rating: newOverallRating,
+        revCount: newRevCount
+      }).then(function(response){
+        console.log(response)
         window.location.reload(false)
       }).catch(function (error) {
         console.log(error);
       });  
   }
     render() {
+        console.log(this.props)
         this.handleSubmit = this.handleSubmit.bind(this);
         document.addEventListener('DOMContentLoaded', function () {
 
@@ -82,18 +96,18 @@ export default class AddReview extends Component {
           const ReviewForm = ()=>{
             if(this.props.loginStatus){
               return(
-                  <div class = "Form">
+                  <div className = "Form">
                   <form>
-                    <div class="field">
-                      <label class="label">Write your Review</label>
-                      <div class="control">
-                        <textarea class="textarea" placeholder="Review" ref = "desc"></textarea>
+                    <div className="field">
+                      <label className="label">Write your Review</label>
+                      <div className="control">
+                        <textarea className="textarea" placeholder="Review" ref = "desc"></textarea>
                       </div>
                     </div>
-                    <div class="field">
-                      <label class="label">Overall Rating</label>
-                      <div class="control">
-                        <div class="select" >
+                    <div className="field">
+                      <label className="label">Overall Rating</label>
+                      <div className="control">
+                        <div className="select" >
                           <select ref = "rating">
                             <option>1</option>
                             <option>2</option>
@@ -110,26 +124,26 @@ export default class AddReview extends Component {
             }
             else{
               return(
-                <a href = "/auth/google" class = "button is-large is-rounded is-black">Log in To Continue</a>
+                <a href = "/auth/google" className = "button is-large is-rounded is-black">Log in To Continue</a>
               )
             }
           }
         return (
-            <div class = "add-review">
-                <button class="button is-rounded is-medium modal-button" data-target="modal-ter" aria-haspopup="true">Add a Review</button>
-                <div class="modal" id = "modal-ter">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                    <p class="modal-card-title has-text-weight-bold">Add a Review</p>
-                    <button class="delete" aria-label="close"></button>
+            <div className = "add-review">
+                <button className="button is-rounded is-medium modal-button" data-target="modal-ter" aria-haspopup="true">Add a Review</button>
+                <div className="modal" id = "modal-ter">
+                <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head">
+                    <p className="modal-card-title has-text-weight-bold">Add a Review</p>
+                    <button className="delete" aria-label="close"></button>
                     </header>
-                    <section class="modal-card-body">
+                    <section className="modal-card-body">
                     {ReviewForm()}
                     </section>
-                    <footer class="modal-card-foot">
-                    <button onClick = {this.handleSubmit} type = "submit" class="button is-rounded is-black">Submit Review</button>
-                    <button class="button is-rounded is-danger">Cancel</button>
+                    <footer className="modal-card-foot">
+                    <button onClick = {this.handleSubmit} type = "submit" className="button is-rounded is-black">Submit Review</button>
+                    <button className="button is-rounded is-danger">Cancel</button>
                     </footer>
                 </div>
                 </div>

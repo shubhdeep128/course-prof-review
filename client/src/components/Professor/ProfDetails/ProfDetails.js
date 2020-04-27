@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from '../../../utils/API.js';
-import axios from 'axios';
 import Reviews from './Reviews.js';
 import ProfHeader from './ProfHeader.js'
 import AddReview from "./AddReview";
@@ -19,7 +18,7 @@ class ProfDetails extends Component {
         const { match: { params } } = this.props;
         API.post('/api/review/add', {
             Parent : params.profid,
-            Author: this.state.current_user,
+            Author: this.props.current_user,
             Time_stamp : Date.now,
             Description : desc,
             Difficulty : 10,
@@ -40,12 +39,9 @@ class ProfDetails extends Component {
     componentDidMount(){
         const { match: { params } } = this.props;
         this.setState(this.props.location.state)
-        axios.all([
-            axios.get(`/api/prof/${params.profid}`),
-            axios.get("/api/current_user")
-        ])
+        API.get(`/api/prof/${params.profid}`)
         .then(responseArr => {
-            this.setState({error:false, resData:responseArr[0].data, prof:responseArr[0].data.prof, reviews: responseArr[0].data.reviews, loadStatus:true, current_user: responseArr[1].data._id});
+            this.setState({error:false, resData:responseArr.data, prof:responseArr.data.prof, reviews: responseArr.data.reviews, loadStatus:true});
             console.log(this.state.resData);
         }).catch(function (error) {
             console.log("ERROR LOADING DATA");
@@ -79,23 +75,22 @@ class ProfDetails extends Component {
                 </div>
                 
               )
-            }.bind(this));
+            });
           }
           
         return(
             <div>
         
-                <ProfHeader prof = {this.state.prof} />
-                
-                <nav class = "level">
-                  <div class = "level-left">
-                    <div class = "level-item">
-                      <div class = "review-heading"><span class = "has-text-weight-semibold">Reviews</span></div>
+                <ProfHeader prof_tags = {prof_tags} prof = {this.state.prof} />
+                <nav className = "level">
+                  <div className = "level-left">
+                    <div className = "level-item">
+                      <div className = "review-heading"><span className = "has-text-weight-semibold">Reviews</span></div>
                     </div>
                   </div>
-                  <div calss = "level-right">
-                    <div class = "level-item">
-                      <div class = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} prof_id = {this.state.prof._id} prof_rating = {this.state.prof.Rating} course_revCount = {this.state.prof.revCount} /></div>
+                  <div className = "level-right">
+                    <div className = "level-item">
+                      <div className = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user._id} prof_id = {this.state.prof._id} prof_rating = {this.state.prof.Rating} prof_revCount = {this.state.prof.revCount} /></div>
                     </div>
                   </div>
                 </nav>

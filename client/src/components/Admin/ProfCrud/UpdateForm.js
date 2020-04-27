@@ -45,6 +45,7 @@ class UpdateForm extends Component {
         });
         
       }
+
       addTag(e){
         e.preventDefault();
         var tag = this.refs.tags.value;
