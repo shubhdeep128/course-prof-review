@@ -47,25 +47,25 @@ describe('Test API', function(){
 
 	describe('Test intrusion: access protected endpoints with no login', function(){
 		// try accessing api endpoints without logging in
-		it('/api/course returns unauthorized', function(done) {
+		it('/api/course/add returns unauthorized', function(done) {
 		  chai.request(server)
-		    .get('/api/course')
+		    .post('/api/course/add',{})
 		    .end(function(err, res){
 		      res.should.have.status(401);
 		      done();
 		    });
     });
-    it('/api/prof returns unauthorized', function(done) {
+    it('/api/prof/add returns unauthorized', function(done) {
 		  chai.request(server)
-		    .get('/api/prof')
+		    .post('/api/prof/add',{})
 		    .end(function(err, res){
 		      res.should.have.status(401);
 		      done();
 		    });
     });
-    it('/api/review returns unauthorized', function(done) {
+    it('/api/review/add returns unauthorized', function(done) {
 		  chai.request(server)
-		    .get('/api/review')
+		    .post('/api/review/add',{})
 		    .end(function(err, res){
 		      res.should.have.status(401);
 		      done();
