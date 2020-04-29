@@ -3,6 +3,7 @@ import API from '../../../utils/API.js';
 import Reviews from './Reviews.js';
 import CourseHeader from './CourseHeader'
 import AddReview from "./AddReview";
+
 class CourseDetails extends Component {
     state = {
         loadstatus : false,
@@ -10,7 +11,8 @@ class CourseDetails extends Component {
         resData : [],
         reviews: [],
         prof:[],
-        error : false,
+        error : false
+    
     }
     handleSubmit(e){
         e.preventDefault();
@@ -48,21 +50,37 @@ class CourseDetails extends Component {
             console.log("ERROR LOADING DATA");
             console.log(error);
           });
+        
     }
 
     
 
     render(){
         this.handleSubmit = this.handleSubmit.bind(this);
+        var state = this.state;
+        var props = this.props;
         var review= this.state.resData.reviews
+        var reviews = review
+        var current_user_review = false;
         console.log(this.props)
         if(this.state.loadStatus===true){
             review = review.map(function(review , i){
+              
               return(
-                <Reviews key = {i} author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
+                <Reviews key = {i} author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} current_user = {props.current_user} review_id = {review._id} loginStatus = {props.loginStatus} course_id = {state.course._id} course_rating = {state.course.Rating} course_revCount = {state.course.revCount}/>
                 )
             });
+            for(var i=0; i<reviews.length;i++)
+            {
+              if(reviews[i].Author === this.props.current_user._id && current_user_review === false)
+              {
+                current_user_review = true
+              }
+            }
+
           }
+          
+        
         
         var course_tags = this.state.course.Relevant_tags
         if(this.state.loadStatus===true){
@@ -85,7 +103,7 @@ class CourseDetails extends Component {
                   </div>
                   <div className = "level-right">
                     <div className = "level-item">
-                      <div className = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id} course_rating = {this.state.course.Rating} course_revCount = {this.state.course.revCount} /></div>
+                      <div className = "add-review"><AddReview loginStatus = {this.props.loginStatus} current_user = {this.props.current_user} course_id = {this.state.course._id} course_rating = {this.state.course.Rating} course_revCount = {this.state.course.revCount} current_user_review = {current_user_review} /></div>
                     </div>
                   </div>
                 </nav>

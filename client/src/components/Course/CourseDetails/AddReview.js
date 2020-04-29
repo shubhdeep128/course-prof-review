@@ -7,6 +7,15 @@ export default class AddReview extends Component {
   calcRating(overall_rating,total_rating,new_rating){
     return ((overall_rating*total_rating)+new_rating)/(total_rating+1);
   }
+  componentDidMount(){
+    API.get(`/api/course/${this.props.course_id}`)
+    .then(response => {
+      this.setState({review : response.data})
+      console.log(this.state.review)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
   handleSubmit(e){
     e.preventDefault();
@@ -99,7 +108,7 @@ export default class AddReview extends Component {
           });
           console.log(this.props)
           const ReviewForm = ()=>{
-            if(this.props.loginStatus){
+            if(this.props.loginStatus && this.props.current_user_review === false){
               return(
                   <div className = "Form">
                   <form>
@@ -125,6 +134,14 @@ export default class AddReview extends Component {
                     </div>
                   </form>
               </div>
+              )
+            }
+            else if(this.props.loginStatus && this.props.current_user_review)
+            {
+              return(
+                <div>
+                  You have already given a review
+                </div>
               )
             }
             else{

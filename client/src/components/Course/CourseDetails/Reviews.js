@@ -1,14 +1,13 @@
 import React,{Component} from 'react';
 import './Reviews.css';
 import API from '../../../utils/API'
-
 class Reviews extends Component {
     state = {
         error:false,
         loadStatus: true,
         user : [],
         upvotes: this.props.upvotes,
-        downvotes: this.props.downvotes
+        downvotes: this.props.downvotes,
     }
     componentDidMount(){
         API.get(`/api/user/${this.props.author}`)
@@ -20,8 +19,35 @@ class Reviews extends Component {
             console.log(error);
           });
     }
+    deleteReview = () => {
+        if(window.confirm("Are you sure want to Delete your Review "))
+        {
+            API.delete(`/api/review/${this.props.review_id}`)
+            .then(response => {
+                console.log(response)
+                alert("Your Review was deleted Successfully")
+                window.location.reload(true)
+            }).catch(function (error){
+                console.log(error)
+                alert("Sorry Review Could not be deleted")
+            }) 
+        }
+    }
+
 
     render() {
+        const UserReview = () => {
+            if(this.props.current_user._id === this.props.author)
+            {
+                return(
+                    <div>
+                        <button onClick = {this.deleteReview}>Delete</button>
+                        
+                        
+                    </div>
+                )
+            }
+        }
         const upvote = ()=>{
 
         }
@@ -45,6 +71,8 @@ class Reviews extends Component {
                             <span className = "">"</span>
                         </div>
                     </div>
+                    {UserReview()}
+                    
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>
                         <button className = "button is-white" onClick = {upvote}><i className="far fa-thumbs-up icon is-large"></i></button><br/>
