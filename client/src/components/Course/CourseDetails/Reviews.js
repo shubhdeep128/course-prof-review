@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
+import ReviewControls from './ReviewControl'
 import './Reviews.css';
 import API from '../../../utils/API'
-
 class Reviews extends Component {
     state = {
         error:false,
         loadStatus: true,
         user : [],
         upvotes: this.props.upvotes,
-        downvotes: this.props.downvotes
+        downvotes: this.props.downvotes,
     }
     componentDidMount(){
         API.get(`/api/user/${this.props.author}`)
@@ -21,7 +21,12 @@ class Reviews extends Component {
           });
     }
 
+    
+    
+
+
     render() {
+
         const upvote = ()=>{
 
         }
@@ -44,7 +49,9 @@ class Reviews extends Component {
                             {this.props.desc}
                             <span className = "">"</span>
                         </div>
+                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.course_id} course_rating = {this.props.course_rating} course_revCount = {this.props.course_revCount}/>
                     </div>
+                    
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>
                         <button className = "button is-white" onClick = {upvote}><i className="far fa-thumbs-up icon is-large"></i></button><br/>

@@ -20,7 +20,8 @@ class UpdateCourse extends Component {
       var desc = this.refs.desc.value;
       var grading = this.refs.grading.value;
       var rating = this.refs.rating.value;
-      var current_prof = this.refs.prof.value
+      var current_prof = this.refs.prof.value;
+      var revCount = this.refs.revCount.value;
       if(this.state.Relevant_tags.length < 3)
       {
           alert("Please fill minimum 3 tags!")
@@ -33,7 +34,8 @@ class UpdateCourse extends Component {
           Relevant_tags: this.state.Relevant_tags,
           Current_Professor : current_prof,
           Average_grade: grading,
-          Rating : rating
+          Rating : rating,
+          revCount: revCount
         }).then(function (response) {
           alert("Course updated successfully!");
           console.log(response);
@@ -185,6 +187,12 @@ class UpdateCourse extends Component {
                     <label className = "label">Rating</label>
                       <div className = "control">
                         <input className = "input" defaultValue = {this.state.course.Rating} placeholder = "Rating" ref = "rating" required/>
+                      </div>
+                    </div>
+                    <div className = "field">
+                    <label className = "label">Review Count</label>
+                      <div className = "control">
+                        <input className = "input" defaultValue = {this.state.course.revCount} placeholder = "revCount" ref = "revCount" required/>
                       </div>
                     </div>
                 </form>

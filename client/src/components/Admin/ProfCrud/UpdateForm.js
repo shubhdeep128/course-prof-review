@@ -13,7 +13,8 @@ class UpdateForm extends Component {
         const { match: { params } } = this.props;
         var Name = this.refs.name.value;
         var Description = this.refs.desc.value;
-        var Rating = this.refs.rating.value
+        var Rating = this.refs.rating.value;
+        var revCount = this.refs.revCount.value
         if(this.state.Relevant_tags.length < 3)
         {
             alert("Minimum 3 tags required!")
@@ -25,6 +26,7 @@ class UpdateForm extends Component {
             Description: Description,
             Rating: Rating,
             Relevant_tags: this.state.Relevant_tags,
+            revCount: revCount
           }).then(function (response) {
             alert("Professor Updated successfully!");
             console.log(response);
@@ -133,6 +135,12 @@ class UpdateForm extends Component {
                     <label className = "label">Rating</label>
                       <div className = "control">
                         <input className = "input" defaultValue = {this.state.profs.Rating} placeholder = "Rating" ref = "rating" required/>
+                      </div>
+                    </div>
+                    <div className = "field">
+                    <label className = "label">Review Count</label>
+                      <div className = "control">
+                        <input className = "input" defaultValue = {this.state.profs.revCount} placeholder = "revCount" ref = "revCount" required/>
                       </div>
                     </div>
 

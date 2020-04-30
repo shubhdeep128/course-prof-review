@@ -55,11 +55,12 @@ class ProfDetails extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         var prof = this.state.prof 
         var review= this.state.resData.reviews
+        var props = this.props
         console.log(prof)
         if(this.state.loadStatus===true){
             review = review.map(function(review){
               return(
-                <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} />
+                <Reviews author = {review.Author} time = {review.Time_stamp} desc = {review.Description} difficulty = {review.Difficulty} rating = {review.Rating} upvotes = {review.Votes.up_vote} downvotes = {review.Votes.down_vote} current_user = {props.current_user} review_id = {review._id} loginStatus = {props.loginStatus} prof_id = {prof._id} prof_rating = {prof.Rating} prof_revCount = {prof.revCount} />
                 )
             });
           }
