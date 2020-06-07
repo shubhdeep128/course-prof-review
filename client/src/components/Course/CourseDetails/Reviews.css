@@ -7,12 +7,12 @@
     margin-left: 5vw;
     margin-right: 5vw;
 }
-.review-circle{
+.course-review-circle{
     margin-left: 1.7vw;
     width: 5vw;
     height: 5vw;
     border-radius: 50%;
-    background: #fdf39b;
+    background-color: #fdf39b;
     display: flex;
 }
 .review-circle-text{

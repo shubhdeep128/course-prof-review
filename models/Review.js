@@ -39,6 +39,13 @@ var Review_schema = new Schema({
                 default: 0
             }
     }
-});
+},
+{ 
+    timestamps: { 
+        createdAt: 'created_at',
+        updatedAt: 'updated_at' 
+    } 
+}	
+);
 
 module.exports = Review = mongoose.model('Review', Review_schema);

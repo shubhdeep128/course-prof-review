@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from '../../Loading'
 import API from '../../../utils/API.js';
 import Reviews from './Reviews.js';
 import ProfHeader from './ProfHeader.js'
@@ -39,14 +40,16 @@ class ProfDetails extends Component {
     componentDidMount(){
         const { match: { params } } = this.props;
         this.setState(this.props.location.state)
-        API.get(`/api/prof/${params.profid}`)
-        .then(responseArr => {
-            this.setState({error:false, resData:responseArr.data, prof:responseArr.data.prof, reviews: responseArr.data.reviews, loadStatus:true});
-            console.log(this.state.resData);
-        }).catch(function (error) {
-            console.log("ERROR LOADING DATA");
-            console.log(error);
-          });
+        setTimeout(()=>{
+          API.get(`/api/prof/${params.profid}`)
+          .then(responseArr => {
+              this.setState({error:false, resData:responseArr.data, prof:responseArr.data.prof, reviews: responseArr.data.reviews, loadStatus:true});
+              console.log(this.state.resData);
+          }).catch(function (error) {
+              console.log("ERROR LOADING DATA");
+              console.log(error);
+            });
+        },1200)
     }
 
     
@@ -81,8 +84,17 @@ class ProfDetails extends Component {
           
         return(
             <div>
-        
+              {!this.state.loadStatus?(
+              <div className = "columns is-centered is-mobile">
+                <div className = "column is-11">
+                  <div className = "profDetail-box box has-text-centered">
+                    <Loading  type = {"spin"} />
+                  </div>
+                </div>
+              </div>):
+              (<div>
                 <ProfHeader prof_tags = {prof_tags} prof = {this.state.prof} />
+              </div>)}
                 <nav className = "level">
                   <div className = "level-left">
                     <div className = "level-item">

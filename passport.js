@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = require("./models/User")
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
+const utils  = require('./routes/api/utils')
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -25,6 +25,7 @@ passport.use(
         if (existingUser) {
           done(null, existingUser);
         } else {
+          utils.record_activity(profile.emails[0].value, "user_add", req.device.type);
           new User({
             googleId: profile.id,
             name: profile.displayName,

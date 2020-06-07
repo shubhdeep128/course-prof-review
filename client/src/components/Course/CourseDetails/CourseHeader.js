@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+import WOW from 'wowjs'
 import  './CourseHeader.css'
 
 class CourseHeader extends Component {
+    constructor(props){
+        super(props)
+        new WOW.WOW().init();
+      }
 
     render() {
         const course = this.props.course

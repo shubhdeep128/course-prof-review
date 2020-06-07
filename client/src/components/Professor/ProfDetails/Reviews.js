@@ -34,7 +34,7 @@ class Reviews extends Component {
             <div className = 'review-container'>
                 <div className = "columns is-vcentered is-mobile">
                     <div className = "column is-2">
-                        <div className = "review-circle">
+                        <div className = "prof-review-circle">
                             <div className = "review-circle-text"> {this.props.rating}</div>
                         </div>
                     </div>

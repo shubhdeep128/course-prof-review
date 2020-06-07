@@ -1,6 +1,7 @@
 var Professor = require('../../models/Professor')
-const passport = require("passport");
 const express = require("express");
+const utils = require('./utils')
+
 require('dotenv/config');
 
 
@@ -10,6 +11,7 @@ router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
     try {
         // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+            utils.record_activity(req.user.email, "prof_all", req.device.type);
             const prof = await Professor.find()
             res.json(prof);
         //     } 
@@ -28,7 +30,7 @@ router.get("/count",async (req,res)=>{
         
 
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
-
+            utils.record_activity(req.user.email, "prof_count", req.device.type);
             Professor.countDocuments({},(err,count)=>{
                 if(err){
                     res.status(500).send({status:false,error:err})
@@ -54,6 +56,7 @@ router.post("/add",async (req,res)=>{
     try {
         
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+            utils.record_activity(req.user.email, "prof_add", req.device.type);
             const prof_object = new Professor({
                 _id: req.params._id,
                 Name: req.body.Name,
@@ -76,6 +79,7 @@ router.post("/add",async (req,res)=>{
 router.get('/:id',async (req,res)=>{
     try {
         // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+            utils.record_activity(req.user.email, "prof_get", req.device.type);
             const prof = await Professor.findById(req.params.id);
             const reviews = await Review.find({Parent: prof._id});
             res.json({prof:prof,reviews:reviews}); 
@@ -92,6 +96,7 @@ router.patch("/:id",async (req,res)=>{
     /// update the attributes of a course in the database 
     try {
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+            utils.record_activity(req.user.email, "prof_update", req.device.type);
             const updatedProf = await Professor.updateOne({_id: req.params.id},  {$set: req.body});
             const prof = await Professor.findById(req.params.id);
             console.log("Professor updated successfully");
@@ -109,6 +114,7 @@ router.patch("/:id",async (req,res)=>{
 router.delete('/:id',async (req,res) => {
     try {
         if (req.isAuthenticated() || process.env.NODE_ENV == "test") {
+            utils.record_activity(req.user.email, "prof_delete", req.device.type);
             const removedProf = await Professor.deleteOne({_id: req.params.id});
             console.log("Professor deleted successfully")
             res.json(removedProf)

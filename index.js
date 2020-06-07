@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,'client','build')))
 
+var device = require('express-device');
+app.use(device.capture());
+
 
 //IMPORT SCHEMAS AND CONNECT TO DB
 require("./models/User.js");
@@ -61,6 +64,8 @@ app.use('/api/prof',profRoutes);
 const reviewRoutes = require("./routes/api/review");
 app.use('/api/review',reviewRoutes);
 
+const statRoutes = require("./routes/api/stats");
+app.use('/api/stats',statRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import API from '../../../utils/API.js';
+import Loading from '../../Loading'
 import Reviews from './Reviews.js';
 import CourseHeader from './CourseHeader'
 import AddReview from "./AddReview";
 
 class CourseDetails extends Component {
+
     state = {
-        loadstatus : false,
+        loadStatus : false,
         course: [],
         resData : [],
         reviews: [],
@@ -42,7 +44,8 @@ class CourseDetails extends Component {
     componentDidMount(){
         const { match: { params } } = this.props;
         this.setState(this.props.location.state)
-        API.get(`/api/course/${params.courseid}`)
+        setTimeout(()=>{
+          API.get(`/api/course/${params.courseid}`)
         .then(responseArr => {
             this.setState({error:false, resData:responseArr.data, course:responseArr.data.course, reviews: responseArr.data.reviews,prof: responseArr.data.prof, loadStatus:true});
             console.log(responseArr);
@@ -50,6 +53,7 @@ class CourseDetails extends Component {
             console.log("ERROR LOADING DATA");
             console.log(error);
           });
+        },1200)
         
     }
 
@@ -93,8 +97,17 @@ class CourseDetails extends Component {
         
         return(
             <div>
-        
+              {!this.state.loadStatus?(
+              <div className = "columns is-centered is-mobile">
+                <div className = "column is-11">
+                  <div className = "courseDetail-box box has-text-centered">
+                    <Loading  type = {"spin"} />
+                  </div>
+                </div>
+              </div>):
+              (<div>
                 <CourseHeader course_tags = {course_tags} course = {this.state.course} prof = {this.state.prof}/>
+              </div>)}
                 <nav className = "level">
                   <div className = "level-left">
                     <div className = "level-item">
@@ -117,6 +130,7 @@ class CourseDetails extends Component {
                     </p>
                   </div>
                 </footer>
+              
             </div>
         );
     }

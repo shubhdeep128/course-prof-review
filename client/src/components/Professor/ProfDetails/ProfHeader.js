@@ -10,16 +10,16 @@ class ProfHeader extends Component {
             <div>
                 <div className = "columns is-centered is-mobile">
                     <div className = "column is-11">
-                        <div className = "courseDetail-box box">
-                            <div className = "courseDetail-title">{prof.Name}</div>
+                        <div className = "profDetail-box box">
+                            <div className = "profDetail-title">{prof.Name}</div>
                             <nav className = "level">
                                 <div className = "level-left">
                                     <div className = "level-item">
                                     <div className = "container">
                                             <span className = 'has-text-weight-semibold is-size-4'>Avg. Rating</span>
                                             <br/>
-                                            <div className = "header-rating-circle">
-                                                <div className = "circle-text"> {Number(prof.Rating).toFixed(1)}</div>
+                                            <div className = "prof-header-rating-circle">
+                                                <div className = "prof-circle-text"> {Number(prof.Rating).toFixed(1)}</div>
                                             </div>      
                                         </div>   
                                     </div>
@@ -43,7 +43,7 @@ class ProfHeader extends Component {
                 </nav>
                 </div>
 
-                <div className = "course-description has-text-justified">
+                <div className = "prof-description has-text-justified">
                     <span className = "has-text-weight-semibold">Details:</span>
                     {prof.Description}
                 </div>
