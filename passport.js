@@ -25,7 +25,9 @@ passport.use(
         if (existingUser) {
           done(null, existingUser);
         } else {
-          utils.record_activity(profile.emails[0].value, "user_add", req.device.type);
+          // console.log(req)
+
+          utils.record_activity(profile.emails[0].value, "user_add", "desktop");
           new User({
             googleId: profile.id,
             name: profile.displayName,

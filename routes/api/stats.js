@@ -82,10 +82,12 @@ router = express.Router();
 	    if (err) res.status(500).send({message:"Internal server error."});
 		result.sort(utils.compare_dates);
 		var daywise_data = [];
+		var total = 0;
 		for(var i=0;i<result.length;i++){
 			daywise_data.push(result[i].count);
+			total = total+result[i].count
 		}
-	    res.status(200).send({data: daywise_data});
+	    res.status(200).send({data: daywise_data, total: total});
 	});
   });
 
