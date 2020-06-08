@@ -72,7 +72,7 @@ class CourseList extends Component {
             <div className="control has-icons-left has-icons-right">
               <input className = "input is-large is-rounded" type = "text" placeholder = "Search By Name" onChange = {this.handleChange}/>
               <span className="icon is-small is-right">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </span>
             </div>
           </div>

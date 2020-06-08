@@ -34,6 +34,9 @@ class OuterContainer extends Component {
                             <a className="navbar-item" href = '/admin/profs/'>
                                 Professors
                             </a>
+                            <a className="navbar-item" href = "/admin/dashboard">
+                                Dashboard
+                            </a>
                         </div>
             </div>
             )

@@ -24,6 +24,13 @@ var Professor_schema = new Schema({
         type: Number,
         default: 1
     }
-});
+},
+{ 
+    timestamps: { 
+      createdAt: 'created_at',
+      updatedAt: 'updated_at' 
+    } 
+}	
+);
 
 module.exports = Professor = mongoose.model('Professor', Professor_schema);

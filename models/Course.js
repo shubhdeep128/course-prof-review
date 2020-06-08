@@ -34,6 +34,13 @@ var Course_schema = new Schema({
         type: Number,
         default: 1
     }
-});
+},
+{ 
+    timestamps: { 
+    createdAt: 'created_at',
+    updatedAt: 'updated_at' 
+    } 
+}	
+);
 
 module.exports = Course = mongoose.model('Course', Course_schema);

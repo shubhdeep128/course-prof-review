@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import ReviewControls from './ReviewControl'
 import './Reviews.css';
 import API from '../../../utils/API'
 class Reviews extends Component {
@@ -35,19 +36,11 @@ class Reviews extends Component {
     }
 
 
+    
+    
+
+
     render() {
-        const UserReview = () => {
-            if(this.props.current_user._id === this.props.author)
-            {
-                return(
-                    <div>
-                        <button onClick = {this.deleteReview}>Delete</button>
-                        
-                        
-                    </div>
-                )
-            }
-        }
         const upvote = ()=>{
 
         }
@@ -59,7 +52,7 @@ class Reviews extends Component {
             <div className = 'review-container'>
                 <div className = "columns is-vcentered is-mobile">
                     <div className = "column is-2">
-                        <div className = "review-circle">
+                        <div className = "course-review-circle">
                             <div className = "review-circle-text"> {this.props.rating}</div>
                         </div>
                     </div>
@@ -70,6 +63,7 @@ class Reviews extends Component {
                             {this.props.desc}
                             <span className = "">"</span>
                         </div>
+                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.course_id} course_rating = {this.props.course_rating} course_revCount = {this.props.course_revCount}/>
                     </div>
                     {UserReview()}
                     

@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import ReviewControls from './ReviewControl'
 import './Reviews.css';
 import API from '../../../utils/API'
 
@@ -33,7 +34,7 @@ class Reviews extends Component {
             <div className = 'review-container'>
                 <div className = "columns is-vcentered is-mobile">
                     <div className = "column is-2">
-                        <div className = "review-circle">
+                        <div className = "prof-review-circle">
                             <div className = "review-circle-text"> {this.props.rating}</div>
                         </div>
                     </div>
@@ -44,6 +45,7 @@ class Reviews extends Component {
                             {this.props.desc}
                             <span className = "">"</span>
                         </div>
+                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} prof_id = {this.props.prof_id} prof_rating = {this.props.prof_rating} prof_revCount = {this.props.prof_revCount}/>
                     </div>
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>

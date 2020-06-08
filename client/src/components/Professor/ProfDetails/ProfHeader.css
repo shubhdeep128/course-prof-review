@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
-.courseDetail-box{
-    background: linear-gradient(90deg, #FBED96 0%, #ABECD6 100%);
+.profDetail-box{
+    background: linear-gradient(90deg, #A0BAFE 0%, #B2ECD1 100%);
     border-radius: 25px;
     font-family: Quicksand, sans-serif;
     margin-top: 2vw;
@@ -12,7 +12,7 @@
     margin-left: 1vw;
     margin-right:1vw;
 }
-.courseDetail-title{
+.profDetail-title{
     font-family: Quicksand, sans-serif;
     font-style: normal;
     font-weight: 900;
@@ -27,7 +27,7 @@
     line-height: 187px;
     color: #000000;
 }
-.header-rating-circle{
+.prof-header-rating-circle{
     margin-left: 1.7vw;
     width: 5vw;
     height: 5vw;
@@ -35,7 +35,7 @@
     background: #ffffff;
     display: flex;
 }
-.circle-text{
+.prof-circle-text{
     font-family: Quicksand, sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -44,7 +44,7 @@
     margin: auto;
     color: #000000;
 }
-.course-description{
+.prof-description{
     font-family: Quicksand, sans-serif;
     font-style: normal;
     font-size: 2.1vw;

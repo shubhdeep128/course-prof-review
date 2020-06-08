@@ -4,8 +4,15 @@ import API from '../../../utils/API.js';
 
 export default class AddReview extends Component {
 
-  calcRating(overall_rating,total_rating,new_rating){
-    return ((overall_rating*total_rating)+new_rating)/(total_rating+1);
+
+  componentDidMount(){
+    API.get(`/api/course/${this.props.course_id}`)
+    .then(response => {
+      this.setState({review : response.data})
+      console.log(this.state.review)
+    }).catch(error => {
+      console.log(error)
+    })
   }
   componentDidMount(){
     API.get(`/api/course/${this.props.course_id}`)
@@ -56,7 +63,6 @@ export default class AddReview extends Component {
   }
     render() {
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.calcRating = this.calcRating.bind(this)
         document.addEventListener('DOMContentLoaded', function () {
 
             // Modals
@@ -164,7 +170,7 @@ export default class AddReview extends Component {
                     {ReviewForm()}
                     </section>
                     <footer className="modal-card-foot">
-                    <button onClick = {this.handleSubmit} type = "submit" className="button is-rounded is-black">Submit Review</button>
+                    {(this.props.loginStatus && this.props.current_user_review)?(<div></div>):(<button onClick = {this.handleSubmit} type = "submit" className="button is-rounded is-black">Submit Review</button>)}
                     <button className="button is-rounded is-danger">Cancel</button>
                     </footer>
                 </div>

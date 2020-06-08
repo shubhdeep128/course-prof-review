@@ -26,6 +26,13 @@ var UserSchema = new Schema({
     Bio: {
         type: [String]
     }
-});
+},
+{ 
+    timestamps: { 
+      createdAt: 'created_at',
+      updatedAt: 'updated_at' 
+    } 
+}	
+);
 
 module.exports = User= mongoose.model("users", UserSchema);
