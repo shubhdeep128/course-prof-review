@@ -65,7 +65,7 @@ class Reviews extends Component {
                         </div>
                         <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.course_id} course_rating = {this.props.course_rating} course_revCount = {this.props.course_revCount}/>
                     </div>
-                    {UserReview()}
+                    
                     
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>
