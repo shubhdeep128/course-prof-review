@@ -13,14 +13,14 @@ class CourseHeader extends Component {
         console.log(course.Relevant_tags)
         var profName = (this.props.prof === null)?" ":this.props.prof.Name
         var courseRating = Number(course.Rating).toFixed(1)
-        
+        var link = '/prof/' + this.props.prof._id;
         return (
             <div>
                 <div className = "columns is-centered is-mobile">
                     <div className = "column is-11">
                         <div className = "courseDetail-box box">
                             <div className = "courseDetail-title">{course.Name}</div>
-                            <div className = "prof-name"><span className = "has-text-weight-bold">Professor: </span>{profName}</div>
+                            <div className = "prof-name"><span className = "has-text-weight-bold">Professor: </span><a href={link}>{profName}</a></div>
                             <nav className = "level">
                                 <div className = "level-left">
                                     <div className = "level-item">

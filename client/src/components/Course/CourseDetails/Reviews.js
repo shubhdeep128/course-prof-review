@@ -20,13 +20,27 @@ class Reviews extends Component {
             console.log(error);
           });
     }
+    deleteReview = () => {
+        if(window.confirm("Are you sure want to Delete your Review "))
+        {
+            API.delete(`/api/review/${this.props.review_id}`)
+            .then(response => {
+                console.log(response)
+                alert("Your Review was deleted Successfully")
+                window.location.reload(true)
+            }).catch(function (error){
+                console.log(error)
+                alert("Sorry Review Could not be deleted")
+            }) 
+        }
+    }
+
 
     
     
 
 
     render() {
-
         const upvote = ()=>{
 
         }
@@ -51,6 +65,7 @@ class Reviews extends Component {
                         </div>
                         <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.course_id} course_rating = {this.props.course_rating} course_revCount = {this.props.course_revCount}/>
                     </div>
+                    
                     
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>

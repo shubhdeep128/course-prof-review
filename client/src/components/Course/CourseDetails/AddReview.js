@@ -14,6 +14,15 @@ export default class AddReview extends Component {
       console.log(error)
     })
   }
+  componentDidMount(){
+    API.get(`/api/course/${this.props.course_id}`)
+    .then(response => {
+      this.setState({review : response.data})
+      console.log(this.state.review)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
   handleSubmit(e){
     e.preventDefault();
@@ -136,7 +145,7 @@ export default class AddReview extends Component {
             else if(this.props.loginStatus && this.props.current_user_review)
             {
               return(
-                <div className = "has-text-weight-bold has-text-danger">
+                <div>
                   You have already given a review
                 </div>
               )

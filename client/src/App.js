@@ -6,6 +6,7 @@ import OuterContainer from './components/OuterContainer/OuterContainer.js'
 import CourseForm from './components/Admin/CourseCrud/AddForm.js';
 import CourseList from './components/Course/CourseList/CourseList.js';
 import CourseDetails from './components/Course/CourseDetails/CourseDetails.js'
+import RevUpdate from './components/Course/CourseDetails/RevUpdate.js';
 import Admin from './components/Admin/Admin.js'
 import CourseCrud from './components/Admin/CourseCrud/CourseCrud.js';
 import UpdateCourse from './components/Admin/CourseCrud/UpdateForm.js';
@@ -53,7 +54,9 @@ class App extends Component {
             <Route exact path='/admin/courses/update/:courseid' render = {(props) => <UpdateCourse {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
             <Route exact path = '/admin/profs' render = {(props) => <ProfCrud {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
             <Route exact path = '/admin/profs/add' render = {(props) => <AddProf {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
-            <Route exact path = '/admin/profs/update/:profid' render = {(props) => <UpdateProf {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  /> 
+            <Route exact path = '/admin/profs/update/:profid' render = {(props) => <UpdateProf {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
+            <Route exact path = '/course/RevUpdate/:id' render = {(props) => <RevUpdate {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
+            <Route exact path = '/profs/RevUpdate/:id' render = {(props) => <RevUpdate {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  /> 
             <Route exact path = '*' component = {NotFound} status={404} />
           </Switch>
         </BrowserRouter>

@@ -49,6 +49,7 @@ export default class ReviewControl extends Component {
     }
     render() {
         console.log(this.props)
+        var link = '/profs/RevUpdate/' + this.props.review_id;
         const ReviewForm = ()=>{
             if(this.props.loginStatus && this.props.current_user_review === false){
               return(
@@ -97,7 +98,7 @@ export default class ReviewControl extends Component {
             {
                 return(
                     <div>
-                        <button className = "button is-white modal-button editButton" data-target="modal-ter" aria-haspopup="true"><i class="far fa-edit"></i></button>
+                        <a href = {link}><i class="far fa-edit"></i></a>
                         <button className = "button is-white" onClick = {this.deleteReview}><i class="far fa-trash-alt"></i></button>
                     </div>
                 )
