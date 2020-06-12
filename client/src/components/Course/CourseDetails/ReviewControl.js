@@ -2,7 +2,27 @@ import React, { Component } from 'react'
 import API from '../../../utils/API'
 export default class ReviewControl extends Component {
 
-    
+    deleteReview = () => {
+        if(window.confirm("Are you sure want to Delete your Review "))
+        {
+            var newRating = ((this.props.course_rating * this.props.course_revCount) - this.props.review_rating)/( this.props.course_revCount - 1);
+            API.patch(`/api/course/${this.props.course_id}`,{
+              Rating: newRating,
+              revCount: (this.props.course_revCount - 1)
+            })
+
+            API.delete(`/api/review/${this.props.review_id}`)
+            .then(response => {
+                console.log(response)
+                alert("Your Review was deleted Successfully")
+                window.location.reload(true)
+            }).catch(function (error){
+                console.log(error)
+                alert("Sorry Review Could not be deleted")
+            }) 
+        }
+    }
+
     handleSubmit(e){
         e.preventDefault();
         var desc = this.refs.desc.value;
@@ -27,26 +47,7 @@ export default class ReviewControl extends Component {
           });
         
     }
-    deleteReview = () => {
-        if(window.confirm("Are you sure want to Delete your Review "))
-        {
-            var newRating = ((this.props.course_rating * this.props.course_revCount) - this.props.review_rating)/( this.props.course_revCount - 1);
-            API.patch(`/api/course/${this.props.course_id}`,{
-              Rating: newRating,
-              revCount: (this.props.course_revCount - 1)
-            })
-
-            API.delete(`/api/review/${this.props.review_id}`)
-            .then(response => {
-                console.log(response)
-                alert("Your Review was deleted Successfully")
-                window.location.reload(true)
-            }).catch(function (error){
-                console.log(error)
-                alert("Sorry Review Could not be deleted")
-            }) 
-        }
-    }
+    
     render() {
         console.log(this.props)
         var link = '/course/RevUpdate/' + this.props.review_id;

@@ -16,29 +16,6 @@ router.get("/",async (req,res)=>{
         console.log(error);
     };
 });
-router.get("/count",async (req,res)=>{
-    try {
-        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
-            utils.record_activity(req, "vote_count");
-            Vote.countDocuments({},(err,count)=>{
-                if(err){
-                    res.status(500).send({status:false,error:err})
-                }
-                else{
-                    res.status(200).send({"votes":count})
-                }
-            })
-        }
-        else{
-            res.status(401).send("Unauthorized")
-        }	
-
-    } catch (error) {
-        console.log(error)
-        res.json({message: error});
-    }
-    
-});
 
 router.post("/add",async (req,res)=>{
     try {
@@ -63,14 +40,36 @@ router.post("/add",async (req,res)=>{
     }
     
 });
+router.get("/count",async (req,res)=>{
+    try {
+        if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
+            utils.record_activity(req, "vote_count");
+            Vote.countDocuments({},(err,count)=>{
+                if(err){
+                    res.status(500).send({status:false,error:err})
+                }
+                else{
+                    res.status(200).send({"votes":count})
+                }
+            })
+        }
+        else{
+            res.status(401).send("Unauthorized")
+        }	
+
+    } catch (error) {
+        console.log(error)
+        res.json({message: error});
+    }
+    
+});
+
 
 router.get('/:id',async (req,res)=>{
     try {
-
-            const vote = await Vote.findById(req.params.id);
-            res.json({vote: vote}); 
-            console.log(vote);
-
+        const vote = await Vote.findById(req.params.id);
+        res.json({vote: vote}); 
+        console.log(vote);
     } catch (error) {
         res.json({message: error});
     }
