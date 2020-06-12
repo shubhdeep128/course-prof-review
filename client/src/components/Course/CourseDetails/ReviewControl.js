@@ -6,7 +6,7 @@ export default class ReviewControl extends Component {
         if(window.confirm("Are you sure want to Delete your Review "))
         {
             var newRating = ((this.props.course_rating * this.props.course_revCount) - this.props.review_rating)/( this.props.course_revCount - 1);
-            API.patch(`/api/course/${this.props.course_id}`,{
+            API.patch(`/api/${this.props.type}/${this.props.course_id}`,{
               Rating: newRating,
               revCount: (this.props.course_revCount - 1)
             })
@@ -50,7 +50,7 @@ export default class ReviewControl extends Component {
     
     render() {
         console.log(this.props)
-        var link = '/course/RevUpdate/' + this.props.review_id;
+        var link = `/${this.props.type}/RevUpdate/` + this.props.review_id;
         console.log(link)
         
         const UserButtons = () => {

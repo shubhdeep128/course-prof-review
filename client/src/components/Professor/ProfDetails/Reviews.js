@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import ReviewControls from './ReviewControl'
+import ReviewControls from '../../Course/CourseDetails/ReviewControl'
 import './Reviews.css';
 import API from '../../../utils/API'
 
@@ -45,7 +45,8 @@ class Reviews extends Component {
                             {this.props.desc}
                             <span className = "">"</span>
                         </div>
-                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} prof_id = {this.props.prof_id} prof_rating = {this.props.prof_rating} prof_revCount = {this.props.prof_revCount}/>
+                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.prof_id} course_rating = {this.props.prof_rating} course_revCount = {this.props.prof_revCount} type = {"prof"}/>
+                        {/* <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} prof_id = {this.props.prof_id} prof_rating = {this.props.prof_rating} prof_revCount = {this.props.prof_revCount}/> */}
                     </div>
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>

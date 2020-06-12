@@ -7,8 +7,8 @@ class Reviews extends Component {
         error:false,
         loadStatus: true,
         user : [],
-        upvotes: this.props.upvotes,
-        downvotes: this.props.downvotes,
+        upVotes: this.props.upvotes,
+        downVotes: this.props.downvotes,
     }
     componentDidMount(){
         API.get(`/api/user/${this.props.author}`)
@@ -19,13 +19,12 @@ class Reviews extends Component {
             console.log("ERROR LOADING DATA");
             console.log(error);
           });
-    }
-    
+    }  
     render() {
-        const upvote = ()=>{
+        const upvote = () => {
 
         }
-        const downvote = ()=>{
+        const downvote = () => {
 
         }
         console.log(this.props)
@@ -44,16 +43,14 @@ class Reviews extends Component {
                             {this.props.desc}
                             <span className = "">"</span>
                         </div>
-                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.course_id} course_rating = {this.props.course_rating} course_revCount = {this.props.course_revCount}/>
+                        <ReviewControls review_rating = {this.props.rating} review_id = {this.props.review_id} current_user = {this.props.current_user} author = {this.state.user} course_id = {this.props.course_id} course_rating = {this.props.course_rating} course_revCount = {this.props.course_revCount} type = {"course"} />
                     </div>
-                    
-                    
                     <div className = "column has-text-centered">
-                        <span className = "has-text-weight-bold">{this.state.upvotes}</span><br/>
+                        <span className = "has-text-weight-bold">{this.state.upVotes}</span><br/>
                         <button className = "button is-white" onClick = {upvote}><i className="far fa-thumbs-up icon is-large"></i></button><br/>
                         <br/>
                         <button className = "button is-white" onClick = {downvote}><i className="far fa-thumbs-down icon is-large"></i></button><br/>
-                        <span className = "has-text-weight-bold">{this.state.downvotes}</span>
+                        <span className = "has-text-weight-bold">{this.state.downVotes}</span>
                     </div>
                 </div>
             </div>
