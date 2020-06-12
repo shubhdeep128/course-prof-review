@@ -1,0 +1,45 @@
+require('dotenv/config')
+
+describe('Add and Delete Course Admin', () => {
+
+    it('Testing Course page', ()=>{
+        process.env['NODE_ENV'] = "test"
+        cy.log(process.env.NODE_ENV)
+
+        cy.visit('http://localhost:3000/admin/courses/add')
+        cy.contains('Add Course')
+        // cy.get('#course-details')
+        //     .click()
+        // cy.get('#add-review')
+        //     .click({force : true})
+        cy.get('#name')
+            .type('Cypress Automated Course', {force: true})
+        cy.get('#desc')
+            .type('This is an automated description generated in a Cypress script')
+        cy.get('#tag')
+            .type('TestTag1',{force: true})
+        cy.get('#add-tag')
+            .click()
+        cy.get('#tag')
+            .type('TestTag2',{force: true})
+        cy.get('#add-tag')
+            .click()
+        cy.get('#tag')
+            .type('TestTag3',{force: true})
+        cy.get('#add-tag')
+            .click()
+        cy.get('#grading')
+            .type("7",{force:true})   
+        cy.get('#rating')
+            .type("3.5") 
+        cy.get('#add-btn')
+            .click()
+        cy.visit('http://localhost:3000/admin/courses')
+        cy.contains('Cypress Automated Course')
+        cy.get('#Cypress-delete')
+            .click()
+        cy.reload();
+        cy.contains('Cypress Automated Course').should('not.exist')
+  
+    })
+})

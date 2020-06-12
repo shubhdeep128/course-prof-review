@@ -64,7 +64,7 @@ module.exports = app => {
       // utils.record_activity(req, "user_get");
       const user = await User.findById(req.params.id);
       res.json({user:user});
-      console.log(user);
+      // console.log(user);
     } catch (error) {
       res.json({message: error})
       console.log(error);
@@ -79,6 +79,7 @@ module.exports = app => {
     }
     else if(process.env.NODE_ENV === 'test'){
       const testUser = await User.findById(process.env.TEST_USER)
+      // console.log(testUser)
       res.send({user: testUser,loggedIn: true})
     }
     else{

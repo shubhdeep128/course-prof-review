@@ -34,8 +34,8 @@ class EachCourse extends Component {
                         </div>
                     </div>
                     <footer className="card-footer">
-                        <a href={this.props.course_id} className="button is-white has-text-link is-large card-footer-item has-text-weight-semibold">Update</a>
-                        <button onClick = {this.props.onClick} className="button is-white is-large card-footer-item has-text-danger has-text-weight-semibold">Delete</button>
+                        <a href={this.props.course_id} className="button is-white has-text-link is-large card-footer-item has-text-weight-semibold" id = {this.props.name.split(" ")[0] +"-update"}>Update</a>
+                        <button onClick = {this.props.onClick} className="button is-white is-large card-footer-item has-text-danger has-text-weight-semibold" id = {this.props.name.split(" ")[0] + "-delete"}>Delete</button>
                     </footer>
                     </div>
                 </div>

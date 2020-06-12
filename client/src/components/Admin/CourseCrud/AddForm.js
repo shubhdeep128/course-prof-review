@@ -127,7 +127,7 @@ class CourseForm extends Component {
                     <div className = "field">
                       <label className = "label">Name</label>
                       <div className="control">
-                      <input className = "input" placeholder = "Name" ref = "name" required/>
+                      <input className = "input" placeholder = "Name" ref = "name" id = "name" required/>
                       </div>
                     </div>
 
@@ -135,18 +135,18 @@ class CourseForm extends Component {
                     <div className = "field">
                       <label className = "label">Description</label>
                       <div className = "control">
-                        <textarea className = "textarea" placeholder = "Description" ref= "desc" required/>
+                        <textarea className = "textarea" placeholder = "Description" ref= "desc" id = "desc" required/>
                       </div>
                     </div>
 
                     <div className = "field">
                       <label className = "label">Relevant Tags</label>
                       <div className = "control">
-                        <input className = "input" type = "text" placeholder = "Add Relevant Tags" ref = "tags"/>
+                        <input className = "input" type = "text" placeholder = "Add Relevant Tags" ref = "tags" id = "tag"/>
                       </div>
                     </div>
 
-                    <button className = "button is-link is-rounded" onClick = {this.addTag}>Add Tags</button>
+                    <button className = "button is-link is-rounded" onClick = {this.addTag} id = "add-tag">Add Tags</button>
                     <br/><br/>
                     <label className = "label"> Existing Tags:{tags} </label>
 
@@ -154,7 +154,7 @@ class CourseForm extends Component {
                       <label className="label">Current Professor</label>
                       <div className="control">
                         <div className="select">
-                          <select ref = "prof">
+                          <select ref = "prof" id = "curr_prof">
                             {Professors}
                           </select>
                         </div>
@@ -164,18 +164,18 @@ class CourseForm extends Component {
                     <div className = "field">
                       <label className = "label">Average Grading</label>
                       <div className = "control">
-                        <input type = "text" className = "input" placeholder = "Average Grading" ref = "grading" required/>
+                        <input type = "text" className = "input" placeholder = "Average Grading" ref = "grading" id = "grading" required/>
                       </div>
                     </div>
 
                     <div className = "field">
                     <label className = "label">Rating</label>
                       <div className = "control">
-                        <input type = "number" className = "input" placeholder = "Rating" ref = "rating" required/>
+                        <input type = "number" className = "input" placeholder = "Rating" ref = "rating" id = "rating" required/>
                       </div>
                     </div>
                     <br/><br/>
-                    <div className = "form-btn"><input onClick = {this.handleSubmit} className = "button is-large is-success is-rounded" type = "submit" value = "Add" /></div>
+                    <div className = "form-btn"><input onClick = {this.handleSubmit} className = "button is-large is-success is-rounded" type = "submit" value = "Add" id = "add-btn" /></div>
                 </form>
                 
             </div>

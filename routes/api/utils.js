@@ -5,7 +5,7 @@ module.exports = {
 	{
 		// record that a user has accessed an endpoint right now. 
 		// make sure to add a Privacy Policy to your app :p 
-		console.log(req.user, req.device)
+		// console.log(req.user, req.device)
 		var user = (req.user !== undefined)?req.user.email:"Not Logged In";
 		const device_type = (req.device !== undefined)?req.device.type:"Endpoint";
 		var record = {email: user, endpoint: api_endpoint, device: device_type};
