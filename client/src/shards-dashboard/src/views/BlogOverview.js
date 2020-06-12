@@ -5,7 +5,6 @@ import PageTitle from "./../components/common/PageTitle";
 import SmallStats from "./../components/common/SmallStats";
 import UsersOverview from "./../components/blog/UsersOverview";
 import UsersByDevice from "./../components/blog/UsersByDevice";
-import API from "../../../utils/API";
 import axios from 'axios';
 import Loading from '../../../components/Loading'
 class BlogOverview extends Component {

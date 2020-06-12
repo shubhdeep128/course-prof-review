@@ -90,8 +90,12 @@ class RevUpdate extends Component
         {
             if(this.state.response.Author !== this.props.current_user._id)
             {
+                console.log(this.state.response.Author, this.props.current_user._id)
                 return(
-                    <Redirect to = '/'/>
+                    <div className = "container has-text-centered">
+                        <p className ="title has-text-danger is-size-1">40</p>
+                        <p className ="subtitle">Forbidden</p>
+                    </div>
                 )
             }
             else
