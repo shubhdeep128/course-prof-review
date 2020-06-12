@@ -20,26 +20,7 @@ class Reviews extends Component {
             console.log(error);
           });
     }
-    deleteReview = () => {
-        if(window.confirm("Are you sure want to Delete your Review "))
-        {
-            API.delete(`/api/review/${this.props.review_id}`)
-            .then(response => {
-                console.log(response)
-                alert("Your Review was deleted Successfully")
-                window.location.reload(true)
-            }).catch(function (error){
-                console.log(error)
-                alert("Sorry Review Could not be deleted")
-            }) 
-        }
-    }
-
-
     
-    
-
-
     render() {
         const upvote = ()=>{
 
