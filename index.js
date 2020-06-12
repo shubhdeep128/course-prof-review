@@ -64,6 +64,9 @@ app.use('/api/prof',profRoutes);
 const reviewRoutes = require("./routes/api/review");
 app.use('/api/review',reviewRoutes);
 
+const voteRoutes = require("./routes/api/vote");
+app.use('/api/vote',voteRoutes);
+
 const statRoutes = require("./routes/api/stats");
 app.use('/api/stats',statRoutes);
 
