@@ -5,7 +5,7 @@ const utils = require('./utils')
 require('dotenv/config');
 
 
-router = express.Router();
+const router = express.Router();
 
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
@@ -22,7 +22,7 @@ router.get("/",async (req,res)=>{
     catch (error) {
         res.json({message: error})
         console.log(error);
-    };
+    }
 });
 
 router.get("/count",async (req,res)=>{
@@ -65,7 +65,7 @@ router.post("/add",async (req,res)=>{
             });
             const savedProf = await prof_object.save();
             console.log("New Professor added successfully");
-            res.json({status:true, newProf: prof_object});
+            res.json({status:true, newProf: prof_object, savedProf});
         }	
         else{
             res.status(401).send("Unauthorized")
@@ -100,7 +100,7 @@ router.patch("/:id",async (req,res)=>{
             const updatedProf = await Professor.updateOne({_id: req.params.id},  {$set: req.body});
             const prof = await Professor.findById(req.params.id);
             console.log("Professor updated successfully");
-            res.json(prof);
+            res.json({prof,updatedProf});
         }
         else{
             res.status(401).send("Unauthorized");

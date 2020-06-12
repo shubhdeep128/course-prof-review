@@ -1,13 +1,12 @@
 var Course = require('../../models/Course')
 var Review = require('../../models/Review')
 var Professor = require('../../models/Professor')
-const passport = require("passport");
 const express = require("express");
 const utils = require('./utils')
 
 require('dotenv/config');
 
-router = express.Router();
+const router = express.Router();
 
 router.get("/",async (req,res)=>{
     /// get a list of all courses in the database
@@ -24,7 +23,7 @@ router.get("/",async (req,res)=>{
     catch (error) {
         res.json({message: error})
         console.log(error);
-    };
+    }
 });
 router.get("/count",async (req,res)=>{
     try {

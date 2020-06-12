@@ -1,12 +1,11 @@
 var Review = require('../../models/Review')
 var Vote = require('../../models/Vote');
-const passport = require("passport");
 const express = require("express");
 const utils = require('./utils')
 
 require('dotenv/config');
 
-router = express.Router();
+const router = express.Router();
 
 router.get("/",async (req,res)=>{
     /// get a list of all reviews in the database
@@ -23,7 +22,7 @@ router.get("/",async (req,res)=>{
     catch (error) {
         res.json({message: error})
         console.log(error);
-    };
+    }
 });
 
 router.get("/count",async (req,res)=>{
@@ -61,7 +60,7 @@ router.get("/votes/:id", async(req,res) => {
     catch (error) {
         res.json({message: error})
         console.log(error);
-    };
+    }
 })
 
 router.post("/add",async (req,res)=>{
@@ -80,7 +79,7 @@ router.post("/add",async (req,res)=>{
             });
             const savedReview = await review_object.save();
             console.log("New Review added successfully");
-            res.json({status:true, newReview: review_object});
+            res.json({status:true, newReview: review_object, savedReview});
         }
         else{
             res.status(401).send("Unauthorized")

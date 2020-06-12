@@ -3,7 +3,7 @@ const express = require("express");
 const utils = require('./utils')
 require('dotenv/config');
 
-router = express.Router();
+const router = express.Router();
 
 router.get("/",async (req,res)=>{
     try {
@@ -14,7 +14,7 @@ router.get("/",async (req,res)=>{
     catch (error) {
         res.json({message: error})
         console.log(error);
-    };
+    }
 });
 
 router.post("/add",async (req,res)=>{
@@ -80,9 +80,8 @@ router.patch("/:id",async (req,res)=>{
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             utils.record_activity(req, "vote_update");
             const updatedVote = await Vote.updateOne({_id: req.params.id},  {$set: req.body});
-            const vote = await Vote.findById(req.params.id);
             console.log("Vote updated successfully");
-            res.json(vote);
+            res.json(updatedVote);
         }
         else{
             res.status(401).send("Unauthorized");
