@@ -6,11 +6,35 @@ var {PageView} = require("../../models/PageView.js");
 var utils = require("./utils.js");
 const express = require("express");
 router = express.Router();
+const pipelineHelper = (old_time,now) => {
+	return(
+		[
+			{	
+				"$match": {
+					"created_at": {
+						"$gte": old_time,
+						"$lte": now
+					}    		
+				}
+			},
+			{
+				"$group": {
+					"_id": {
+						"year":  { "$year": "$created_at"  },
+						"month": { "$month": "$created_at" },
+						"day":   { "$dayOfMonth": "$created_at" }
+					},
+					"count": { "$sum": 1 }
+				}
+			}
+		]
+	)
+}
 
+	router.get("/", (req,res)=>{
+		res.status(200).send({message: "State surveillance metrics exposed in a public API."})
+	});
 
-  router.get("/", (req,res)=>{
-      res.status(200).send({message: "State surveillance metrics exposed in a public API."})
-  });
 
   router.get("/course", (req,res)=>{
 	var days = req.query.days;
@@ -20,27 +44,7 @@ router = express.Router();
 	var now = new Date();
 	var old_time = new Date(now.getTime()  - (days * 24 * 60 * 60 * 1000));
 	console.log(now,old_time)
-	var pipeline = [
-	    {	
-	    	"$match": {
-				"created_at": {
-					"$gte": old_time,
-					"$lte": now
-				}    		
-	    	}
-	    },
-	    {
-	        "$group": {
-	            "_id": {
-	            	"year":  { "$year": "$created_at"  },
-	            	"month": { "$month": "$created_at" },
-	            	"day":   { "$dayOfMonth": "$created_at" }
-	            },
-	            "count": { "$sum": 1 }
-	        }
-	    }
-	];
-	Course.aggregate(pipeline, function (err, result){
+	Course.aggregate(pipelineHelper(old_time,now), function (err, result){
 	    if (err) res.status(500).send({message:"Internal server error."});
 		result.sort(utils.compare_dates);
 		var daywise_data = [];
@@ -60,27 +64,7 @@ router = express.Router();
 	var now = new Date();
 	var old_time = new Date(now.getTime()  - (days * 24 * 60 * 60 * 1000));
 	console.log(now,old_time)
-	var pipeline = [
-	    {	
-	    	"$match": {
-				"created_at": {
-					"$gte": old_time,
-					"$lte": now
-				}    		
-	    	}
-	    },
-	    {
-	        "$group": {
-	            "_id": {
-	            	"year":  { "$year": "$created_at"  },
-	            	"month": { "$month": "$created_at" },
-	            	"day":   { "$dayOfMonth": "$created_at" }
-	            },
-	            "count": { "$sum": 1 }
-	        }
-	    }
-	];
-	Prof.aggregate(pipeline, function (err, result){
+	Prof.aggregate(pipelineHelper(old_time,now), function (err, result){
 	    if (err) res.status(500).send({message:"Internal server error."});
 		result.sort(utils.compare_dates);
 		var daywise_data = [];
@@ -98,27 +82,8 @@ router = express.Router();
 	var now = new Date();
 	var old_time = new Date(now.getTime()  - (days * 24 * 60 * 60 * 1000));
 	console.log(now,old_time)
-	var pipeline = [
-	    {	
-	    	"$match": {
-				"created_at": {
-					"$gte": old_time,
-					"$lte": now
-				}    		
-	    	}
-	    },
-	    {
-	        "$group": {
-	            "_id": {
-	            	"year":  { "$year": "$created_at"  },
-	            	"month": { "$month": "$created_at" },
-	            	"day":   { "$dayOfMonth": "$created_at" }
-	            },
-	            "count": { "$sum": 1 }
-	        }
-	    }
-	];
-	Review.aggregate(pipeline, function (err, result){
+
+	Review.aggregate(pipelineHelper(old_time,now), function (err, result){
 	    if (err) res.status(500).send({message:"Internal server error."});
 		result.sort(utils.compare_dates);
 		var daywise_data = [];
@@ -135,27 +100,7 @@ router = express.Router();
 	console.log("[STATS: Users] Returning last", days, "days of data");
 	var now = new Date();
 	var old_time = new Date(now.getTime()  - (days * 24 * 60 * 60 * 1000));
-	var pipeline = [
-	    {	
-	    	"$match": {
-				"created_at": {
-					"$gte": old_time,
-					"$lte": now
-				}    		
-	    	}
-	    },
-	    {
-	        "$group": {
-	            "_id": {
-	            	"year":  { "$year": "$created_at"  },
-	            	"month": { "$month": "$created_at" },
-	            	"day":   { "$dayOfMonth": "$created_at" }
-	            },
-	            "count": { "$sum": 1 }
-	        }
-	    }
-	];
-	User.aggregate(pipeline, function (err, result){
+	User.aggregate(pipelineHelper(old_time,now), function (err, result){
 	    if (err) res.status(500).send({message:"Internal server error."});
 		result.sort(utils.compare_dates);
 		var daywise_data = [];
@@ -169,7 +114,6 @@ router = express.Router();
   });
 
   router.get("/visits", (req,res)=>{
-	// how many movies were added over the last few days?
 	var days = req.query.days;
 	console.log(days);
 	if(days == undefined) days = 6;
@@ -177,27 +121,7 @@ router = express.Router();
 	var now = new Date();
 	var old_time = new Date(now.getTime()  - (days * 24 * 60 * 60 * 1000));
 	console.log(now,old_time)
-	var pipeline = [
-	    {	
-	    	"$match": {
-				"created_at": {
-					"$gte": old_time,
-					"$lte": now
-				}    		
-	    	}
-	    },
-	    {
-	        "$group": {
-	            "_id": {
-	            	"year":  { "$year": "$created_at"  },
-	            	"month": { "$month": "$created_at" },
-	            	"day":   { "$dayOfMonth": "$created_at" }
-	            },
-	            "count": { "$sum": 1 }
-	        }
-	    }
-	];
-	PageView.aggregate(pipeline, function (err, result){
+	PageView.aggregate(pipelineHelper(old_time,now), function (err, result){
 	    if (err) res.status(500).send({message:"Internal server error."});
 		result.sort(utils.compare_dates);
 		var daywise_data = [];
@@ -215,10 +139,7 @@ router = express.Router();
 
   router.get("/views/total", (req,res)=>{
   	var request_type = req.query.type; 
-  	/*
-  	 * type == "device" -> return total pageviews grouped by device
-  	 * type == "endpoint" -> return total pageviews grouped by endpoint
-	 */
+
 	if(!(request_type == "device" || request_type == "endpoint")){
 		request_type = "device"; // default
 	}

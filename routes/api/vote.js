@@ -1,23 +1,15 @@
 var Vote = require('../../models/Vote')
-const passport = require("passport");
 const express = require("express");
 const utils = require('./utils')
-
 require('dotenv/config');
 
 router = express.Router();
 
 router.get("/",async (req,res)=>{
-    /// get a list of all votes in the database
     try {
-        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             utils.record_activity(req, "vote_all");
             const votes = await Vote.find()
             res.json(votes);
-            // } 
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
     }
     catch (error) {
         res.json({message: error})
@@ -26,8 +18,6 @@ router.get("/",async (req,res)=>{
 });
 router.get("/count",async (req,res)=>{
     try {
-        
-
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             utils.record_activity(req, "vote_count");
             Vote.countDocuments({},(err,count)=>{
@@ -38,7 +28,6 @@ router.get("/count",async (req,res)=>{
                     res.status(200).send({"votes":count})
                 }
             })
-
         }
         else{
             res.status(401).send("Unauthorized")
@@ -53,8 +42,6 @@ router.get("/count",async (req,res)=>{
 
 router.post("/add",async (req,res)=>{
     try {
-        
-
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             utils.record_activity(req, "vote_add");
             const vote_object = new Vote({
@@ -65,7 +52,6 @@ router.post("/add",async (req,res)=>{
             const savedVote = await vote_object.save();
             console.log("New Vote added successfully",savedVote);
             res.json({status:true, newVote: vote_object});
-
         }
         else{
             res.status(401).send("Unauthorized")
@@ -81,15 +67,9 @@ router.post("/add",async (req,res)=>{
 router.get('/:id',async (req,res)=>{
     try {
 
-        // if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             const vote = await Vote.findById(req.params.id);
             res.json({vote: vote}); 
             console.log(vote);
-
-        // }
-        // else{
-        //     res.status(401).send("Unauthorized")
-        // }
 
     } catch (error) {
         res.json({message: error});
@@ -97,7 +77,6 @@ router.get('/:id',async (req,res)=>{
 });
 
 router.patch("/:id",async (req,res)=>{
-    /// update the attributes of a vote in the database 
     try {
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
             utils.record_activity(req, "vote_update");
