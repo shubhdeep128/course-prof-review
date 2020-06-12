@@ -36,7 +36,7 @@ module.exports = app => {
         
 
         if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
-            utils.record_activity(req.user.email, "user_count", req.device.type);
+            utils.record_activity(req, "user_count");
             User.countDocuments({},(err,count)=>{
                 if(err){
                     res.status(500).send({status:false,error:err})
@@ -61,7 +61,7 @@ module.exports = app => {
 
   app.get("/api/user/:id",async (req,res)=>{
     try {
-      utils.record_activity(req.user.email, "user_get", req.device.type);
+      // utils.record_activity(req, "user_get");
       const user = await User.findById(req.params.id);
       res.json({user:user});
       console.log(user);
@@ -72,10 +72,14 @@ module.exports = app => {
   });
 
   
-  app.get("/api/current_user", (req, res) => {
-    if(req.isAuthenticated() || process.env.NODE_ENV == "test"){
-      utils.record_activity(req.user.email, "current_user", req.device.type);
+  app.get("/api/current_user", async (req, res) => {
+    if(req.isAuthenticated()){
+      // utils.record_activity(req, "current_user");
       res.send({user:req.user,loggedIn:true});
+    }
+    else if(process.env.NODE_ENV === 'test'){
+      const testUser = await User.findById(process.env.TEST_USER)
+      res.send({user: testUser,loggedIn: true})
     }
     else{
       res.send({user:{Roles: "Unauthorized"},loggedIn:false})

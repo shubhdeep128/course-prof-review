@@ -76,7 +76,7 @@ class CourseDetails extends Component {
             });
             for(var i=0; i<reviews.length;i++)
             {
-              if(reviews[i].Author === this.props.current_user._id && current_user_review === false)
+              if(reviews[i].Author === this.props.current_user._id && current_user_review === false && this.props.current_user.name !== "Test User" )
               {
                 current_user_review = true
               }

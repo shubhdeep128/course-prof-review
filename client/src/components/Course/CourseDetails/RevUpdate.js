@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import { Redirect } from 'react-router-dom';
 import API from '../../../utils/API';
 import Loading from 'react-loading';
-
+import './RevUpdate.css'
 
 class RevUpdate extends Component 
 {
@@ -45,18 +45,20 @@ class RevUpdate extends Component
           console.log(error);
       })
     }
+
     componentDidMount()
-{
-    const { match: { params } } = this.props;
-    API.get(`/api/review/${params.id}`)
-    .then(response => {
-        console.log(response.data);
-        this.setState({response : response.data,loadStatus : true})
-    })
-    .catch(error => {
-        console.log(error);
-    })
-}
+    {
+        const { match: { params } } = this.props;
+        API.get(`/api/review/${params.id}`)
+        .then(response => {
+            console.log(response.data);
+            this.setState({response : response.data,loadStatus : true})
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+    
     render(){
         this.handleSubmit = this.handleSubmit.bind(this);
         var Rating  = [1,2,3,4,5];
@@ -95,17 +97,34 @@ class RevUpdate extends Component
             else
             {
                 return(
-                    <div>
+                    <div className = "form">
+                                          <span className = "is-size-1 has-text-weight-bold has-text-black">Edit your Review</span><br/><br/>
                         <form>
-                        <div class="control">
-                        <textarea class="textarea is-primary" defaultValue = {this.state.response.Description} ref="review"></textarea>
-                        </div>
-                        <div class="select">
-                        <select ref = "rating" >
-                        {Rating}
-                        </select>
-                        </div>
-                        <div className = "form-btn"><input onClick = {this.handleSubmit} className = "button is-large is-success is-rounded" type = "submit" value = "Update" /></div>
+                            {/* <div className="control">
+                                <textarea class="textarea is-primary" defaultValue = {this.state.response.Description} ref="review"></textarea>
+                            </div> */}
+                            <div className="field">
+                                <label className="label">Review Body</label>
+                                <div className="control">
+                                    <textarea className="textarea" placeholder="Review body" defaultValue = {this.state.response.Description} ref="review"></textarea>
+                                </div>
+                            </div>
+                            {/* <div className="select">
+                                <select ref = "rating" >
+                                    {Rating}
+                                </select>
+                            </div> */}
+                             <div className="field">
+                                <label className="label">Overall Rating</label>
+                                <div className="control">
+                                    <div className="select" >
+                                    <select ref = "rating">
+                                        {Rating}
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className = "form-btn"><input onClick = {this.handleSubmit} className = "button is-large is-success is-rounded" type = "submit" value = "Update" /></div>
                         </form>
                     </div>
                 )

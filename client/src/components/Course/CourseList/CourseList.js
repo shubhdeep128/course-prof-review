@@ -27,7 +27,7 @@ class CourseList extends Component {
           this.setState({error:false, courses:response.data, loadStatus:true});
           console.log(response.data);
         }).catch(function (error) {
-          console.log("ERROR LOADING DATA");
+          console.log("ERROR LOADING DATA",error);
           console.log(error);
           window.location = '/'
         });

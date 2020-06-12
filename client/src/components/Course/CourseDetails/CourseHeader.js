@@ -64,7 +64,7 @@ class CourseHeader extends Component {
                 </nav>
                 </div>
 
-                <div className = "course-description has-text-justified">
+                <div className = "course-description has-text-justified" id = "desc">
                     <span className = "has-text-weight-semibold">Details:</span>
                     {course.Description}
                 </div>

@@ -121,14 +121,14 @@ export default class AddReview extends Component {
                     <div className="field">
                       <label className="label">Write your Review</label>
                       <div className="control">
-                        <textarea className="textarea" placeholder="Review" ref = "desc"></textarea>
+                        <textarea className="textarea" placeholder="Review" ref = "desc" id = "revbody"></textarea>
                       </div>
                     </div>
                     <div className="field">
                       <label className="label">Overall Rating</label>
                       <div className="control">
                         <div className="select" >
-                          <select ref = "rating">
+                          <select ref = "rating" id = "rating">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -158,7 +158,7 @@ export default class AddReview extends Component {
           }
         return (
             <div className = "add-review">
-                <button className="button is-rounded is-medium modal-button" data-target="modal-ter" aria-haspopup="true">Add a Review</button>
+                <button className="button is-rounded is-medium modal-button" id="add-review" data-target="modal-ter" aria-haspopup="true">Add a Review</button>
                 <div className="modal" id = "modal-ter">
                 <div className="modal-background"></div>
                 <div className="modal-card">
@@ -170,7 +170,7 @@ export default class AddReview extends Component {
                     {ReviewForm()}
                     </section>
                     <footer className="modal-card-foot">
-                    {(this.props.loginStatus && this.props.current_user_review)?(<div></div>):(<button onClick = {this.handleSubmit} type = "submit" className="button is-rounded is-black">Submit Review</button>)}
+                    {(this.props.loginStatus && this.props.current_user_review)?(<div></div>):(<button onClick = {this.handleSubmit} type = "submit" className="button is-rounded is-black" id = "submit-review">Submit Review</button>)}
                     <button className="button is-rounded is-danger">Cancel</button>
                     </footer>
                 </div>

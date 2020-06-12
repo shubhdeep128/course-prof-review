@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+.form{
+  font-family: Quicksand, sans-serif;
+  padding: 3vw;
+}
+.form-btn{
+  text-align: center;
+}

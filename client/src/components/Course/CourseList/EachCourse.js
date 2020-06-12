@@ -25,7 +25,7 @@ class EachCourse extends Component {
           <div className = "level-right">
             <div className = "level-item has-text-weight-bold">
               <span className = "icon is-large">
-                <a className = "has-text-black"href = {this.props.course_id}>
+                <a className = "has-text-black"href = {this.props.course_id} id = "course-details">
                   <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </span>

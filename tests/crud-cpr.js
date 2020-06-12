@@ -6,7 +6,8 @@ var should = chai.should();
 chai.use(chaiHttp);
 require('dotenv/config');
 
-process.env['NODE_ENV'] = "Production"
+process.env['NODE_ENV'] = ""
+console.log(process.env.NODE_ENV)
 /// Testing if arithmetic is true. Spoiler alert: it is
 describe('Basic Math', function() {
   describe('#indexOf()', function() {
@@ -22,28 +23,6 @@ describe('Basic Math', function() {
 });
 
 describe('Test API', function(){
-	describe('Endpoint /api', function(){
-		it('returns correct status', function(done) {
-		  chai.request(server)
-		    .get('/api')
-		    .end(function(err, res){
-		      res.should.have.status(200);
-		      res.should.be.an('object');
-		      done();
-		    });
-		});
-
-		it('welcome message', function(done) {
-		  chai.request(server)
-		    .get('/api')
-		    .end(function(err, res){
-		      res.body.should.have.property('message');
-		      res.body.message.should.equal("Welcome to the course-prof API");
-		      done();
-		    });
-		});
-	});
-
 	describe('Test intrusion: access protected endpoints with no login', function(){
 		// try accessing api endpoints without logging in
 		it('/api/course/add returns unauthorized', function(done) {

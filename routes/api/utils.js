@@ -1,17 +1,20 @@
 var {PageView} = require("../../models/PageView.js");
 
 module.exports = {
-	record_activity: function (user, api_endpoint, device_type)
+	record_activity: function (req, api_endpoint)
 	{
 		// record that a user has accessed an endpoint right now. 
 		// make sure to add a Privacy Policy to your app :p 
+		console.log(req.user, req.device)
+		var user = (req.user !== undefined)?req.user.email:"Not Logged In";
+		const device_type = (req.device !== undefined)?req.device.type:"Endpoint";
 		var record = {email: user, endpoint: api_endpoint, device: device_type};
 		PageView.create(record,(err, obj) => {
 			if (err) {
 				throw err;
 			} 
 			else {
-				console.log("State surveillance successful. One step closer to 1984.");
+				console.log(`Surveillance successful. ${api_endpoint}`);
 			}
 		});
 	},

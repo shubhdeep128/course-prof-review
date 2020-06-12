@@ -18,6 +18,7 @@ import ProfDetails from './components/Professor/ProfDetails/ProfDetails.js';
 import NotFound from './components/NotFound.js'
 import API from './utils/API'
 import BlogOverview from './shards-dashboard/src/views/BlogOverview'
+import Test from './components/Test'
 class App extends Component {
   state = {
     current_user: [],
@@ -57,6 +58,7 @@ class App extends Component {
             <Route exact path = '/admin/profs/update/:profid' render = {(props) => <UpdateProf {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
             <Route exact path = '/course/RevUpdate/:id' render = {(props) => <RevUpdate {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  />
             <Route exact path = '/profs/RevUpdate/:id' render = {(props) => <RevUpdate {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus}/>}  /> 
+            <Route exact path = '/test' render = {(props) => <Test {...props} current_user = {this.state.current_user} loginStatus = {this.state.loginStatus} />} />
             <Route exact path = '*' component = {NotFound} status={404} />
           </Switch>
         </BrowserRouter>
