@@ -2,31 +2,173 @@ import React,{Component} from 'react';
 import ReviewControls from './ReviewControl'
 import './Reviews.css';
 import API from '../../../utils/API'
+import axios from 'axios'
 class Reviews extends Component {
     state = {
         error:false,
-        loadStatus: true,
+        loadStatus: false,
         user : [],
-        upVotes: this.props.upvotes,
-        downVotes: this.props.downvotes,
+        upVoteisPressed : false,
+        downVoteisPressed : false,
+        voteArr : [],
+        upVotes: 0,
+        downVotes: 0,
+        voteid : '',
     }
+    
     componentDidMount(){
-        API.get(`/api/user/${this.props.author}`)
-        .then(response => {
-            this.setState({error:false, user:response.data.user, loadStatus:true});
-            console.log(response);
-        }).catch(function (error) {
-            console.log("ERROR LOADING DATA");
-            console.log(error);
-          });
+    axios.all([
+        axios.get(`/api/user/${this.props.author}`),
+        axios.get(`/api/review/votes/${this.props.review_id}`)
+    ])
+    .then(responseArr => {
+        this.setState({error:false, user:responseArr[0].data.user,voteArr : responseArr[1].data, loadStatus:true})
+        console.log(responseArr[0].data)
+        console.log(this.state.voteArr)
+        for(var i=0;i<this.state.voteArr.length;i++)
+       {
+          if(this.state.voteArr[i].Author === this.state.user._id && this.state.voteArr[i].Value === 1)
+          {
+              var id = this.state.voteArr[i]._id
+              this.setState({upVoteisPressed : true,voteid : id})
+          }
+          else if(this.state.voteArr[i].Author === this.state.user._id && this.state.voteArr[i].Value === -1)
+          {
+              var id = this.state.voteArr[i]._id
+            this.setState({downVoteisPressed : true,voteid : id})
+          }
+          if(this.state.voteArr[i].Value ===1)
+          {
+              this.setState({upVotes : this.state.upVotes +1})
+          }
+          else
+          {
+              this.setState({downVotes : this.state.downVotes - 1})
+          }
+        }
+        console.log(this.state.voteid);
+    }).catch(function (error) {
+        console.log("ERROR LOADING DATA");
+        console.log(error);
+      })
+      console.log("Hello")
+      var voteArr = this.state.voteArr
+      
+    }
+    upvote = () => {
+        if(this.state.upVoteisPressed)
+        {
+            API.delete(`/api/vote/${this.state.voteid}`).then((response) => {
+                console.log(response.data)
+                this.setState({upVoteisPressed : false, voteid : '',upVotes : this.state.upVotes -1});
+            })
+        }
+        else
+        {
+            if(this.state.downVoteisPressed)
+            {
+             API.patch(`/api/vote/${this.state.voteid}`,{
+                Parent : this.props.review_id,
+                Value : 1,
+                Author : this.state.user._id,
+                timestamps : {
+                    createdAt : Date.now(),
+                    upDatedAt : Date.now()
+                }
+             }).then((response) => {
+                 console.log(response)
+                 this.setState({upVoteisPressed : true,downVoteisPressed : false,upVotes : this.state.upVotes+1,downVotes : this.state.downVotes+1})
+             })
+            }
+            else
+            {
+               API.post('/api/vote/add',{
+                   Parent : this.props.review_id,
+                   Value : 1,
+                   Author : this.state.user._id,
+                   timestamps : {
+                       createdAt : Date.now(),
+                       upDatedAt : Date.now()
+                   }
+               }).then(
+                   response => {
+                       console.log(response.data.newVote._id)
+                       this.setState({upVoteisPressed : true,voteid : response.data.newVote._id,upVotes : this.state.upVotes+1})
+                   }
+               ).catch(error => {
+                   console.log(error)
+               })
+
+            }
+        }
     }  
+    downvote = () => {
+        if(this.state.downVoteisPressed)
+        {
+            API.delete(`/api/vote/${this.state.voteid}`).then((response) => {
+                console.log(response.data)
+                this.setState({downVoteisPressed : false, voteid : '',downVotes : this.state.downVotes+1});
+            })
+        }
+        else
+        {
+            if(this.state.upVoteisPressed)
+            {
+                API.patch(`/api/vote/${this.state.voteid}`,{
+                    Parent : this.props.review_id,
+                    Value : -1,
+                    Author : this.state.user._id,
+                    timestamps : {
+                        createdAt : Date.now(),
+                        upDatedAt : Date.now()
+                    }
+                 }).then((response) => {
+                     console.log(response)
+                     this.setState({upVoteisPressed : false,downVoteisPressed : true,upVotes : this.state.upVotes-1,downVotes : this.state.downVotes-1})
+                 })
+            }
+            else
+            {
+                API.post('/api/vote/add',{
+                    Parent : this.props.review_id,
+                    Value : -1,
+                    Author : this.state.user._id,
+                    timestamps : {
+                        createdAt : Date.now(),
+                        upDatedAt : Date.now()
+                    }
+                }).then(
+                    response => {
+                        console.log(response.data.newVote._id)
+                        this.setState({downVoteisPressed : true, voteid : response.data.newVote._id,downVotes : this.state.downVotes-1})
+                    }
+                ).catch(error => {
+                    console.log(error)
+                })
+ 
+            }
+        }
+    }
     render() {
-        const upvote = () => {
-
+        var upColor = "white";
+        var downColor = "white";
+        if(this.state.upVoteisPressed)
+        {
+            upColor = "blue";
         }
-        const downvote = () => {
-
+        else
+        {
+            upColor = 'white';
         }
+        if(this.state.downVoteisPressed)
+        {
+            downColor = "blue";
+        }
+        else
+        {
+            downColor = 'white';
+        }
+
         console.log(this.props)
         return (
             <div className = 'review-container'>
@@ -47,9 +189,9 @@ class Reviews extends Component {
                     </div>
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upVotes}</span><br/>
-                        <button className = "button is-white" onClick = {upvote}><i className="far fa-thumbs-up icon is-large"></i></button><br/>
+                        <button className = "button is-white" onClick = {this.upvote} style={{backgroundColor:upColor}}><i className="far fa-thumbs-up icon is-large"></i></button><br/>
                         <br/>
-                        <button className = "button is-white" onClick = {downvote}><i className="far fa-thumbs-down icon is-large"></i></button><br/>
+                        <button className = "button is-white" onClick = {this.downvote} style={{backgroundColor:downColor}}><i className="far fa-thumbs-down icon is-large"></i></button><br/>
                         <span className = "has-text-weight-bold">{this.state.downVotes}</span>
                     </div>
                 </div>
