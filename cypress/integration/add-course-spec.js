@@ -1,17 +1,10 @@
 require('dotenv/config')
 
-describe('Add and Delete Course Admin', () => {
+describe('Add Update and Delete Course Admin', () => {
 
     it('Testing Course page', ()=>{
-        process.env['NODE_ENV'] = "test"
-        cy.log(process.env.NODE_ENV)
-
         cy.visit('http://localhost:3000/admin/courses/add')
         cy.contains('Add Course')
-        // cy.get('#course-details')
-        //     .click()
-        // cy.get('#add-review')
-        //     .click({force : true})
         cy.get('#name')
             .type('Cypress Automated Course', {force: true})
         cy.get('#desc')
@@ -36,10 +29,17 @@ describe('Add and Delete Course Admin', () => {
             .click()
         cy.visit('http://localhost:3000/admin/courses')
         cy.contains('Cypress Automated Course')
+        cy.get('#Cypress-update')
+                .click()
+        cy.get('#desc')
+            .type('This description is now updated')
+        cy.get('#update-btn')
+            .click()
+        cy.visit('http://localhost:3000/admin/courses')
+        cy.contains('Cypress Automated Course')
         cy.get('#Cypress-delete')
             .click()
         cy.reload();
         cy.contains('Cypress Automated Course').should('not.exist')
-  
     })
 })
