@@ -3,9 +3,6 @@ require('dotenv/config')
 describe('Course Review Submission', () => {
 
     it('Testing Course page', ()=>{
-        process.env['NODE_ENV'] = "test"
-        cy.log(process.env.NODE_ENV)
-
         cy.visit('http://localhost:3000/course')
         cy.contains('Courses')
         cy.get('#course-details')
@@ -19,5 +16,8 @@ describe('Course Review Submission', () => {
         cy.get('#submit-review')
             .click({force:true})      
         cy.contains('Reviews')
+        cy.get('#add-review')
+            .click({force : true})
+        cy.contains('You have already left a review')
     })
 })
