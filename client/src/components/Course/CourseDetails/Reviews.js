@@ -150,23 +150,23 @@ class Reviews extends Component {
         }
     }
     render() {
-        var upColor = "white";
-        var downColor = "white";
+        var upColor = "black";
+        var downColor = "black";
         if(this.state.upVoteisPressed)
         {
-            upColor = "blue";
+            upColor = "green";
         }
         else
         {
-            upColor = 'white';
+            upColor = 'black';
         }
         if(this.state.downVoteisPressed)
         {
-            downColor = "blue";
+            downColor = "red";
         }
         else
         {
-            downColor = 'white';
+            downColor = 'black';
         }
 
         console.log(this.props)
@@ -189,9 +189,9 @@ class Reviews extends Component {
                     </div>
                     <div className = "column has-text-centered">
                         <span className = "has-text-weight-bold">{this.state.upVotes}</span><br/>
-                        <button className = "button is-white" onClick = {this.upvote} style={{backgroundColor:upColor}}><i className="far fa-thumbs-up icon is-large"></i></button><br/>
+                        <span className = "icon is-medium" style={{color:upColor}} onClick = {this.upvote} ><i className="far fa-thumbs-up icon is-medium"  ></i></span><br/>
                         <br/>
-                        <button className = "button is-white" onClick = {this.downvote} style={{backgroundColor:downColor}}><i className="far fa-thumbs-down icon is-large"></i></button><br/>
+                        <span className = "icon is-medium" style={{color:downColor}} onClick = {this.downvote} ><i className="far fa-thumbs-down icon is-medium" ></i></span><br/>
                         <span className = "has-text-weight-bold">{this.state.downVotes}</span>
                     </div>
                 </div>
